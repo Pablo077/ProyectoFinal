@@ -1,45 +1,55 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+// import Avatar from '@mui/material/Avatar';
+// import Button from "@mui/material/Button";
+// import Tooltip from '@mui/material/Tooltip';
+import MenuItem from "@mui/material/MenuItem";
+// import AdbIcon from "@mui/icons-material/Adb";
+import { colores } from "../styles/colors";
 
-const pages = ['Crear cuenta', 'Iniciar sesión'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import logo11 from "../assets/logo11.jpeg";
+import { Buttons } from "./Buttons";
+
+const pages = ["Crear cuenta", "Iniciar sesión"];
 
 function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+    null
+  );
+  // const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
+  // const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+  //   setAnchorElUser(event.currentTarget);
+  // };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  // const handleCloseUserMenu = () => {
+  //   setAnchorElUser(null);
+  // };
 
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: '#D5FFF3', color: "#060D66"}}>
+    <AppBar
+      position="fixed"
+      sx={{ backgroundColor: colores.CornflowerBlue, color: colores.PennBlue }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}/>
+          <a style={{ textDecoration: "none" }} href="/">
+            <img src={logo11} width={"50px"} />
+          </a>
           <Typography
             variant="h6"
             noWrap
@@ -47,16 +57,19 @@ function ResponsiveAppBar() {
             href="/"
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              color: 'inherit',
-              textDecoration: 'none',
-              fontSize:"16px",
+              display: { xs: "none", md: "flex" },
+              color: colores.PennBlue,
+              textDecoration: "none",
+              fontSize: "14px",
+              marginLeft: "5px",
+              marginTop: "32px",
+              fontStyle:"italic",
             }}
           >
             Conduce tu libertad, nosotros ponemos las ruedas
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -71,17 +84,17 @@ function ResponsiveAppBar() {
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: "top",
+                horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
-              sx={{ display: { xs: 'block', md: 'none' } }}
+              sx={{ display: { xs: "block", md: "none" } }}
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
@@ -90,7 +103,7 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+
           <Typography
             variant="h6"
             noWrap
@@ -98,16 +111,16 @@ function ResponsiveAppBar() {
             href="#"
             sx={{
               mr: 2,
-              display: { xs: 'flex', md: 'none' },
+              display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              color: 'inherit',
-              textDecoration: 'none',
-              fontSize:"12px",
+              color: "inherit",
+              textDecoration: "none",
+              fontSize: "12px",
             }}
           >
             Conduce tu libertad, nosotros ponemos las ruedas
           </Typography>
-          
+
           <Box sx={{ flexGrow: 1 }}>
             {/* <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -136,18 +149,34 @@ function ResponsiveAppBar() {
                 </MenuItem>
               ))}
             </Menu> */}
-            
           </Box>
-          <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+          <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
+            {/* {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: '#060D66', display: 'block' }}
+                sx={{ my: 2, color: "#060D66", display: "block" }}
               >
                 {page}
               </Button>
-            ))}
+            ))} */}
+            <Buttons
+              variant="contained"
+              text={pages[0]}
+              styles={{
+                backgroundColor: colores.PennBlue,
+                color: colores.CornflowerBlue,
+              }}
+            />
+            <Buttons
+              variant="contained"
+              text={pages[1]}
+              styles={{
+                marginLeft:"10px",
+                backgroundColor: colores.PennBlue,
+                color: colores.CornflowerBlue,
+              }}
+            />
           </Box>
         </Toolbar>
       </Container>
