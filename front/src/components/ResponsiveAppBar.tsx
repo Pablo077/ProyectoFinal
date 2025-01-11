@@ -19,6 +19,17 @@ import { Buttons } from "./Buttons";
 
 const pages = ["Crear cuenta", "Iniciar sesión"];
 
+const items = [
+  {
+    pages:"Crear cuenta",
+    href:"/Register"
+  },
+  {
+    pages: "Iniciar sesión",
+    href:"/Login"
+  }
+]
+
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -162,7 +173,8 @@ function ResponsiveAppBar() {
             ))} */}
             <Buttons
               variant="contained"
-              text={pages[0]}
+             href={items[0].href}
+              text={items[0].pages}
               styles={{
                 backgroundColor: colores.PennBlue,
                 color: colores.CornflowerBlue,
@@ -170,7 +182,8 @@ function ResponsiveAppBar() {
             />
             <Buttons
               variant="contained"
-              text={pages[1]}
+              href={items[1].href}
+              text={items[1].pages}
               styles={{
                 marginLeft:"10px",
                 backgroundColor: colores.PennBlue,

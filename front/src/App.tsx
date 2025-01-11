@@ -1,13 +1,17 @@
-import { Home } from './pages/Home'
-import './App.css'
+import { BrowserRouter } from "react-router-dom";
+import "./App.css";
+import { AppRouter } from "./router/AppRouter";
+import { ThemeProvider } from "@mui/material/styles";
+import { themeDriver } from "./theme/theme";
 
 function App() {
-
   return (
-    <>
-      <Home />
-    </>
-  )
+    <ThemeProvider theme={themeDriver}>
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;
