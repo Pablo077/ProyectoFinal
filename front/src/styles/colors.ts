@@ -8,4 +8,5 @@ export const colores = {
 export const coloresDesignados = {
     Fondo: colores.PennBlue,
     Letra: colores.AntiFlashWhite,
+    Hover: colores.CornflowerBlue,
 }

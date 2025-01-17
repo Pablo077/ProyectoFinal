@@ -37,7 +37,7 @@ export const themeDriver: ThemeOptions = createTheme({
     MuiFormControl: {
       styleOverrides: {
         root: {
-        
+          
           //Label de arriba cuando hace foco
           "& label.Mui-focused": {
             color: "white",
@@ -46,20 +46,20 @@ export const themeDriver: ThemeOptions = createTheme({
           "& .MuiOutlinedInput-root": {
             //Linea input limpia
             "& fieldset": {
-              borderColor: "white",
+              borderColor: coloresDesignados.Letra,
             },
             //Linea cuando se hace hover
             "&:hover fieldset": {
-              borderColor: "white",
+              borderColor: coloresDesignados.Hover,
             },
             //Linea cuando se hace foco en input
             "&.Mui-focused fieldset": {
-              borderColor: "white",
+              borderColor: coloresDesignados.Hover,
             },
             //Texto input cuando se sale de foco y se selecciona una lista.
             "& .MuiOutlinedInput-input": {
-              boxShadow: `0 0 0 100px ${"white"} inset`,
-              textFillColor: "white",
+              boxShadow: `0 0 0 100px ${coloresDesignados.Fondo} inset`,
+              textFillColor: coloresDesignados.Letra,
             },
           },
 
@@ -72,7 +72,7 @@ export const themeDriver: ThemeOptions = createTheme({
 
           //Formato de icono
           "& .MuiSvgIcon-root": {
-            color: "white",
+            color: coloresDesignados.Letra,
           },
         },
       },
@@ -107,6 +107,25 @@ export const themeDriver: ThemeOptions = createTheme({
           "&:focus": {
             backgroundColor: "skyblue",
             color: "skyblue",
+          },
+        },
+      },
+    },
+    //Boton
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          backgroundColor: coloresDesignados.Fondo, // Cambia aquí al color deseado
+          color: coloresDesignados.Letra, // Color del texto del botón
+          borderColor: coloresDesignados.Letra, // Color del borde del botón 
+          borderWidth: "1px", // Ancho del borde del botón 
+          borderStyle: "solid", // Estilo del borde del botón
+          "&:hover": {
+            backgroundColor: coloresDesignados.Hover, // Cambia aquí al color deseado para el hover
+            color: coloresDesignados.Letra,
+          },
+          "&.Mui-disabled": {
+            backgroundColor: coloresDesignados.Fondo, // Color del botón cuando está deshabilitado
           },
         },
       },

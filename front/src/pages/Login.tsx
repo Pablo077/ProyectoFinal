@@ -6,11 +6,13 @@ export const Login = () => {
   return (
     <div>
       <Navbar />
-      <div style={{ color: "white", marginTop: "80px" }}>
+      <div style={{ color: "white", marginTop: "180px", flex: 1 }}>
         <LoginViews />
       </div>
 
-      <Footer />
+      <div style={{ marginTop: "80px" }}>
+        <Footer />
+      </div>
     </div>
   );
 };
