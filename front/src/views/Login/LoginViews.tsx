@@ -1,10 +1,18 @@
 import { DynamicForm } from "../../components/Formik/DynamicForm";
 import { coloresDesignados } from "../../styles/colors";
 import { campos, formJson } from "./components/DataInputs";
+import { apiUsers } from "../../service/Users/apiUsers";
 
 export const LoginViews = () => {
+  const {login} = apiUsers()  
   const onSubmit = async (values: campos) => {
     console.log(values);
+    try {
+      const response = await login(values);
+      console.log(response);
+    } catch (error) {
+      
+    }
   };
 
   return (
