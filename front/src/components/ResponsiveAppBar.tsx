@@ -16,24 +16,40 @@ import { colores } from "../styles/colors";
 
 import logo11 from "../assets/logo11.jpeg";
 import { Buttons } from "./Buttons";
+import { useEffect, useState } from "react";
+import { deleteCookie, getCookie } from "../utils/utils";
 
-const pages = ["Crear cuenta", "Iniciar sesión"];
+const pages = [
+  "Crear cuenta",
+  "Iniciar sesión",
+  "Agregar producto",
+  "Cerrar sesión",
+];
 
 const items = [
   {
-    pages:"Crear cuenta",
-    href:"/Register"
+    pages: "Crear cuenta",
+    href: "/Register",
   },
   {
     pages: "Iniciar sesión",
-    href:"/Login"
-  }
-]
+    href: "/Login",
+  },
+  {
+    pages: "Agregar producto",
+    href: "/IngresarProductos",
+  },
+  {
+    pages: "Cerrar sesión",
+    href: "/",
+  },
+];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
+  const [apiData, setApiData] = useState<any>(null);
   // const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -50,6 +66,22 @@ function ResponsiveAppBar() {
   // const handleCloseUserMenu = () => {
   //   setAnchorElUser(null);
   // };
+
+  const cerrarSesion = () =>{
+    deleteCookie('user');
+    
+  }
+
+  useEffect(() => {
+    // Obtener la respuesta de la API de las cookies
+    const cookieData = getCookie("user");
+    if (cookieData) {
+      // Convertir la cadena JSON en un objeto
+      const parsedData = JSON.parse(cookieData);
+      setApiData(parsedData);
+    }
+  }, []);
+  console.log(apiData);
 
   return (
     <AppBar
@@ -74,7 +106,7 @@ function ResponsiveAppBar() {
               fontSize: "14px",
               marginLeft: "5px",
               marginTop: "32px",
-              fontStyle:"italic",
+              fontStyle: "italic",
             }}
           >
             Conduce tu libertad, nosotros ponemos las ruedas
@@ -171,25 +203,54 @@ function ResponsiveAppBar() {
                 {page}
               </Button>
             ))} */}
-            <Buttons
-              variant="contained"
-             href={items[0].href}
-              text={items[0].pages}
-              styles={{
-                backgroundColor: colores.PennBlue,
-                color: colores.CornflowerBlue,
-              }}
-            />
-            <Buttons
-              variant="contained"
-              href={items[1].href}
-              text={items[1].pages}
-              styles={{
-                marginLeft:"10px",
-                backgroundColor: colores.PennBlue,
-                color: colores.CornflowerBlue,
-              }}
-            />
+            {apiData?.rol === "ADMIN" ? (
+              <Buttons
+                variant="contained"
+                href={items[2].href}
+                text={items[2].pages}
+                styles={{
+                  backgroundColor: colores.PennBlue,
+                  color: colores.CornflowerBlue,
+                }}
+              />
+            ) : (
+              <></>
+            )}
+            {apiData ? (
+              <Buttons
+                variant="contained"
+                href={items[3].href}
+                text={items[3].pages}
+                onClick={cerrarSesion}
+                styles={{
+                  marginLeft: "10px",
+                  backgroundColor: colores.PennBlue,
+                  color: colores.CornflowerBlue,
+                }}
+              />
+            ) : (
+              <>
+                <Buttons
+                  variant="contained"
+                  href={items[0].href}
+                  text={items[0].pages}
+                  styles={{
+                    backgroundColor: colores.PennBlue,
+                    color: colores.CornflowerBlue,
+                  }}
+                />
+                <Buttons
+                  variant="contained"
+                  href={items[1].href}
+                  text={items[1].pages}
+                  styles={{
+                    marginLeft: "10px",
+                    backgroundColor: colores.PennBlue,
+                    color: colores.CornflowerBlue,
+                  }}
+                />
+              </>
+            )}
           </Box>
         </Toolbar>
       </Container>

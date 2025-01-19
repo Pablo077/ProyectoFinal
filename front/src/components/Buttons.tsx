@@ -7,13 +7,14 @@ interface Props {
   styles: SxProps<Theme> | undefined;
   href?: string;
   tipo?: "button" | "submit" | "reset";
+  onClick?: () => void;
 }
 
 export const Buttons = (props: Props) => {
-  const { text, styles, variant, href, tipo } = props;
+  const { text, styles, variant, href, tipo, onClick } = props;
   return (
     <>
-      <Button variant={variant} sx={styles} href={href} type={tipo}>
+      <Button variant={variant} sx={styles} href={href} type={tipo} onClick={onClick}>
         {text}
       </Button>
     </>

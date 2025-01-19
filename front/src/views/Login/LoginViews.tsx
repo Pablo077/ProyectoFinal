@@ -6,12 +6,16 @@ import { apiUsers } from "../../service/Users/apiUsers";
 export const LoginViews = () => {
   const {login} = apiUsers()  
   const onSubmit = async (values: campos) => {
-    console.log(values);
+    
     try {
       const response = await login(values);
-      console.log(response);
+      if(response.rol){
+        let jsonData = JSON.stringify(response);
+        document.cookie = `user=${jsonData}; path=/; max-age=1800`; // max-age de 1800 segundos (30 minutos)
+        window.location.href = "/"; // Redirige a la página principal
+      }
     } catch (error) {
-      
+      console.error(error);
     }
   };
 
