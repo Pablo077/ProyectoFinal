@@ -1,8 +1,10 @@
 import { DynamicForm } from "../../components/Formik/DynamicForm"
 import { coloresDesignados } from "../../styles/colors";
-import { formJsonIP, IingPr } from "./components/DataInputs";
+import { IingPr } from "./components/DataInputs";
+import { DataInputs } from "./components/DataInputs";
 
 export const IngresarProductosViews = () => {
+  const {formJsonIP} = DataInputs();
      const onSubmit = async (values: IingPr) => {
         
        console.log(values);

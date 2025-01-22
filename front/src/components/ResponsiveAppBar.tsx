@@ -81,7 +81,7 @@ function ResponsiveAppBar() {
       setApiData(parsedData);
     }
   }, []);
-  console.log(apiData);
+  
 
   return (
     <AppBar

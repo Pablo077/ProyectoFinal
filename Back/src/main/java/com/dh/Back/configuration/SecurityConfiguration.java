@@ -60,11 +60,15 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/auth/**").permitAll() // Permitir acceso a H2 Console
+                        .requestMatchers("/caja/**").permitAll()
+                        .requestMatchers("/direccion/**").permitAll()
                         .anyRequest().authenticated() // Otras rutas requieren autenticación
                 )
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers("/h2-console/**")
                         .ignoringRequestMatchers("/auth/**")// Desactiva CSRF para H2 Console
+                        .ignoringRequestMatchers("/caja/**")
+                        .ignoringRequestMatchers("/direccion/**")
                 )
                 .headers(headers -> headers
                         .frameOptions(frameOptions -> frameOptions.disable()) // Desactiva restricciones para frames
