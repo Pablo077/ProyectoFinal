@@ -96,17 +96,17 @@ export const themeDriver: ThemeOptions = createTheme({
           fontSize: "18px",
           //Efecto cuando selecciona
           "& .MuiTouchRipple-root": {
-            color: "blue",
+            color: coloresDesignados.Hover,
           },
           //Hover cuando pasas en las opciones
           "&:hover": {
-            backgroundColor: "orange",
-            color: "orange",
+            backgroundColor: coloresDesignados.Letra,
+            color: coloresDesignados.Fondo,
           },
           //Valor seleccionado
           "&:focus": {
-            backgroundColor: "skyblue",
-            color: "skyblue",
+            backgroundColor: coloresDesignados.Fondo,
+            color: coloresDesignados.Hover,
           },
         },
       },

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FormJson } from "../../../components/Formik/interface";
 import { apiCaja, ICaja } from "../../../service/Caja/apiCaja";
-// import { apiDireccion } from "../../../service/Direccion/apiDireccion";
+import { apiDireccion } from "../../../service/Direccion/apiDireccion";
 
 export interface IingPr {
   email: string;
@@ -9,15 +9,16 @@ export interface IingPr {
 }
 
 export const DataInputs = () => {
+  const anchoInput = "208px";
   const { getCajas } = apiCaja();
-  // const {getDireccion} = apiDireccion();
+  const {getDireccion} = apiDireccion();
   const [caja, setCaja] = useState<ICaja[] | undefined>();
-  // const [direccion, setDireccion]= useState([]);
+  const [direccion, setDireccion]= useState([]);
   const ObtenerDatos = async () => {
     const caja = await getCajas();
-    // const direccion = await getDireccion();
+    const direccion = await getDireccion();
     setCaja(caja);
-    // setDireccion(direccion);
+    setDireccion(direccion);
   };
 
   useEffect(() => {
@@ -81,7 +82,36 @@ export const DataInputs = () => {
         sxSelect: {
           textAlign: "left",
         },
+        sxForm: {
+          width: anchoInput,
+        },
+        
       },
+      {
+        label: "Dirección",
+        name: "direccion_id",
+        type: "select",
+        value: "",
+        size: "small",
+        validation: [
+          {
+            type: "required",
+          },
+        ],
+        selectValues: {
+          datos: direccion,
+          datosMostrar: "tipo",
+          value: "",
+        },
+        sxSelect: {
+          textAlign: "left",
+        },
+        sxForm: {
+          width: anchoInput,
+        },
+        
+      },
+      
     ];
  
 
