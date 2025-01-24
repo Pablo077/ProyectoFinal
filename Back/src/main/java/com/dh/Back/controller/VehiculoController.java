@@ -23,12 +23,20 @@ import java.util.Optional;
 public class VehiculoController {
     private static final String UPLOAD_DIR = System.getProperty("user.dir") + "/uploads/"; // Ruta dentro del proyecto
 
-    private IVehiculoService iVehiculoService;
-    private ICajaService icajaService;
+    private IVehiculoService vehiculoService;
+    private ICajaService cajaService;
     private IDireccionService direccionService;
 
     @Autowired
-    public VehiculoController(IVehiculoService iVehiculoService) {this.iVehiculoService = iVehiculoService;}
+    public VehiculoController(
+            IVehiculoService vehiculoService,
+            ICajaService cajaService,
+            IDireccionService direccionService
+            ) {
+        this.vehiculoService = vehiculoService;
+        this.cajaService = cajaService;
+        this.direccionService = direccionService;
+    }
 
     @PostMapping
     public ResponseEntity<Vehiculo> save(
@@ -38,13 +46,13 @@ public class VehiculoController {
             @RequestParam("valijasGrandes") Integer valijasGrandes,
             @RequestParam("valijasChicas") Integer valijasChicas,
             @RequestParam("caja_id") Long caja_id,
-            @RequestParam("direccion_id") Long direccion_id
+            @RequestParam("direccion_id") Long direccion_id,
             //@RequestParam("mainImageIndex") Integer mainImageIndex,
-            //@RequestParam("images") MultipartFile[] files
+            @RequestParam("images") MultipartFile[] files
     ) {
         try {
             // Buscar Caja y Direccion en la BD
-            Optional<Caja> cajaOptional = icajaService.findById(caja_id);
+            Optional<Caja> cajaOptional = cajaService.findById(caja_id);
             Optional<Direccion> direccionOptional = direccionService.findById(direccion_id);
 
 
@@ -54,7 +62,7 @@ public class VehiculoController {
 
             Caja caja = cajaOptional.get();
             Direccion direccion = direccionOptional.get();
-/*
+
             // Crear la carpeta si no existe
             File uploadDir = new File(UPLOAD_DIR);
             if (!uploadDir.exists()) {
@@ -69,7 +77,7 @@ public class VehiculoController {
                 file.transferTo(path.toFile());
                 imagePaths.append(filePath).append(";");
             }
-*/
+
             // Crear objeto Vehiculo
             Vehiculo vehiculo = new Vehiculo();
             vehiculo.setMarca(marca);
@@ -82,7 +90,7 @@ public class VehiculoController {
             //vehiculo.setImagenes(imagePaths.toString()); // Guardar rutas en la BD
 
             // Guardar en BD
-            return ResponseEntity.ok(iVehiculoService.save(vehiculo));
+            return ResponseEntity.ok(vehiculoService.save(vehiculo));
         } catch (Exception e) {
             System.out.println(e);
             return ResponseEntity.badRequest().build();
@@ -90,5 +98,5 @@ public class VehiculoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Vehiculo>> findAll(){return ResponseEntity.ok(iVehiculoService.findAll());}
+    public ResponseEntity<List<Vehiculo>> findAll(){return ResponseEntity.ok(vehiculoService.findAll());}
 }
