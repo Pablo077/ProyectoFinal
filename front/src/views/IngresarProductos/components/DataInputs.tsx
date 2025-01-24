@@ -24,8 +24,8 @@ export const DataInputs = () => {
 
     const JsonInfo: FormJson[] = [
         {
-          label: "Nombre",
-          name: "nombre",
+          label: "Marca",
+          name: "marca",
           type: "input",
           value: "",
           size: "small",
@@ -39,8 +39,8 @@ export const DataInputs = () => {
           },
         },
         {
-            label: "Descripción",
-            name: "descripcion",
+            label: "Modelo",
+            name: "modelo",
             type: "input",
             value: "",
             size: "small",
@@ -115,11 +115,11 @@ export const DataInputs = () => {
               value: "",
             },
             sxForm: {
-              width: "170px",
+              width: "100%",
             },
             sxSelect:{
               textAlign:"left",
-              with:"%100",
+              
             }
           },
           {
@@ -139,11 +139,11 @@ export const DataInputs = () => {
               value: "",
             },
             sxForm: {
-              width: "170px",
+              width: "100%",
             },
             sxSelect:{
               textAlign:"left",
-              with:"%100",
+              
             }
           },
         

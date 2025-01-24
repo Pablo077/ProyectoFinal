@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DireccionService implements IDireccionService {
@@ -25,6 +26,11 @@ public class DireccionService implements IDireccionService {
     @Override
     public List<Direccion> findAll() {
         return direccionRepository.findAll();
+    }
+
+    @Override
+    public Optional<Direccion> findById(Long id) {
+        return direccionRepository.findById(id);
     }
 
     @PostConstruct

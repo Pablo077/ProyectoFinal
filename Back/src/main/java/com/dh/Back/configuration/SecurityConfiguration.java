@@ -62,6 +62,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/auth/**").permitAll() // Permitir acceso a H2 Console
                         .requestMatchers("/caja/**").permitAll()
                         .requestMatchers("/direccion/**").permitAll()
+                        .requestMatchers("/vehiculo/**").permitAll()
                         .anyRequest().authenticated() // Otras rutas requieren autenticación
                 )
                 .csrf(csrf -> csrf
@@ -69,6 +70,8 @@ public class SecurityConfiguration {
                         .ignoringRequestMatchers("/auth/**")// Desactiva CSRF para H2 Console
                         .ignoringRequestMatchers("/caja/**")
                         .ignoringRequestMatchers("/direccion/**")
+                        .ignoringRequestMatchers("/vehiculo/**")
+
                 )
                 .headers(headers -> headers
                         .frameOptions(frameOptions -> frameOptions.disable()) // Desactiva restricciones para frames

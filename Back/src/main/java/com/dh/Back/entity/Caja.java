@@ -2,6 +2,9 @@ package com.dh.Back.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name="caja")
 public class Caja {
@@ -12,6 +15,9 @@ public class Caja {
 
     @Column(name="tipo")
     private String tipo;
+
+    @OneToMany(mappedBy = "caja")
+    private Set<Vehiculo> vehiculos = new HashSet<>();
 
     public Caja(){
 
