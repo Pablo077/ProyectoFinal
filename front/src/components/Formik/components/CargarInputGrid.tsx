@@ -1,7 +1,7 @@
 import React from "react";
 
 import { SwitchInput } from "./SwitchInput";
-import Grid from "@mui/material/Grid";
+import Grid from '@mui/material/Grid2';
 import { FormJson } from "../interface";
 
 interface Propscargar {
@@ -38,7 +38,7 @@ export const CargarInputGrid = () => {
       let hasta = desde + cantidadInput + suma;
 
       resultado.push(
-        <Grid item xs={columnas} key={index}>
+        <Grid columns={{xs:columnas}} key={index}>
           <SwitchInput
             errors={errors}
             formJson={formJson.slice(desde, hasta)}

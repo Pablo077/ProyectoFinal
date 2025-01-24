@@ -1,23 +1,27 @@
 import { useState } from "react";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
 import { coloresDesignados } from "../../styles/colors";
 import { SubirImagenes } from "./components/SubirImagenes";
+import Grid from '@mui/material/Grid2';
+import { DataInputs } from "./components/DataInputs";
+import { InitialValues } from "../../components/Formik/components/InitialValues";
+import { Validation } from "../../components/Formik/components/Validation";
+import { SwitchInput } from "../../components/Formik/components/SwitchInput";
+import { CargarInputGrid } from "../../components/Formik/components/CargarInputGrid";
+import { Formik, Form } from "formik";
 import { Button } from "@mui/material";
-import { Inputs } from "./components/Inputs";
 
 export const IngresarProductosViews = () => {
+  const [column, setColumn] = useState(2);
   const [files, setFiles] = useState<File[]>([]);
   const [previews, setPreviews] = useState<string[]>([]);
   const [mainImageIndex, setMainImageIndex] = useState<number | null>(null);
+  const { JsonInfo } = DataInputs();
+  const formJson = JsonInfo;
+  const { cargarInputGrid } = CargarInputGrid();
 
-  // Definir el esquema de validación con Yup
-  const validationSchema = Yup.object({
-    nombre: Yup.string().required("El nombre es obligatorio"),
-    // detalle: Yup.string()
-    //   .required("La observación es requerida")
-    //   .max(255, "La observación debe tener menos de 200 caracteres"),
-  });
+  const onSubmit = async (values: any) => {
+    console.log(values)
+  }
 
 
 
@@ -27,40 +31,60 @@ export const IngresarProductosViews = () => {
         <h1>Agregar un producto</h1>
       </div>
 
-      <Formik
-        initialValues={{ nombre: "", detalle: "" }}
-        validationSchema={validationSchema}
-        onSubmit={(values) => {
-          console.log("Valores a enviar:", values);
-        }}
-      >
-        {({ values, touched, errors, handleChange, handleSubmit  }) => (
-          <Form noValidate onSubmit={handleSubmit}>
-            <Inputs
-              errors={errors}
-              touched={touched}
-              value={values}
-              onChange={handleChange}
-            />
 
-            <SubirImagenes
-              files={files}
-              setFiles={setFiles}
-              mainImageIndex={mainImageIndex}
-              previews={previews}
-              setMainImageIndex={setMainImageIndex}
-              setPreviews={setPreviews}
-            />
 
-            {/* Botón para subir imágenes */}
-            {files.length > 0 && (
-              <Button variant="contained" color="primary" sx={{ mt: 2 }} type="submit">
-                Subir Imágenes
-              </Button>
-            )}
-          </Form>
-        )}
-      </Formik>
+      <div>
+        <Formik
+          initialValues={InitialValues(JsonInfo)}
+          validationSchema={Validation(JsonInfo)}
+          onSubmit={(values) => {
+            onSubmit(values);
+          }}
+        >
+          {({ values, touched, errors, handleChange }) => (
+
+            <Form noValidate>
+
+                  <SubirImagenes
+                    files={files}
+                    setFiles={setFiles}
+                    mainImageIndex={mainImageIndex}
+                    previews={previews}
+                    setMainImageIndex={setMainImageIndex}
+                    setPreviews={setPreviews}
+                  />
+                  <Grid container spacing={2}>
+                    {cargarInputGrid({
+                      values,
+                      touched,
+                      errors,
+                      handleChange,
+                      column,
+                      formJson,
+                    })}
+                  </Grid>
+              
+
+
+              
+
+
+
+
+              {/* Botón para subir imágenes */}
+              {files.length > 0 && (
+                <Button variant="contained" color="primary" sx={{ mt: 2 }} type="submit">
+                  Subir Imágenes
+                </Button>
+              )}
+
+            </Form>
+          )}
+        </Formik>
+      </div>
+
+
+
     </div>
   );
 };
