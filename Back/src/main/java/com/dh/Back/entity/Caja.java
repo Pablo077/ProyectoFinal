@@ -15,10 +15,10 @@ public class Caja {
 
     @Column(name="tipo")
     private String tipo;
-
+/*
     @OneToMany(mappedBy = "caja")
     private Set<Vehiculo> vehiculos = new HashSet<>();
-
+*/
     public Caja(){
 
     }

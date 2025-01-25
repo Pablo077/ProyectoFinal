@@ -15,10 +15,10 @@ public class Direccion {
 
     @Column(name="tipo")
     private String tipo;
-
+/*
     @OneToMany(mappedBy = "direccion")
     private Set<Vehiculo> vehiculos = new HashSet<>();
-
+*/
     public Direccion(){
 
     }

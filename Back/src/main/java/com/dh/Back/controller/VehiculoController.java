@@ -10,24 +10,17 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.dh.Back.service.ICajaService;
 import com.dh.Back.service.IDireccionService;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/vehiculo")
 public class VehiculoController {
-    private static final String UPLOAD_DIR = System.getProperty("user.dir") + "/uploads/"; // Ruta dentro del proyecto
+    private static final String BASE_UPLOAD_DIR = System.getProperty("user.dir") + "/fotos/"; // Carpeta base de fotos
 
     private IVehiculoService vehiculoService;
     private ICajaService cajaService;
@@ -44,8 +37,10 @@ public class VehiculoController {
         this.direccionService = direccionService;
     }
 
+
+
     @PostMapping
-    public ResponseEntity<Vehiculo> save(
+    public ResponseEntity<String> save(
             @RequestParam("marca") String marca,
             @RequestParam("modelo") String modelo,
             @RequestParam("pasajeros") Integer pasajeros,
@@ -53,11 +48,15 @@ public class VehiculoController {
             @RequestParam("valijasChicas") Integer valijasChicas,
             @RequestParam("caja_id") Long caja_id,
             @RequestParam("direccion_id") Long direccion_id,
-            //@RequestParam("mainImageIndex") Integer mainImageIndex,
-            @RequestParam("images") MultipartFile[] files
-    ) {
+            @RequestParam("images") MultipartFile[] files,
+            @RequestParam("mainImage") String mainImage,
+            @RequestParam("filesName") String filesName
 
+    ) {
+        ResponseEntity<String> response;
         try {
+
+
 
             // Buscar Caja y Direccion en la BD
             Optional<Caja> cajaOptional = cajaService.findById(caja_id);
@@ -72,21 +71,6 @@ public class VehiculoController {
             Caja caja = cajaOptional.get();
             Direccion direccion = direccionOptional.get();
 
-            // Crear la carpeta si no existe
-            File uploadDir = new File(UPLOAD_DIR);
-            if (!uploadDir.exists()) {
-                uploadDir.mkdirs();
-            }
-
-            // Guardar imágenes y obtener las rutas
-            StringBuilder imagePaths = new StringBuilder();
-            for (MultipartFile file : files) {
-                String filePath = UPLOAD_DIR + file.getOriginalFilename();
-                Path path = Paths.get(filePath);
-                file.transferTo(path.toFile());
-                imagePaths.append(filePath).append(";");
-            }
-
             // Crear objeto Vehiculo
             Vehiculo vehiculo = new Vehiculo();
             vehiculo.setMarca(marca);
@@ -96,10 +80,35 @@ public class VehiculoController {
             vehiculo.setValijasChicas(valijasChicas);
             vehiculo.setCaja(caja);
             vehiculo.setDireccion(direccion);
-            //vehiculo.setImagenes(imagePaths.toString()); // Guardar rutas en la BD
+            vehiculo.setMainImage(mainImage);
+            vehiculo.setFilesName(filesName);
+
+            Optional<Vehiculo> existingVehiculo = vehiculoService.findByMarcaAndModelo(marca, modelo);
+            if (existingVehiculo.isPresent()) {
+                return ResponseEntity.status(200).body("El vehículo ya existe");
+            }
+
+            // 🔹 4. Crear la carpeta "fotos/marca_modelo/" si no existe
+            String sanitizedFolderName = (marca + "_" + modelo).replaceAll("[^a-zA-Z0-9_]", "_");
+            String uploadDirPath = BASE_UPLOAD_DIR + sanitizedFolderName + "/";
+            File uploadDir = new File(uploadDirPath);
+            if (!uploadDir.exists()) {
+                uploadDir.mkdirs();
+            }
+
+            // Guardar imágenes y obtener las rutas
+            StringBuilder imagePaths = new StringBuilder();
+            for (MultipartFile file : files) {
+                String filePath = BASE_UPLOAD_DIR + file.getOriginalFilename();
+                Path path = Paths.get(filePath);
+                file.transferTo(path.toFile());
+                imagePaths.append(filePath).append(";");
+            }
 
             // Guardar en BD
-            return ResponseEntity.ok(vehiculoService.save(vehiculo));
+            vehiculoService.save(vehiculo);
+            response = ResponseEntity.status(200).body("Vehículo guardado correctamente");
+            return response;
 
         } catch (Exception e) {
             System.out.println(e);
@@ -107,11 +116,14 @@ public class VehiculoController {
         }
     }
 
+
+
+
+
+
     @GetMapping
     public ResponseEntity<List<Vehiculo>> findAll() {
         List<Vehiculo> vehiculos = vehiculoService.findAll();
-
-        System.out.println(vehiculos); // Verifica en la consola
 
         if (vehiculos.isEmpty()) {
             return ResponseEntity.noContent().build();
@@ -119,6 +131,11 @@ public class VehiculoController {
 
         return ResponseEntity.ok(vehiculos);
     }
+
+
+
+
+
 
     /*
     @GetMapping("/images/{filename}")

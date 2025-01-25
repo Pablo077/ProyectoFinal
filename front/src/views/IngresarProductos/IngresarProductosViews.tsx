@@ -9,6 +9,7 @@ import { CargarInputGrid } from "../../components/Formik/components/CargarInputG
 import { Formik, Form } from "formik";
 import { Button } from "@mui/material";
 import { apiVehiculo } from "../../service/Vehiculo/apiVehiculo";
+import { useSnack } from "../../hook/useSnack";
 
 export const IngresarProductosViews = () => {
   const column = 2;
@@ -18,7 +19,11 @@ export const IngresarProductosViews = () => {
   const { JsonInfo } = DataInputs();
   const formJson = JsonInfo;
   const { cargarInputGrid } = CargarInputGrid();
-  const {cargarVehiculo} = apiVehiculo();
+  const { cargarVehiculo } = apiVehiculo();
+  const { SnackStatus } = useSnack();
+  const [openSnack, setOpenSnack] = useState(false);
+  const [alertSnack, setAlertSnack] = useState<"success" | "error" | "info" | "warning">("success");
+  const [mensajeSnack, setMensajeSnack] = useState("");
 
   const onSubmit = async (values: any) => {
     // Combinar imágenes y valores del formulario
@@ -29,28 +34,61 @@ export const IngresarProductosViews = () => {
       formData.append(key, values[key]);
     }
 
-    //Agregamos que imagen es la principal a mostrar
-    formData.append("mainImageIndex", mainImageIndex ? mainImageIndex.toString() : "sin imagen principal");
+    // Obtener marca y modelo del formulario
+    const marca = values.marca?.replace(/\s+/g, "_") || "Desconocido";
+    const modelo = values.modelo?.replace(/\s+/g, "_") || "Desconocido";
 
-    // Agregar las imágenes
+    let renamedFiles: File[] = [];
+    let fileNames: string[] = [];
+
+    // Renombrar imágenes y agregarlas a FormData
     files.forEach((file, index) => {
-      formData.append(`images`, file);
+      const extension = file.name.split(".").pop(); // Obtener extensión del archivo
+      const nuevoNombre = `${marca}_${modelo}_${index + 1}.${extension}`; // Nuevo nombre
+
+      // Crear un nuevo archivo con el nombre cambiado
+      const renamedFile = new File([file], nuevoNombre, { type: file.type });
+
+      renamedFiles.push(renamedFile);
+      fileNames.push(nuevoNombre); // Guardamos el nombre en un array
+      formData.append("images", renamedFile);
     });
 
+    // Guardar la imagen principal con el nuevo nombre
+    const imagenPrincipal =
+      mainImageIndex !== null
+        ? renamedFiles[mainImageIndex]?.name
+        : "sin_imagen_principal";
+    formData.append("mainImage", imagenPrincipal);
+
+    // Crear un JSON con los nombres de los archivos y convertirlo en string
+    const fileNamesJson = JSON.stringify({ images: fileNames });
+    formData.append("filesName", fileNamesJson); // Enviar JSON como string en FormData
+
     // 🔍 Ver datos en consola antes de enviar
-    //console.log("Datos en FormData:");
-    //formData.forEach((value, key) => console.log(key, value));
-    //console.log(mainImageIndex)
+    // console.log("Datos en FormData:");
+    // formData.forEach((value, key) => console.log(key, value));
+    // console.log(mainImageIndex);
 
     // Enviar datos al servidor
     try {
       const response = await cargarVehiculo(formData);
+
+      
+      setMensajeSnack(response);
+      if (response === "Vehículo guardado correctamente") {
+        setAlertSnack("success");
+        setOpenSnack(true);
+      } else {
+        setAlertSnack("error");
+        setOpenSnack(true);
+      }
+
       console.log(response);
       // const response = await fetch("/api/upload", {
       //   method: "POST",
       //   body: formData,
       // });
-
       // if (response.ok) {
       //   console.log("Formulario enviado con éxito");
       // } else {
@@ -66,6 +104,13 @@ export const IngresarProductosViews = () => {
       <div style={{ textAlign: "center", color: coloresDesignados.Letra }}>
         <h1>Agregar vehículo</h1>
       </div>
+
+      <SnackStatus
+        mensaje={mensajeSnack}
+        open={openSnack}
+        setOpen={setOpenSnack}
+        tipoAlert={alertSnack}
+      />
 
       <div>
         <Formik
