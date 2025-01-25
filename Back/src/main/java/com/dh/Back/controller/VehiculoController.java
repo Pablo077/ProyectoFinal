@@ -10,12 +10,18 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.dh.Back.service.ICajaService;
 import com.dh.Back.service.IDireccionService;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -50,10 +56,13 @@ public class VehiculoController {
             //@RequestParam("mainImageIndex") Integer mainImageIndex,
             @RequestParam("images") MultipartFile[] files
     ) {
+
         try {
+
             // Buscar Caja y Direccion en la BD
             Optional<Caja> cajaOptional = cajaService.findById(caja_id);
             Optional<Direccion> direccionOptional = direccionService.findById(direccion_id);
+
 
 
             if (cajaOptional.isEmpty() || direccionOptional.isEmpty()) {
@@ -91,6 +100,7 @@ public class VehiculoController {
 
             // Guardar en BD
             return ResponseEntity.ok(vehiculoService.save(vehiculo));
+
         } catch (Exception e) {
             System.out.println(e);
             return ResponseEntity.badRequest().build();
@@ -98,5 +108,37 @@ public class VehiculoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Vehiculo>> findAll(){return ResponseEntity.ok(vehiculoService.findAll());}
+    public ResponseEntity<List<Vehiculo>> findAll() {
+        List<Vehiculo> vehiculos = vehiculoService.findAll();
+
+        System.out.println(vehiculos); // Verifica en la consola
+
+        if (vehiculos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(vehiculos);
+    }
+
+    /*
+    @GetMapping("/images/{filename}")
+    public ResponseEntity<Resource> getImage(@PathVariable String filename) {
+        try {
+            Path imagePath = Paths.get(System.getProperty("user.home") + "/Desktop/uploads/").resolve(filename);
+            Resource resource = new UrlResource(imagePath.toUri());
+
+            if (resource.exists() || resource.isReadable()) {
+                return ResponseEntity.ok()
+                        .contentType(MediaType.IMAGE_JPEG) // Cambia según el tipo de imagen (PNG, GIF, etc.)
+                        .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + resource.getFilename() + "\"")
+                        .body(resource);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+    */
+
 }

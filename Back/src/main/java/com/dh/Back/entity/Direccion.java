@@ -36,4 +36,12 @@ public class Direccion {
     public void setTipo() {this.tipo = tipo;}
 
     public String getTipo () {return tipo;}
+
+    @Override
+    public String toString() {
+        return "Direccion{" +
+                "direccionId=" + id +
+                ", tipo='" + tipo + '\'' +
+                '}';
+    }
 }

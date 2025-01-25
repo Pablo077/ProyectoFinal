@@ -34,12 +34,12 @@ export const IngresarProductosViews = () => {
 
     // Agregar las imágenes
     files.forEach((file, index) => {
-      formData.append(`images[${index}]`, file);
+      formData.append(`images`, file);
     });
 
     // 🔍 Ver datos en consola antes de enviar
-    // console.log("Datos en FormData:");
-    // formData.forEach((value, key) => console.log(key, value));
+    //console.log("Datos en FormData:");
+    //formData.forEach((value, key) => console.log(key, value));
     //console.log(mainImageIndex)
 
     // Enviar datos al servidor

@@ -36,4 +36,12 @@ public class Caja {
     public void setTipo() {this.tipo = tipo;}
 
     public String getTipo () {return tipo;}
+
+    @Override
+    public String toString() {
+        return "Caja{" +
+                "cajaId=" + id +
+                ", tipo='" + tipo + '\'' +
+                '}';
+    }
 }

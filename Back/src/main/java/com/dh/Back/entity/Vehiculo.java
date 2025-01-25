@@ -56,4 +56,18 @@ public class Vehiculo {
     public void setCaja(Caja caja){this.caja = caja;}
 
     public void setDireccion(Direccion direccion){this.direccion= direccion;}
+
+    @Override
+    public String toString() {
+        return "Vehiculo{" +
+                "vehiculoId=" + id +
+                ", marca='" + marca + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", pasajeros=" + pasajeros +
+                ", valijasGrandes=" + valijasGrandes +
+                ", valijasChicas=" + valijasChicas +
+                ", caja=" + caja +
+                ", direccion=" + direccion +
+                '}';
+    }
 }
