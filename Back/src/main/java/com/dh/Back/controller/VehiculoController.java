@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.dh.Back.service.ICajaService;
 import com.dh.Back.service.IDireccionService;
+import org.apache.log4j.Logger;
+import java.util.Collections;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -20,11 +22,12 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/vehiculo")
 public class VehiculoController {
-    private static final String BASE_UPLOAD_DIR = System.getProperty("user.dir") + "/fotos/"; // Carpeta base de fotos
+    private static final String BASE_UPLOAD_DIR = System.getProperty("user.dir") + "/src/main/resources/static/fotos/"; // Carpeta base de fotos
 
     private IVehiculoService vehiculoService;
     private ICajaService cajaService;
     private IDireccionService direccionService;
+    private static final Logger LOGGER = Logger.getLogger(VehiculoController.class);
 
     @Autowired
     public VehiculoController(
@@ -43,6 +46,7 @@ public class VehiculoController {
     public ResponseEntity<String> save(
             @RequestParam("marca") String marca,
             @RequestParam("modelo") String modelo,
+            @RequestParam("motor") Float motor,
             @RequestParam("pasajeros") Integer pasajeros,
             @RequestParam("valijasGrandes") Integer valijasGrandes,
             @RequestParam("valijasChicas") Integer valijasChicas,
@@ -54,15 +58,11 @@ public class VehiculoController {
 
     ) {
         ResponseEntity<String> response;
+
         try {
-
-
-
             // Buscar Caja y Direccion en la BD
             Optional<Caja> cajaOptional = cajaService.findById(caja_id);
             Optional<Direccion> direccionOptional = direccionService.findById(direccion_id);
-
-
 
             if (cajaOptional.isEmpty() || direccionOptional.isEmpty()) {
                 return ResponseEntity.badRequest().body(null);
@@ -75,6 +75,7 @@ public class VehiculoController {
             Vehiculo vehiculo = new Vehiculo();
             vehiculo.setMarca(marca);
             vehiculo.setModelo(modelo);
+            vehiculo.setMotor(motor);
             vehiculo.setPasajeros(pasajeros);
             vehiculo.setValijasGrandes(valijasGrandes);
             vehiculo.setValijasChicas(valijasChicas);
@@ -99,7 +100,7 @@ public class VehiculoController {
             // Guardar imágenes y obtener las rutas
             StringBuilder imagePaths = new StringBuilder();
             for (MultipartFile file : files) {
-                String filePath = BASE_UPLOAD_DIR + file.getOriginalFilename();
+                String filePath = uploadDirPath + file.getOriginalFilename();
                 Path path = Paths.get(filePath);
                 file.transferTo(path.toFile());
                 imagePaths.append(filePath).append(";");
@@ -111,21 +112,19 @@ public class VehiculoController {
             return response;
 
         } catch (Exception e) {
+            LOGGER.warn("Error: " + e);
             System.out.println(e);
             return ResponseEntity.badRequest().build();
         }
     }
 
-
-
-
-
-
-    @GetMapping
+    @GetMapping("/getVehiculos")
     public ResponseEntity<List<Vehiculo>> findAll() {
         List<Vehiculo> vehiculos = vehiculoService.findAll();
+        Collections.shuffle(vehiculos);
 
         if (vehiculos.isEmpty()) {
+            LOGGER.info("Vehículos está vacío");
             return ResponseEntity.noContent().build();
         }
 

@@ -15,16 +15,17 @@ public class Caja {
 
     @Column(name="tipo")
     private String tipo;
-/*
+
     @OneToMany(mappedBy = "caja")
     private Set<Vehiculo> vehiculos = new HashSet<>();
-*/
+
     public Caja(){
 
     }
     public Caja(String tipo) {
         this.tipo = tipo;
     }
+
     public Long getId() {
         return id;
     }
@@ -33,9 +34,13 @@ public class Caja {
         this.id = id;
     }
 
-    public void setTipo() {this.tipo = tipo;}
+    public String getTipo() {
+        return tipo;
+    }
 
-    public String getTipo () {return tipo;}
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
     @Override
     public String toString() {

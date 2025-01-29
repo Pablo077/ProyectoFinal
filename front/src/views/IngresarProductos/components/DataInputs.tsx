@@ -54,6 +54,21 @@ export const DataInputs = () => {
             },
           },
           {
+            label: "Motor",
+            name: "motor",
+            type: "number",
+            value: "",
+            size: "small",
+            validation: [
+              {
+                type: "",
+              },
+            ],
+            sxForm: {
+              width: "%100",
+            },
+          },
+          {
             label: "Pasajeros",
             name: "pasajeros",
             type: "number",

@@ -25,29 +25,33 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        /*http
+        http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         auth -> auth
                                 .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/fotos/**").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/vehiculo/getVehiculos").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/h2-console/**").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/h2-console/**").permitAll()
-                                .requestMatchers(HttpMethod.PUT, "/h2-console/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/h2-console/login.do/**").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/h2-console/login.do/**").permitAll()
-                                .requestMatchers(HttpMethod.PUT, "/h2-console/login.do/**").permitAll()
-                                .requestMatchers(HttpMethod.GET,"/v3/api-docs/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/v3/api-docs/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll()
-                                .anyRequest().authenticated())
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
-                .sessionManagement(
-                        session -> session
-                                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                                .anyRequest().authenticated()) // Ahora, todas las demás requieren autenticación
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);*/
-
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .cors(cors -> cors.configurationSource(request -> {
+                    CorsConfiguration config = new CorsConfiguration();
+                    config.setAllowedOrigins(List.of("http://localhost:5173")); // Permitir solo el frontend
+                    config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+                    config.setAllowedHeaders(List.of("*"));
+                    config.setAllowCredentials(true);
+                    return config;
+                }))
+                .headers(headers -> headers
+                        .frameOptions(frameOptions -> frameOptions.disable()) // Permitir H2 Console en un frame
+                );
+/*
         http
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
@@ -76,7 +80,7 @@ public class SecurityConfiguration {
                 .headers(headers -> headers
                         .frameOptions(frameOptions -> frameOptions.disable()) // Desactiva restricciones para frames
                 );
-
+*/
 
         return http.build();
     }

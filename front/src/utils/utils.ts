@@ -8,3 +8,9 @@ export const getCookie = (name: string): string | null => {
 export const deleteCookie = (name: string) => {
   document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
 };
+
+// 🔍 Ver datos de formData
+export const verDatosFormData = (formData: FormData) => {
+  console.log("Datos en FormData:");
+  formData.forEach((value, key) => console.log(key, value));
+}

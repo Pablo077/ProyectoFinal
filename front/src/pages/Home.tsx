@@ -9,6 +9,9 @@ export const Home = () => {
     <div>
       <Navbar />
       <div style={{ marginTop: "80px", height:"800px" }}>
+      <div style={{ textAlign: "center" }}>
+        <h1>Flota de vehículos en alquiler</h1>
+      </div>
         <Buscador />
         <Categorias />
         <Recomendaciones />

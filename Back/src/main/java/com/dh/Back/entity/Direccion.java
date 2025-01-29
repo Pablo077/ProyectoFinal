@@ -15,16 +15,17 @@ public class Direccion {
 
     @Column(name="tipo")
     private String tipo;
-/*
+
     @OneToMany(mappedBy = "direccion")
     private Set<Vehiculo> vehiculos = new HashSet<>();
-*/
+
     public Direccion(){
 
     }
     public Direccion(String tipo) {
         this.tipo = tipo;
     }
+
     public Long getId() {
         return id;
     }
@@ -33,9 +34,13 @@ public class Direccion {
         this.id = id;
     }
 
-    public void setTipo() {this.tipo = tipo;}
+    public String getTipo() {
+        return tipo;
+    }
 
-    public String getTipo () {return tipo;}
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
     @Override
     public String toString() {
@@ -44,4 +49,6 @@ public class Direccion {
                 ", tipo='" + tipo + '\'' +
                 '}';
     }
+
+
 }

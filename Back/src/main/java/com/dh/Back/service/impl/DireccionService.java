@@ -38,6 +38,7 @@ public class DireccionService implements IDireccionService {
         if(direccionRepository.count()==0){
             direccionRepository.save(new Direccion("Asistido"));
             direccionRepository.save(new Direccion("Hibrido"));
+            direccionRepository.save(new Direccion("Manual"));
         }
     }
 }

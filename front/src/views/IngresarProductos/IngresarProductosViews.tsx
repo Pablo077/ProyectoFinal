@@ -65,35 +65,19 @@ export const IngresarProductosViews = () => {
     const fileNamesJson = JSON.stringify({ images: fileNames });
     formData.append("filesName", fileNamesJson); // Enviar JSON como string en FormData
 
-    // 🔍 Ver datos en consola antes de enviar
-    // console.log("Datos en FormData:");
-    // formData.forEach((value, key) => console.log(key, value));
-    // console.log(mainImageIndex);
+
 
     // Enviar datos al servidor
     try {
       const response = await cargarVehiculo(formData);
-
-      
       setMensajeSnack(response);
+      setAlertSnack(()=>response === "Vehículo guardado correctamente" ? "success" : "error");
+      setOpenSnack(true);
       if (response === "Vehículo guardado correctamente") {
-        setAlertSnack("success");
-        setOpenSnack(true);
-      } else {
-        setAlertSnack("error");
-        setOpenSnack(true);
+        setTimeout(() => {
+          window.location.href = "/"; // Redirige a la página principal
+        }, 3000); 
       }
-
-      console.log(response);
-      // const response = await fetch("/api/upload", {
-      //   method: "POST",
-      //   body: formData,
-      // });
-      // if (response.ok) {
-      //   console.log("Formulario enviado con éxito");
-      // } else {
-      //   console.error("Error al enviar el formulario");
-      // }
     } catch (error) {
       console.error("Error en la solicitud:", error);
     }

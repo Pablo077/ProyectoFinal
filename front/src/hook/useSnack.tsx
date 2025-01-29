@@ -12,7 +12,7 @@ export const useSnack = () => {
     const { open, setOpen, mensaje, tipoAlert } = props;
     return (
       <SnackPropio
-        autoHideDurat={4000}
+        autoHideDurat={2000}
         horizontalSnack="center"
         mensaje={mensaje}
         open={open}

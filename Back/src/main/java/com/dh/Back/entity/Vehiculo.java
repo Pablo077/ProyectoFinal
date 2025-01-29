@@ -16,6 +16,9 @@ public class Vehiculo {
     @Column(name="modelo")
     private String modelo;
 
+    @Column(name="motor")
+    private Float motor;
+
     @Column(name="pasajeros")
     private Integer pasajeros;
 
@@ -44,6 +47,7 @@ public class Vehiculo {
     public Vehiculo(
             String marca,
             String modelo,
+            Float motor,
             Integer pasajeros,
             Integer valijasGrandes,
             Integer valijasChicas,
@@ -54,6 +58,7 @@ public class Vehiculo {
             ){
         this.marca = marca;
         this.modelo = modelo;
+        this.motor = motor;
         this.pasajeros = pasajeros;
         this.valijasGrandes = valijasGrandes;
         this.valijasChicas = valijasChicas;
@@ -85,6 +90,14 @@ public class Vehiculo {
 
     public void setModelo(String modelo) {
         this.modelo = modelo;
+    }
+
+    public Float getMotor() {
+        return motor;
+    }
+
+    public void setMotor(Float motor) {
+        this.motor = motor;
     }
 
     public Integer getPasajeros() {
@@ -135,30 +148,11 @@ public class Vehiculo {
         this.mainImage = mainImage;
     }
 
-    public String getFiles() {
+    public String getFilesName() {
         return filesName;
     }
 
     public void setFilesName(String filesName) {
         this.filesName = filesName;
     }
-
-
-
-    /*
-    @Override
-    public String toString() {
-        return "Vehiculo{" +
-                "vehiculoId=" + id +
-                ", marca='" + marca + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", pasajeros=" + pasajeros +
-                ", valijasGrandes=" + valijasGrandes +
-                ", valijasChicas=" + valijasChicas +
-                ", caja=" + caja +
-                ", direccion=" + direccion +
-                '}';
-    }
-
-     */
 }

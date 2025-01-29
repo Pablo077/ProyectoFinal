@@ -38,7 +38,7 @@ public class CajaService implements ICajaService {
         if (cajaRepository.count() == 0) {
             cajaRepository.save(new Caja("Automático"));
             cajaRepository.save(new Caja("Manual"));
-
+            cajaRepository.save(new Caja("Semiautomático"));
         }
     }
 }
