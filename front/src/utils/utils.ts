@@ -1,3 +1,5 @@
+const linkFotos = "http://localhost:8080/fotos/";
+
 // Función para obtener el valor de una cookie por su nombre
 export const getCookie = (name: string): string | null => {
   const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
@@ -13,4 +15,11 @@ export const deleteCookie = (name: string) => {
 export const verDatosFormData = (formData: FormData) => {
   console.log("Datos en FormData:");
   formData.forEach((value, key) => console.log(key, value));
+}
+
+export const linkFotosArchivos = (marca: string, modelo: string, archivo: string)=>{
+  let marca2 = marca.replace(/ /g, "_");
+    let modelo2 = modelo.replace(/ /g, "_");
+    let dato = `${marca2}_${modelo2}/${archivo}`;
+    return `${linkFotos}${dato}`;
 }
