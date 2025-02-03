@@ -5,6 +5,7 @@ import { Categorias } from "../views/Home/Categorias";
 import { Recomendaciones } from "../views/Home/Recomendaciones";
 import { Footer } from "../views/Home/Footer";
 import { Galeria } from "../views/Home/Galeria";
+import { ListaVehiculos } from "../views/Home/ListaVehiculos";
 
 export const Home = () => {
   return (
@@ -22,6 +23,7 @@ export const Home = () => {
         <Box mt={3} mb={3}>
           <Galeria />
         </Box>
+        <ListaVehiculos />
       </Box>
       <Footer />
     </>

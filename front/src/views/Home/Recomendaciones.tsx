@@ -36,9 +36,9 @@ export const Recomendaciones = () => {
   return (
     <>
       <div>
-        <Grid container spacing={3} justifyContent="center" alignItems="center">
+        <Grid container spacing={1} justifyContent="center" alignItems="center">
           {vehiculos.slice(0, 10).map((vehiculo) => (
-            <Grid columns={{ xs: 6, sm: 4, md: 2 }} key={vehiculo.id}>
+            <Grid columns={{ xs: 5, sm: 5, md: 2 }} key={vehiculo.id}>
               <Card
                 sx={{
                   cursor: "pointer",
@@ -47,7 +47,7 @@ export const Recomendaciones = () => {
               >
                 <CardMedia
                   component="img"
-                  height="180"
+                  height="190"
                   onClick={() => handleClick(vehiculo)}
                   image={linkFotosArchivos(
                     vehiculo.marca,
@@ -58,15 +58,21 @@ export const Recomendaciones = () => {
                 />
               </Card>
               <div>
-                <div style={{ textAlign: "center" }}>
+
+
+                <div style={{ textAlign: "center", width: "100%" }}>
                   <p
                     style={{
                       margin: "0px",
-                      textAlign: "center",
                       fontSize: "16px",
+                      textAlign: "center",
+                      wordWrap: "break-word",
+                      overflowWrap: "break-word",
+                      maxWidth: "100%", 
                     }}
                   >{`${vehiculo.marca} ${vehiculo.modelo} - ${vehiculo.motor} Lts`}</p>
                 </div>
+
 
                 <div
                   style={{

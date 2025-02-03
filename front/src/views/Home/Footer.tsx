@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { coloresDesignados } from "../../styles/colors";
 
 export const Footer = () => {
   return (
@@ -6,11 +7,11 @@ export const Footer = () => {
       component="footer"
       sx={{
         width: "100%",
-        backgroundColor: "#333",
-        color: "#fff",
+        backgroundColor: coloresDesignados.FooterFondo,
+        color: coloresDesignados.FooterLetra,
         textAlign: "left",
-        py: 2, // Padding en el eje Y (arriba y abajo)
-        mt: "auto", // Empuja el footer al final si el contenedor principal usa flexbox
+        py: 2,
+        mt: "auto",
       }}
     >
       <Typography variant="body2">© 2025 Drive Punilla. Todos los derechos reservados.</Typography>

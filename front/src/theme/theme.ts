@@ -1,6 +1,6 @@
 
 import { ThemeOptions, createTheme } from "@mui/material";
-import { coloresDesignados } from "../styles/colors";
+import { colores, coloresDesignados } from "../styles/colors";
 
 export const themeDriver: ThemeOptions = createTheme({
   components: {
@@ -37,7 +37,7 @@ export const themeDriver: ThemeOptions = createTheme({
     MuiFormControl: {
       styleOverrides: {
         root: {
-          
+
           //Label de arriba cuando hace foco
           "& label.Mui-focused": {
             color: "white",
@@ -78,15 +78,15 @@ export const themeDriver: ThemeOptions = createTheme({
       },
     },
 
-    MuiTextField:{
+    MuiTextField: {
       styleOverrides: {
         root: {
-          backgroundColor:coloresDesignados.Fondo,
+          backgroundColor: coloresDesignados.Fondo,
         }
       }
     },
 
-   // Item de las lista
+    // Item de las lista
     MuiMenuItem: {
       styleOverrides: {
         root: {
@@ -130,5 +130,76 @@ export const themeDriver: ThemeOptions = createTheme({
         },
       },
     },
+
+    MuiTable: {
+      styleOverrides: {
+        root: {
+          borderCollapse: "separate",
+          borderSpacing: "0 8px", // Espacio entre filas
+          backgroundColor: coloresDesignados.Fondo,
+        },
+      },
+    },
+    MuiTableHead: {
+      styleOverrides: {
+        root: {
+          //backgroundColor: coloresDesignados.Fondo, // Fondo del encabezado
+        },
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          borderBottom: `1px solid ${colores.SlateGray}`, // Borde entre filas
+          color: coloresDesignados.Letra, // Color del texto de las celdas
+          backgroundColor: coloresDesignados.Fondo,
+        },
+        head: {
+          fontWeight: "bold", // Texto en negrita para el encabezado
+          fontSize: "1rem", // Tamaño de fuente del encabezado
+        },
+        body: {
+          fontSize: "0.9rem", // Tamaño de fuente del cuerpo
+        },
+      },
+    },
+    MuiTableRow: {
+      styleOverrides: {
+        root: {
+          // "&:nth-of-type(odd)": {
+          //   backgroundColor: "#f9f9f9", // Fondo alterno para filas impares
+          // },
+          // "&:hover": {
+          //   backgroundColor: "#e0e0e0", // Color de fondo al pasar el mouse
+          // },
+        },
+      },
+    },
+
+    MuiTablePagination: {
+      styleOverrides: {
+        root: {
+          backgroundColor: coloresDesignados.Fondo, // Fondo de la barra de paginación
+          color: coloresDesignados.Letra, // Color del texto
+        },
+        select: {
+          backgroundColor: coloresDesignados.Fondo, // Fondo del selector de filas
+          color: coloresDesignados.Letra, // Color de texto del selector
+        },
+        selectIcon: {
+          color: coloresDesignados.Letra, // Color del ícono del selector
+        },
+        actions: {
+          color: coloresDesignados.Letra, // Color de las flechas de navegación
+        },
+        displayedRows: {
+          color: coloresDesignados.Letra, // Color de los textos de 'of' y 'Rows per page'
+        },
+      },
+    },
   },
 });
+
+
+
+
