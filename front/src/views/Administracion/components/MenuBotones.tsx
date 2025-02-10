@@ -1,4 +1,4 @@
-import { Buttons } from "../../components/Buttons";
+import { Buttons } from "../../../components/Buttons";
 import { useNavigate } from "react-router-dom";
 
 export const MenuBotones = () => {

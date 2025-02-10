@@ -4,6 +4,7 @@ import { Footer } from "../views/Home/Footer";
 import { ColumnTablas, Tablas } from "../components/Tablas";
 import { useContext, useEffect, useState } from "react";
 import { VehiculoContext } from "../context/VehiculoContext";
+import { AccionesListaProductos } from "../views/ListaProductos/AccionesListaProductos";
 
 const columns: ColumnTablas[] = [
   { id: "id", label: "Id" },
@@ -21,6 +22,7 @@ export const ListaProductos = () => {
       id: vehiculo.id,
       marca: vehiculo.marca,
       modelo: vehiculo.modelo,
+      acciones: <AccionesListaProductos vehiculo={vehiculo}/>
     }));
     setRows(mappedRows);
   }, [vehiculos]);

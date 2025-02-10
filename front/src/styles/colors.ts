@@ -4,7 +4,8 @@ export const colores = {
     CornflowerBlue:"#758BFD",
     AntiFlashWhite: "#F1F2F6",
     SlateGray:"#747C92",
-    HookersGreen:"#5A716A"
+    HookersGreen:"#5A716A",
+    Jasper:"#DB504A",
 }
 
 export const coloresDesignados = {

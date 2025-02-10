@@ -11,7 +11,6 @@ const columns: ColumnTablas[] = [
     { id: 'valijasChicas', label: 'Valijas Chicas', align:"center" },
     { id: 'cajaTipo', label: 'Caja' },
     { id: 'direccionTipo', label: 'Direccion' },
-
 ];
 
 export const ListaVehiculos = () => {
