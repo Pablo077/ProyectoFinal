@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getCookie } from "../../utils/utils";
 
-const api_url = "http://localhost"; 
+const api_url = "http://localhost";
 const port1 = "8080";
 
 interface Props {
@@ -13,7 +13,6 @@ interface Props {
 interface PropsGet {
   url: string;
 }
-
 
 const obtenerToken = (): string | null => {
   try {
@@ -30,7 +29,7 @@ const obtenerToken = (): string | null => {
 
 const api = axios.create({
   baseURL: `${api_url}:${port1}`,
-  withCredentials: true, 
+  withCredentials: true,
 });
 
 api.interceptors.request.use((config) => {
@@ -46,6 +45,16 @@ export const postApiLocal = async (props: Props) => {
   const { url, valores = {} } = props;
 
   const result = await api.post(`/${url}`, valores, {
+    headers: {
+      Accept: "application/json",
+    },
+  });
+  return result.data;
+};
+
+// 🔹 Función para Enviar Peticiones POST
+export const deleteApiLocal = async (url: string, id: number) => {
+  const result = await api.delete(`/${url}/${id}`, {
     headers: {
       Accept: "application/json",
     },

@@ -1,5 +1,5 @@
 import { useEffect, useContext } from "react";
-import { apiVehiculo, Vehiculo } from "../../service/Vehiculo/apiVehiculo";
+import { Vehiculo } from "../../service/Vehiculo/apiVehiculo";
 import { Card, CardMedia } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import {
@@ -15,14 +15,8 @@ import { useNavigate } from "react-router-dom";
 import { linkFotosArchivos } from "../../utils/utils";
 
 export const Recomendaciones = () => {
-  const { getVehiculos } = apiVehiculo();
-  const { setVehiculo, vehiculos, setVehiculos } = useContext(VehiculoContext);
+  const { setVehiculo, vehiculos, cargarVehiculos } = useContext(VehiculoContext);
   const navigate = useNavigate();
-
-  const cargarVehiculos = async () => {
-    const result = await getVehiculos();
-    setVehiculos(result);
-  };
 
   const handleClick = (vehiculo: Vehiculo) => {
     setVehiculo(vehiculo);

@@ -6,6 +6,7 @@ interface VehiculoContextType {
   setVehiculos: (vehiculos: Vehiculo[]) => void;
   vehiculo: Vehiculo;
   setVehiculo: (vehiculo: Vehiculo) => void;
+  cargarVehiculos: () => Promise<void>
 }
 
 // Crear el contexto con el tipo VehiculoContextType

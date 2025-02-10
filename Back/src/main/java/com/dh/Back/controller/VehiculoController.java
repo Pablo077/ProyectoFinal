@@ -3,6 +3,7 @@ package com.dh.Back.controller;
 import com.dh.Back.entity.Caja;
 import com.dh.Back.entity.Direccion;
 import com.dh.Back.entity.Vehiculo;
+import com.dh.Back.exception.ResourceNotFoundException;
 import com.dh.Back.service.IVehiculoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,8 +40,6 @@ public class VehiculoController {
         this.cajaService = cajaService;
         this.direccionService = direccionService;
     }
-
-
 
     @PostMapping
     public ResponseEntity<String> save(
@@ -132,29 +131,10 @@ public class VehiculoController {
     }
 
 
-
-
-
-
-    /*
-    @GetMapping("/images/{filename}")
-    public ResponseEntity<Resource> getImage(@PathVariable String filename) {
-        try {
-            Path imagePath = Paths.get(System.getProperty("user.home") + "/Desktop/uploads/").resolve(filename);
-            Resource resource = new UrlResource(imagePath.toUri());
-
-            if (resource.exists() || resource.isReadable()) {
-                return ResponseEntity.ok()
-                        .contentType(MediaType.IMAGE_JPEG) // Cambia según el tipo de imagen (PNG, GIF, etc.)
-                        .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + resource.getFilename() + "\"")
-                        .body(resource);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().build();
-        }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) throws ResourceNotFoundException {
+        vehiculoService.delete(id);
+        return ResponseEntity.ok("Borrado exitoso");
     }
-    */
 
 }

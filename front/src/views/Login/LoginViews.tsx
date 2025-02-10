@@ -19,7 +19,12 @@ export const LoginViews = () => {
       if(response.rol){
         let jsonData = JSON.stringify(response);
         document.cookie = `user=${jsonData}; path=/; max-age=1800`; // max-age de 1800 segundos (30 minutos)
-        window.location.href = "/"; // Redirige a la página principal
+        if(response.rol == "ADMIN"){
+          window.location.href = "/administracion"; // Redirige a la página principal
+        }
+        else{
+          window.location.href = "/";
+        }
       }
     } catch (error) {
       setMensajeSnack("Usuario o contraseña incorrectos");
