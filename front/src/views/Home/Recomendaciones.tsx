@@ -43,7 +43,7 @@ export const Recomendaciones = () => {
                   >
                     <CardMedia
                       component="img"
-                      height="240vh"
+                      height="200vh"
                       onClick={() => handleClick(vehiculo)}
                       image={linkFotosArchivos(
                         vehiculo.marca,

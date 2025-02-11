@@ -1,4 +1,3 @@
-import { mdiConsoleLine } from "@mdi/js";
 
 const linkFotos = "http://localhost:8080/vehiculo/fotos/";
 

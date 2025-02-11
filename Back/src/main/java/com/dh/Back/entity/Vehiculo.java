@@ -2,6 +2,9 @@ package com.dh.Back.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name="Vehiculo")
 public class Vehiculo {
@@ -39,6 +42,9 @@ public class Vehiculo {
 
     @Column(name="files")
     private String filesName;
+
+    @OneToMany(mappedBy = "vehiculo")
+    private Set<VehiculoCategoria> vehiculoCategorias = new HashSet<>();
 
     public Vehiculo(){
 
