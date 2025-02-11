@@ -18,7 +18,7 @@ export const ListaVehiculos = () => {
     const [rows, setRows] = useState<any[]>([]);
 
     useEffect(() => {
-        const mappedRows = vehiculos.map(vehiculo => ({
+        const mappedRows = vehiculos && vehiculos.map(vehiculo => ({
             marca: vehiculo.marca,
             modelo: vehiculo.modelo,
             motor: vehiculo.motor,

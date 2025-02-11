@@ -25,12 +25,13 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         auth -> auth
                                 .requestMatchers("/auth/**").permitAll()
-                                .requestMatchers("/fotos/**").permitAll()
+                                .requestMatchers("/vehiculo/fotos/**").permitAll()
                                 .requestMatchers(HttpMethod.GET,"/vehiculo/getVehiculos").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/v3/api-docs/**").permitAll()
@@ -51,6 +52,8 @@ public class SecurityConfiguration {
                 .headers(headers -> headers
                         .frameOptions(frameOptions -> frameOptions.disable()) // Permitir H2 Console en un frame
                 );
+
+
 /*
         http
                 .cors(cors -> cors.configurationSource(request -> {

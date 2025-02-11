@@ -19,11 +19,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+
 
 @RestController
 @RequestMapping("/vehiculo")
 public class VehiculoController {
-    private static final String BASE_UPLOAD_DIR = System.getProperty("user.dir") + "/src/main/resources/static/fotos/"; // Carpeta base de fotos
+    /*
+     private static final String BASE_UPLOAD_DIR = System.getProperty("user.dir") + "/src/main/resources/static/fotos/";
+     */
+    private static final String BASE_UPLOAD_DIR = System.getProperty("user.dir") + "/fotos/";
 
     private IVehiculoService vehiculoService;
     private ICajaService cajaService;
@@ -128,6 +136,24 @@ public class VehiculoController {
         }
 
         return ResponseEntity.ok(vehiculos);
+    }
+
+    @GetMapping("/fotos/{folder}/{filename:.+}")
+    public ResponseEntity<Resource> getFile(@PathVariable String folder, @PathVariable String filename) {
+        try {
+            Path filePath = Paths.get(BASE_UPLOAD_DIR).resolve(folder).resolve(filename).normalize();
+            Resource resource = new UrlResource(filePath.toUri());
+
+            if (resource.exists() || resource.isReadable()) {
+                return ResponseEntity.ok()
+                        .contentType(MediaType.IMAGE_JPEG)  // Cambia según el tipo de imagen
+                        .body(resource);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
 

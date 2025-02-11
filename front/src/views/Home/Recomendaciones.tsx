@@ -31,8 +31,10 @@ export const Recomendaciones = () => {
     <>
       <div>
         <Grid container spacing={1} justifyContent="center" alignItems="center">
-          {vehiculos.slice(0, 10).map((vehiculo) => (
-            <Grid columns={{ xs: 5, sm: 5, md: 2 }} key={vehiculo.id}>
+          {
+            vehiculos ?
+          vehiculos.slice(0, 10).map((vehiculo) => (
+            <Grid columns={{ xs: 5, sm: 5, md: 2 }} key={vehiculo?.id}>
               <Card
                 sx={{
                   cursor: "pointer",
@@ -114,7 +116,9 @@ export const Recomendaciones = () => {
                 </div>
               </div>
             </Grid>
-          ))}
+          )):
+          <></>
+          }
         </Grid>
       </div>
     </>

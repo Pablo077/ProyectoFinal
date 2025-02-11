@@ -1,4 +1,6 @@
-const linkFotos = "http://localhost:8080/fotos/";
+import { mdiConsoleLine } from "@mdi/js";
+
+const linkFotos = "http://localhost:8080/vehiculo/fotos/";
 
 // Función para obtener el valor de una cookie por su nombre
 export const getCookie = (name: string): string | null => {
@@ -21,5 +23,6 @@ export const linkFotosArchivos = (marca: string, modelo: string, archivo: string
   let marca2 = marca.replace(/ /g, "_");
     let modelo2 = modelo.replace(/ /g, "_");
     let dato = `${marca2}_${modelo2}/${archivo}`;
+    console.log(`${linkFotos}${dato}`)
     return `${linkFotos}${dato}`;
 }
