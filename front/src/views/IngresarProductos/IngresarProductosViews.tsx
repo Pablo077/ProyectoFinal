@@ -71,12 +71,12 @@ export const IngresarProductosViews = () => {
     try {
       const response = await cargarVehiculo(formData);
       setMensajeSnack(response);
-      setAlertSnack(()=>response === "Vehículo guardado correctamente" ? "success" : "error");
+      setAlertSnack(() => response === "Vehículo guardado correctamente" ? "success" : "error");
       setOpenSnack(true);
       if (response === "Vehículo guardado correctamente") {
         setTimeout(() => {
           window.location.href = "/"; // Redirige a la página principal
-        }, 3000); 
+        }, 3000);
       }
     } catch (error) {
       console.error("Error en la solicitud:", error);
@@ -133,7 +133,7 @@ export const IngresarProductosViews = () => {
 
               <div style={{ textAlign: "center" }}>
                 {/* Botón para subir imágenes */}
-                {files.length > 0 && (
+                {files.length > 0 && mainImageIndex != null && (
                   <Button
                     variant="contained"
                     color="primary"
@@ -148,6 +148,15 @@ export const IngresarProductosViews = () => {
           )}
         </Formik>
       </div>
+
+      {
+        (files.length === 0 || mainImageIndex === null) && (
+          <div style={{ textAlign: "center" }}>
+            <h5>Recuerda seleccionar imágenes e indicar la principal marcándola con una estrella</h5>
+          </div>
+        )
+      }
+
     </div>
   );
 };

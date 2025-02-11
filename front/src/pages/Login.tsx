@@ -1,18 +1,16 @@
+import { Box, Typography } from "@mui/material";
 import { Footer } from "../views/Home/Footer";
 import { Navbar } from "../views/Home/Navbar";
 import { LoginViews } from "../views/Login/LoginViews";
 
 export const Login = () => {
   return (
-    <div>
-      <Navbar />
-      <div style={{ color: "white", marginTop: "180px", flex: 1 }}>
+    <>
+      <Box display="flex" flexDirection="column" minHeight="100vh">
+        <Navbar />
         <LoginViews />
-      </div>
-
-      <div style={{ marginTop: "80px" }}>
-        <Footer />
-      </div>
-    </div>
+      </Box>
+      <Footer />
+    </>
   );
 };

@@ -24,6 +24,9 @@ export const formJson: FormJson[] = [
         type: "required",
       },
     ],
+    sxForm: {
+      width: "100%",
+    },
   },
   {
     label: "Password",
@@ -37,8 +40,8 @@ export const formJson: FormJson[] = [
       },
     ],
     sxForm: {
-      width:"223px"
-    }
+      width: "100%",
+    },
   },
 ];
 

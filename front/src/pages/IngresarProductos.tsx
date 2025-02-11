@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import { Footer } from "../views/Home/Footer"
 import { Navbar } from "../views/Home/Navbar"
 import { IngresarProductosViews } from "../views/IngresarProductos/IngresarProductosViews"
@@ -5,15 +6,15 @@ import { IngresarProductosViews } from "../views/IngresarProductos/IngresarProdu
 
 export const IngresarProductos = () => {
   return (
-    <div>
-          <Navbar />
-          <div style={{ color: "white", marginTop: "100px", flex: 1 }}>
-            <IngresarProductosViews />
-          </div>
-    
-          <div style={{ marginTop: "80px" }}>
-            <Footer />
-          </div>
+    <>
+      <Box display="flex" flexDirection="column" minHeight="100vh">
+        <Navbar />
+        <div style={{ color: "white", marginTop: "100px", flex: 1 }}>
+          <IngresarProductosViews />
         </div>
+      </Box>
+      <Footer />
+
+    </>
   )
 }

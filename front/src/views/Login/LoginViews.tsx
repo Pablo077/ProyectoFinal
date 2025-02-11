@@ -42,14 +42,14 @@ export const LoginViews = () => {
         setOpen={setOpenSnack}
         tipoAlert={alertSnack}
       />
-    <div style={{ margin: "auto", width: "50%" }}>
+    <div style={{ margin: "auto" }}>
       <div style={{ textAlign: "center", color:coloresDesignados.Letra }}>
         <h1>Login</h1>
       </div>
       <div style={{ textAlign: "center", color:coloresDesignados.Letra }}>
         <h3>Ingrese sus datos para iniciar sesión</h3>
       </div>
-      <div style={{ textAlign: "center" }}>
+      <div style={{width:"70%", margin:"auto"}}>
         <DynamicForm
           column={1}
           formJson={formJson}
