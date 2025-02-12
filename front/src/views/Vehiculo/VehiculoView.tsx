@@ -118,6 +118,7 @@ export const VehiculoView = () => {
         <div style={{ marginLeft: "20px", marginBottom: "80px" }}>
           <h2 style={style}>{`Caja: ${vehiculo.caja.tipo}`}</h2>
           <h2 style={style}>{`Dirección: ${vehiculo.direccion.tipo}`}</h2>
+          <h2 style={style}>{`Categoría: ${vehiculo.categoria.nombre}`}</h2>
           <h2 style={style}>{`Pasajeros: ${vehiculo.pasajeros}`}</h2>
           <h2 style={style}>{`Valijas chicas: ${vehiculo.valijasChicas}`}</h2>
           <h2 style={style}>{`Valijas grandes: ${vehiculo.valijasGrandes}`}</h2>

@@ -1,9 +1,12 @@
 package com.dh.Back.authentication;
 
 import com.dh.Back.configuration.JwtService;
+import com.dh.Back.entity.Categoria;
 import com.dh.Back.entity.Role;
 import com.dh.Back.entity.User;
 import com.dh.Back.repository.IUserRepository;
+import jakarta.annotation.PostConstruct;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -56,12 +59,27 @@ public class AuthenticationService {
 
         var jwt = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
+                .id(user.getId())
+                .firstname(user.getFirstname())
+                .lastname(user.getLastname())
                 .token(jwt)
                 .rol(user.getRole().toString())
                 .build();
-
-
     }
+
+    @PostConstruct
+    public void initData() {
+        var user = User.builder()
+                .firstname("Juan")
+                .lastname("Perez")
+                .email("admin@gmail.com")
+                .password(passwordEncoder.encode("1234"))
+                .role(Role.ADMIN)
+                .build();
+
+        userRepository.save(user);
+    }
+
 
 
 }

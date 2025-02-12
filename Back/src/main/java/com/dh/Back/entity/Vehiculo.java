@@ -37,6 +37,9 @@ public class Vehiculo {
     @ManyToOne
     private Direccion direccion;
 
+    @ManyToOne
+    private Categoria categoria;
+
     @Column(name="mainImage")
     private String mainImage;
 
@@ -59,6 +62,7 @@ public class Vehiculo {
             Integer valijasChicas,
             Caja caja,
             Direccion direccion,
+            Categoria categoria,
             String mainImage,
             String files
             ){
@@ -70,6 +74,7 @@ public class Vehiculo {
         this.valijasChicas = valijasChicas;
         this.caja = caja;
         this.direccion = direccion;
+        this.categoria = categoria;
         this.mainImage = mainImage;
         this.filesName = files;
     }
@@ -160,5 +165,13 @@ public class Vehiculo {
 
     public void setFilesName(String filesName) {
         this.filesName = filesName;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }

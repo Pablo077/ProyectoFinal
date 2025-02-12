@@ -10,7 +10,7 @@ const columns: ColumnTablas[] = [
   { id: "id", label: "Id" },
   { id: "marca", label: "Marca" },
   { id: "modelo", label: "Modelo" },
-  { id: "acciones", label: "Acciones" },
+  { id: "acciones", label: "Acciones", align:"center" },
 ];
 
 export const ListaProductos = () => {

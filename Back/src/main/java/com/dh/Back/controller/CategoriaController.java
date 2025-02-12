@@ -21,9 +21,9 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public ResponseEntity<Caja> save(@RequestBody Caja caja){
+    public ResponseEntity<Categoria> save(@RequestBody Categoria categoria){
         try{
-            return ResponseEntity.ok(iCategoriaService.save(caja));
+            return ResponseEntity.ok(iCategoriaService.save(categoria));
         }catch (Exception e){
             System.out.println(e);
             return ResponseEntity.badRequest().build();

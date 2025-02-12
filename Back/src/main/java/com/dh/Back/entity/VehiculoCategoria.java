@@ -1,5 +1,4 @@
 package com.dh.Back.entity;
-
 import jakarta.persistence.*;
 
 @Entity

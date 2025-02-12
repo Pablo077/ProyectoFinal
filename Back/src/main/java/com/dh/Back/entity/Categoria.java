@@ -16,9 +16,6 @@ public class Categoria {
     @Column(name="nombre")
     private String nombre;
 
-    @ManyToOne
-    private User user;
-
     @OneToMany(mappedBy = "categoria")
     private Set<VehiculoCategoria> vehiculoCategorias = new HashSet<>();
 
@@ -26,9 +23,8 @@ public class Categoria {
 
     }
 
-    public Categoria(String nombre, User user){
+    public Categoria(String nombre){
         this.nombre = nombre;
-        this.user = user;
     }
 
     public Long getId() {
@@ -45,14 +41,6 @@ public class Categoria {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public Set<VehiculoCategoria> getVehiculoCategorias() {

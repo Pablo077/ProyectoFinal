@@ -10,6 +10,7 @@ export interface Vehiculo {
   valijasChicas: number;
   caja: Caja;
   direccion: Direccion;
+  categoria: Categoria;
   mainImage: string;
   filesName: string;
 }
@@ -22,6 +23,11 @@ export interface Caja {
 export interface Direccion {
   id: number;
   tipo: string;
+}
+
+export interface Categoria {
+  id: number;
+  nombre: string;
 }
 
 export const apiVehiculo = () => {

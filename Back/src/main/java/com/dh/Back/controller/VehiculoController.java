@@ -1,9 +1,7 @@
 package com.dh.Back.controller;
-
-import com.dh.Back.entity.Caja;
-import com.dh.Back.entity.Direccion;
-import com.dh.Back.entity.Vehiculo;
+import com.dh.Back.entity.*;
 import com.dh.Back.exception.ResourceNotFoundException;
+import com.dh.Back.service.ICategoriaService;
 import com.dh.Back.service.IVehiculoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,17 +34,20 @@ public class VehiculoController {
     private IVehiculoService vehiculoService;
     private ICajaService cajaService;
     private IDireccionService direccionService;
+    private ICategoriaService categoriaService;
     private static final Logger LOGGER = Logger.getLogger(VehiculoController.class);
 
     @Autowired
     public VehiculoController(
             IVehiculoService vehiculoService,
             ICajaService cajaService,
-            IDireccionService direccionService
+            IDireccionService direccionService,
+            ICategoriaService categoriaService
             ) {
         this.vehiculoService = vehiculoService;
         this.cajaService = cajaService;
         this.direccionService = direccionService;
+        this.categoriaService = categoriaService;
     }
 
     @PostMapping
@@ -61,7 +62,9 @@ public class VehiculoController {
             @RequestParam("direccion_id") Long direccion_id,
             @RequestParam("images") MultipartFile[] files,
             @RequestParam("mainImage") String mainImage,
-            @RequestParam("filesName") String filesName
+            @RequestParam("filesName") String filesName,
+            @RequestParam("categoria_id") Long categoria_id
+
 
     ) {
         ResponseEntity<String> response;
@@ -70,13 +73,15 @@ public class VehiculoController {
             // Buscar Caja y Direccion en la BD
             Optional<Caja> cajaOptional = cajaService.findById(caja_id);
             Optional<Direccion> direccionOptional = direccionService.findById(direccion_id);
+            Optional<Categoria> categoriaOptional = categoriaService.findById(categoria_id);
 
-            if (cajaOptional.isEmpty() || direccionOptional.isEmpty()) {
+            if (cajaOptional.isEmpty() || direccionOptional.isEmpty() || categoriaOptional.isEmpty()) {
                 return ResponseEntity.badRequest().body(null);
             }
 
             Caja caja = cajaOptional.get();
             Direccion direccion = direccionOptional.get();
+            Categoria categoria = categoriaOptional.get();
 
             // Crear objeto Vehiculo
             Vehiculo vehiculo = new Vehiculo();
@@ -88,6 +93,7 @@ public class VehiculoController {
             vehiculo.setValijasChicas(valijasChicas);
             vehiculo.setCaja(caja);
             vehiculo.setDireccion(direccion);
+            vehiculo.setCategoria(categoria);
             vehiculo.setMainImage(mainImage);
             vehiculo.setFilesName(filesName);
 
