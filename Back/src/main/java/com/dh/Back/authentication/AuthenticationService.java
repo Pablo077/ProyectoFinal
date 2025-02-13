@@ -4,6 +4,8 @@ import com.dh.Back.configuration.JwtService;
 import com.dh.Back.entity.Categoria;
 import com.dh.Back.entity.Role;
 import com.dh.Back.entity.User;
+import com.dh.Back.exception.GlobalException;
+import com.dh.Back.exception.ResourceNotFoundException;
 import com.dh.Back.repository.IUserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.Builder;
@@ -22,11 +24,19 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse register(RegisterRequest request) {
+    public AuthenticationResponse register(RegisterRequest request) throws ResourceNotFoundException {
         Role rol = Role.ADMIN;
 
         if(request.getIdrol()==1){
             rol = Role.USER;
+        }
+
+        // Verificar si ya existe un usuario con el mismo correo electrónico
+        var userExist = userRepository.findByEmail(request.getEmail())
+                .orElse(null);  // Devuelve null si no encuentra un usuario
+
+        if (userExist != null) {
+            throw new ResourceNotFoundException("El usuario con el correo " + request.getEmail() + " ya existe");
         }
 
         var user = User.builder()
@@ -41,6 +51,9 @@ public class AuthenticationService {
 
         var jwt = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
+                .id(user.getId())
+                .firstname(user.getFirstname())
+                .lastname(user.getLastname())
                 .token(jwt)
                 .rol(user.getRole().toString())
                 .build();

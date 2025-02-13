@@ -1,5 +1,6 @@
 package com.dh.Back.authentication;
 
+import com.dh.Back.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +17,7 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register (
-            @RequestBody RegisterRequest request) {
+            @RequestBody RegisterRequest request) throws ResourceNotFoundException {
             return ResponseEntity.ok(authenticationService.register(request));
     }
 
