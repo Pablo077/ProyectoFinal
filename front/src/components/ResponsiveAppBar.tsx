@@ -7,12 +7,13 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-// import Avatar from '@mui/material/Avatar';
+import Avatar from '@mui/material/Avatar';
+import { deepOrange } from '@mui/material/colors';
 // import Button from "@mui/material/Button";
 // import Tooltip from '@mui/material/Tooltip';
 import MenuItem from "@mui/material/MenuItem";
 // import AdbIcon from "@mui/icons-material/Adb";
-import { colores } from "../styles/colors";
+import { colores, coloresDesignados } from "../styles/colors";
 
 import logo11 from "../assets/logo11.jpeg";
 import { Buttons } from "./Buttons";
@@ -67,10 +68,23 @@ function ResponsiveAppBar() {
   //   setAnchorElUser(null);
   // };
 
-  const cerrarSesion = () =>{
+  const cerrarSesion = () => {
     deleteCookie('user');
-    
   }
+
+  const letrasNombres = (nombre: string) => {
+    if (!nombre) return "";
+
+    const palabras = nombre.trim().split(/\s+/); // Divide el nombre en palabras
+
+    if (palabras.length === 1) {
+      return palabras[0].charAt(0).toUpperCase(); // Retorna la primera letra
+    } else {
+      return (palabras[0].charAt(0) + palabras[1].charAt(0)).toUpperCase(); // Retorna las iniciales de las dos primeras palabras
+    }
+  }
+
+  console.log(apiData)
 
   useEffect(() => {
     // Obtener la respuesta de la API de las cookies
@@ -81,7 +95,7 @@ function ResponsiveAppBar() {
       setApiData(parsedData);
     }
   }, []);
-  
+
 
   return (
     <AppBar
@@ -217,17 +231,29 @@ function ResponsiveAppBar() {
               <></>
             )}
             {apiData ? (
-              <Buttons
-                variant="contained"
-                href={items[3].href}
-                text={items[3].pages}
-                onClick={cerrarSesion}
-                styles={{
-                  marginLeft: "10px",
-                  backgroundColor: colores.PennBlue,
-                  color: colores.CornflowerBlue,
-                }}
-              />
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <div style={{ marginRight: "10px" }}>
+                  <h3>{apiData.firstname}</h3>
+                </div>
+
+                <Avatar sx={{ backgroundColor: coloresDesignados.Fondo, color: coloresDesignados.Letra }} alt={apiData.firstname}>
+                  {letrasNombres(apiData.firstname)}
+                </Avatar>
+
+                <div style={{ marginLeft: "10px" }}>
+                  <Buttons
+                    variant="contained"
+                    href={items[3].href}
+                    text={items[3].pages}
+                    onClick={cerrarSesion}
+                    styles={{
+                      backgroundColor: colores.PennBlue,
+                      color: colores.CornflowerBlue,
+                    }}
+                  />
+                </div>
+              </div>
+
             ) : (
               <>
                 <Buttons
