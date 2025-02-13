@@ -1,4 +1,4 @@
-import { postApiLocal, getApiLocal, deleteApiLocal } from "../Api/apiBack";
+import { postApiLocal, getApiLocal, deleteApiLocal, putApiLocal } from "../Api/apiBack";
 
 export interface Vehiculo {
   id: number;
@@ -38,20 +38,26 @@ export const apiVehiculo = () => {
     return result;
   };
 
+  const deleteVehiculo = async (id: number) => {
+    const result = await deleteApiLocal(url, id);
+    return result;
+  };
+
+  const putVehiculo = async (valores: any) =>{
+    const result = await putApiLocal({valores, url});
+    return result.data;
+  }
+
   const getVehiculos = async () => {
     url = "vehiculo/getVehiculos";
     const result = await getApiLocal({ url });
     return result;
   };
 
-  const deleteVehiculo = async (id: number) => {
-    url = "vehiculo";
-    const result = await deleteApiLocal(url, id);
-    return result;
-  };
   return {
     cargarVehiculo,
     getVehiculos,
     deleteVehiculo,
+    putVehiculo,
   };
 };

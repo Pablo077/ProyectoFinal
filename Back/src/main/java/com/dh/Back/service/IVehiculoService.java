@@ -12,4 +12,5 @@ public interface IVehiculoService {
     Optional<Vehiculo> findByMarcaAndModelo(String marca, String modelo);
     Optional<Vehiculo> findById(Long id);
     void delete(Long id) throws ResourceNotFoundException;
+    Vehiculo update(Vehiculo vehiculo);
 }

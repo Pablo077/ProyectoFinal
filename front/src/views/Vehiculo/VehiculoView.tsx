@@ -21,7 +21,7 @@ export const VehiculoView = () => {
 
   // Navegar hacia atrás
   const back = () => {
-    navigate("/");
+    navigate(-1);
   };
 
   // Cargar las imágenes al montar el componente

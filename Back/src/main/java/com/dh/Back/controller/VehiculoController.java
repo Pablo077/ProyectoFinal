@@ -169,4 +169,9 @@ public class VehiculoController {
         return ResponseEntity.ok("Borrado exitoso");
     }
 
+    @PutMapping
+    public ResponseEntity<Vehiculo> update(@RequestBody Vehiculo vehiculo) {
+        return ResponseEntity.ok(vehiculoService.update(vehiculo));
+    }
+
 }

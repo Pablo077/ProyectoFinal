@@ -16,7 +16,7 @@ export interface FormJson {
   sxForm?: SxProps<Theme>;
   type: "input" | "password" | "email" | "select" | "date" | "number" | "checkbox";
   validation: Validation[];
-  value: string | number | boolean;
+  value: any;
   sxSelect?: SxProps<Theme>;
   ocultar?: boolean;
 }

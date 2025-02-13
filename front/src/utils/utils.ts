@@ -24,3 +24,7 @@ export const linkFotosArchivos = (marca: string, modelo: string, archivo: string
     let dato = `${marca2}_${modelo2}/${archivo}`;
     return `${linkFotos}${dato}`;
 }
+
+export const buscarPorId = <T extends { id: number }>(array: T[], id: number): T | undefined => {
+  return array.find(item => item.id === id);
+};

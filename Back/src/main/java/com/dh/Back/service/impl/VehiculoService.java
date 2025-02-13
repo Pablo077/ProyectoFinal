@@ -73,6 +73,10 @@ public class VehiculoService implements IVehiculoService {
         }
     }
 
+    @Override
+    public Vehiculo update(Vehiculo vehiculo) {
+        return vehiculoRepository.save(vehiculo);
+    }
 
     public boolean deleteFolder(File folder) {
         if (folder.exists()) {
