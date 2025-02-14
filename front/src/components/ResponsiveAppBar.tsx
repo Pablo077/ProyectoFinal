@@ -7,8 +7,8 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from '@mui/material/Avatar';
-import { deepOrange } from '@mui/material/colors';
+import Avatar from "@mui/material/Avatar";
+import { deepOrange } from "@mui/material/colors";
 // import Button from "@mui/material/Button";
 // import Tooltip from '@mui/material/Tooltip';
 import MenuItem from "@mui/material/MenuItem";
@@ -69,8 +69,8 @@ function ResponsiveAppBar() {
   // };
 
   const cerrarSesion = () => {
-    deleteCookie('user');
-  }
+    deleteCookie("user");
+  };
 
   const letrasNombres = (nombre: string) => {
     if (!nombre) return "";
@@ -82,9 +82,9 @@ function ResponsiveAppBar() {
     } else {
       return (palabras[0].charAt(0) + palabras[1].charAt(0)).toUpperCase(); // Retorna las iniciales de las dos primeras palabras
     }
-  }
+  };
 
-  console.log(apiData)
+  console.log(apiData);
 
   useEffect(() => {
     // Obtener la respuesta de la API de las cookies
@@ -95,7 +95,6 @@ function ResponsiveAppBar() {
       setApiData(parsedData);
     }
   }, []);
-
 
   return (
     <AppBar
@@ -117,10 +116,11 @@ function ResponsiveAppBar() {
               display: { xs: "none", md: "flex" },
               color: colores.PennBlue,
               textDecoration: "none",
-              fontSize: "14px",
+              fontSize: "20px",
               marginLeft: "5px",
               marginTop: "32px",
               fontStyle: "italic",
+              fontWeight:"bold",
             }}
           >
             Conduce tu libertad, nosotros ponemos las ruedas
@@ -218,29 +218,55 @@ function ResponsiveAppBar() {
               </Button>
             ))} */}
             {apiData?.rol === "ADMIN" ? (
-              <Buttons
-                variant="contained"
-                href={items[2].href}
-                text={items[2].pages}
-                styles={{
-                  backgroundColor: colores.PennBlue,
-                  color: colores.CornflowerBlue,
-                }}
-              />
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <Buttons
+                  variant="contained"
+                  href={items[2].href}
+                  text={items[2].pages}
+                  styles={{
+                    backgroundColor: colores.PennBlue,
+                    color: colores.CornflowerBlue,
+                    marginRight: "40px",
+                  }}
+                />
+              </div>
             ) : (
               <></>
             )}
             {apiData ? (
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <div style={{ marginRight: "10px" }}>
-                  <h3>{apiData.firstname}</h3>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                {/* Contenedor para el nombre y el avatar */}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginBottom: "-5px",
+                    marginTop:"-5px"
+                  }}
+                >
+                  <div style={{ marginRight: "10px" }}>
+                    <h3>{apiData.firstname}</h3>
+                  </div>
+
+                  <Avatar
+                    sx={{
+                      backgroundColor: coloresDesignados.Fondo,
+                      color: coloresDesignados.Letra,
+                    }}
+                    alt={apiData.firstname}
+                  >
+                    {letrasNombres(apiData.firstname)}
+                  </Avatar>
                 </div>
 
-                <Avatar sx={{ backgroundColor: coloresDesignados.Fondo, color: coloresDesignados.Letra }} alt={apiData.firstname}>
-                  {letrasNombres(apiData.firstname)}
-                </Avatar>
-
-                <div style={{ marginLeft: "10px" }}>
+                {/* Botón de cerrar sesión */}
+                <div>
                   <Buttons
                     variant="contained"
                     href={items[3].href}
@@ -249,11 +275,13 @@ function ResponsiveAppBar() {
                     styles={{
                       backgroundColor: colores.PennBlue,
                       color: colores.CornflowerBlue,
+                      fontSize:"10px",
+                      padding:"2px 10px 2px 10px",
+                      marginBottom:"2px"
                     }}
                   />
                 </div>
               </div>
-
             ) : (
               <>
                 <Buttons

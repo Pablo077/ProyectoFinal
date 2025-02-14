@@ -54,7 +54,7 @@ export const Administracion = () => {
     <Box display="flex" flexDirection="column" minHeight="100vh">
       <Navbar />
       {apiData?.rol === "ADMIN" ? (
-        <Box textAlign="right" mt={6} marginTop={"80px"}>
+        <Box textAlign="right" mt={6} marginTop={"90px"}>
           <MenuBotones />
         </Box>
       ) : (
