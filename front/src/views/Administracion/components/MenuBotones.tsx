@@ -4,17 +4,27 @@ import { useNavigate } from "react-router-dom";
 export const MenuBotones = () => {
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClickProductos = () => {
     navigate("/ListaProductos");
+  };
+
+  const handleClickUsuarios = () => {
+    navigate("/ListaUsuarios");
   };
 
   return (
     <>
       <Buttons
+        text="Lista de usuarios"
+        variant="contained"
+        styles={{marginRight:"10px"}}
+        onClick={handleClickUsuarios}
+      />
+      <Buttons
         text="Lista de productos"
         variant="contained"
-        styles={{}}
-        onClick={handleClick}
+        styles={{marginRight:"10px"}}
+        onClick={handleClickProductos}
       />
     </>
   );

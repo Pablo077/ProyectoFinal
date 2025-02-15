@@ -116,7 +116,7 @@ function ResponsiveAppBar() {
               display: { xs: "none", md: "flex" },
               color: colores.PennBlue,
               textDecoration: "none",
-              fontSize: "20px",
+              fontSize: "16px",
               marginLeft: "5px",
               marginTop: "32px",
               fontStyle: "italic",

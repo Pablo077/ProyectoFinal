@@ -1,19 +1,20 @@
 package com.dh.Back.authentication;
 
 import com.dh.Back.configuration.JwtService;
-import com.dh.Back.entity.Categoria;
 import com.dh.Back.entity.Role;
 import com.dh.Back.entity.User;
 import com.dh.Back.exception.GlobalException;
 import com.dh.Back.exception.ResourceNotFoundException;
 import com.dh.Back.repository.IUserRepository;
 import jakarta.annotation.PostConstruct;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -79,6 +80,39 @@ public class AuthenticationService {
                 .rol(user.getRole().toString())
                 .build();
     }
+
+    /*
+    public List<AuthenticationResponse> listAllUsers() {
+        return userRepository.findAll().stream()
+                .map(user -> new AuthenticationResponse(user.getId(), user.getFirstname(), user.getLastname(), user.getEmail(),user.getRole().toString()))
+                .collect(Collectors.toList());
+    }
+
+     */
+/*
+    public AuthenticationResponse updateUser(AuthenticationResponse request) throws ResourceNotFoundException {
+        var user = userRepository.findById(request.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con ID: " + request.getId()));
+
+
+        user.setFirstname(request.getFirstname());
+        user.setLastname(request.getLastname());
+        user.setEmail(request.getEmail());
+
+
+        if (request.getPassword() != null && !request.getPassword().isEmpty()) {
+            user.setPassword(passwordEncoder.encode(request.getPassword()));
+        }
+
+        if (request.getRole() != null) {
+            user.setRole(request.getRole());
+        }
+        
+        userRepository.save(user);
+        return new AuthenticationResponse(userRepository.save(user));
+        //return new AuthenticationResponse(user.getId(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getRole().toString());
+    }
+    */
 
     @PostConstruct
     public void initData() {
