@@ -12,13 +12,13 @@ interface Register extends Login{
 
 export const apiUsers = () => {
   const login = async (valores: Login) => {
-    const url = "auth/login";
+    const url = "auth/user/login";
     const result = await postApiLocal({ valores, url });
     return result;
   };
 
   const register = async (valores: Register) =>{
-    const url = "auth/register";
+    const url = "auth/user/register";
     const result = await postApiLocal({ valores, url });
     return result;
   }

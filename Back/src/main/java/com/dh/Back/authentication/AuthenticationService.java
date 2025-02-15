@@ -81,16 +81,16 @@ public class AuthenticationService {
                 .build();
     }
 
-    /*
+
     public List<AuthenticationResponse> listAllUsers() {
         return userRepository.findAll().stream()
-                .map(user -> new AuthenticationResponse(user.getId(), user.getFirstname(), user.getLastname(), user.getEmail(),user.getRole().toString()))
+                .map(user -> new AuthenticationResponse(user.getId(), user.getFirstname(), user.getLastname(), user.getEmail(),"",user.getRole().toString()))
                 .collect(Collectors.toList());
     }
 
-     */
-/*
-    public AuthenticationResponse updateUser(AuthenticationResponse request) throws ResourceNotFoundException {
+    public AuthenticationUpdate updateUser(AuthenticationUpdate request) throws ResourceNotFoundException {
+        Role rol = Role.ADMIN;
+
         var user = userRepository.findById(request.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con ID: " + request.getId()));
 
@@ -104,15 +104,19 @@ public class AuthenticationService {
             user.setPassword(passwordEncoder.encode(request.getPassword()));
         }
 
-        if (request.getRole() != null) {
-            user.setRole(request.getRole());
+        if(request.getRol().equals("USER")){
+            rol = Role.USER;
+        }
+
+        if (request.getRol() != null) {
+            user.setRole(rol);
         }
         
         userRepository.save(user);
-        return new AuthenticationResponse(userRepository.save(user));
-        //return new AuthenticationResponse(user.getId(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getRole().toString());
+
+        return new AuthenticationUpdate(user.getId(), user.getFirstname(), user.getLastname(), user.getEmail(), "",user.getRole().toString());
     }
-    */
+
 
     @PostConstruct
     public void initData() {
