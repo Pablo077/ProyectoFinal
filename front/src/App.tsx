@@ -7,13 +7,15 @@ import { VehiculoProvider } from "./context/VehiculoProvider";
 
 function App() {
   return (
-    <ThemeProvider theme={themeDriver}>
-      <VehiculoProvider>
-        <BrowserRouter>
-          <AppRouter />
-        </BrowserRouter>
-      </VehiculoProvider>
-    </ThemeProvider>
+    <>
+      <ThemeProvider theme={themeDriver}>
+        <VehiculoProvider>
+          <BrowserRouter>
+            <AppRouter />
+          </BrowserRouter>
+        </VehiculoProvider>
+      </ThemeProvider>
+    </>
   );
 }
 

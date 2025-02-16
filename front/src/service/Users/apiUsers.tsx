@@ -1,4 +1,4 @@
-import { postApiLocal } from "../Api/apiBack";
+import { getApiLocal, postApiLocal, putApiLocal } from "../Api/apiBack";
 
 interface Login {
   email: string;
@@ -6,8 +6,13 @@ interface Login {
 }
 
 interface Register extends Login{
-  nombre: string;
-  apellido: string;
+  firstname: string;
+  lastname: string;
+}
+
+export interface userList extends Register {
+  id: number;
+  rol: string;
 }
 
 export const apiUsers = () => {
@@ -23,8 +28,22 @@ export const apiUsers = () => {
     return result;
   }
 
+  const getUsers = async () =>{
+    const url = "auth/listUsers";
+    const result = await getApiLocal({url});
+    return result
+  }
+
+  const updateUser = async (valores: userList) =>{
+    const url = "auth/updateUser";
+    const result = await putApiLocal({url, valores});
+    return result.data
+  }
+
   return {
     login,
     register,
+    getUsers,
+    updateUser,
   };
 };

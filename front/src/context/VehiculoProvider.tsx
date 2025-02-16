@@ -8,14 +8,20 @@ export const VehiculoProvider = ({ children }: any) => {
   const [vehiculo, setVehiculo] = useState<Vehiculo>({} as Vehiculo);
   const { getVehiculos } = apiVehiculo();
 
+  const [openSnack, setOpenSnack] = useState(false);
+  const [alertSnack, setAlertSnack] = useState<
+    "success" | "error" | "info" | "warning"
+  >("success");
+  const [mensajeSnack, setMensajeSnack] = useState("");
+
   const cargarVehiculos = async () => {
     const result = await getVehiculos();
     setVehiculos(result);
   };
 
-
   return (
-    <VehiculoContext.Provider value={{ vehiculos, setVehiculos, vehiculo, setVehiculo, cargarVehiculos }}>
+    <VehiculoContext.Provider
+      value={{ vehiculos, setVehiculos, vehiculo, setVehiculo, cargarVehiculos, alertSnack, mensajeSnack, openSnack, setMensajeSnack, setOpenSnack, setAlertSnack }}>
       {children}
     </VehiculoContext.Provider>
   );

@@ -34,7 +34,7 @@ public class AuthenticationController {
     }
 
     @PutMapping("/updateUser")
-    public ResponseEntity<AuthenticationUpdate> updateUser(AuthenticationUpdate user) throws ResourceNotFoundException{
+    public ResponseEntity<AuthenticationUpdate> updateUser(@RequestBody AuthenticationUpdate user) throws ResourceNotFoundException{
         return ResponseEntity.ok(authenticationService.updateUser(user));
     }
 }

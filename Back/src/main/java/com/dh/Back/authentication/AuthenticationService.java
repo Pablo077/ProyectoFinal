@@ -89,6 +89,7 @@ public class AuthenticationService {
     }
 
     public AuthenticationUpdate updateUser(AuthenticationUpdate request) throws ResourceNotFoundException {
+
         Role rol = Role.ADMIN;
 
         var user = userRepository.findById(request.getId())
@@ -98,6 +99,8 @@ public class AuthenticationService {
         user.setFirstname(request.getFirstname());
         user.setLastname(request.getLastname());
         user.setEmail(request.getEmail());
+
+        System.out.println("Ingresa");
 
 
         if (request.getPassword() != null && !request.getPassword().isEmpty()) {
@@ -115,6 +118,7 @@ public class AuthenticationService {
         userRepository.save(user);
 
         return new AuthenticationUpdate(user.getId(), user.getFirstname(), user.getLastname(), user.getEmail(), "",user.getRole().toString());
+
     }
 
 

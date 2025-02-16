@@ -1,31 +1,7 @@
-import { useEffect, useState } from "react";
-import { apiCaja } from "../../service/Caja/apiCaja";
-import { apiCategoria } from "../../service/Categoria/apiCategoria";
-import { apiDireccion } from "../../service/Direccion/apiDireccion";
 import { FormJson } from "../../components/Formik/interface";
 import { Caja, Categoria, Direccion, Vehiculo } from "../../service/Vehiculo/apiVehiculo";
 
-
-
 export const DataInputs = () => {
-
-    // const { getCajas } = apiCaja();
-    // const { getDireccion } = apiDireccion();
-    // const { getCategoria } = apiCategoria();
-    // const [caja, setCaja] = useState([]);
-    // const [direccion, setDireccion] = useState([]);
-    // const [categoria, setCategoria] = useState([]);
-
-    // const cargarDatos = async () => {
-    //     setCaja(await getCajas());
-    //     setDireccion(await getDireccion());
-    //     setCategoria(await getCategoria());
-    // }
-
-    // useEffect(() => {
-    //     cargarDatos();
-    // }, [])
-
 
     const formData = (vehiculo:Vehiculo, caja: Caja[], direccion: Direccion[], categoria: Categoria[]) => {
         const JsonInfo: FormJson[] = [
