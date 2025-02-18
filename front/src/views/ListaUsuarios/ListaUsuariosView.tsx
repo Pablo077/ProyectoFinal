@@ -18,6 +18,8 @@ export const ListaUsuariosView = () => {
   const { getUsers } = apiUsers();
   const [rows, setRows] = useState<any[]>([]);
 
+  
+
   const cargarDatos = async () => {
     const response = await getUsers();
     const mappedRows = response.map((user: userList) => ({
@@ -26,7 +28,7 @@ export const ListaUsuariosView = () => {
       lastname: user.lastname,
       email: user.email,
       rol: user.rol,
-      acciones: <AccionesListaUsuarios user={user}/>
+      acciones: <AccionesListaUsuarios user={user} cargarDatos={cargarDatos}/>
     }));
     setRows(mappedRows);
   }
