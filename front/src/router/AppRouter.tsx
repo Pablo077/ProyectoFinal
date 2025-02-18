@@ -7,6 +7,7 @@ import { VehiculoPage } from '../pages/VehiculoPage';
 import { Administracion } from '../pages/Administracion';
 import { ListaProductos } from '../pages/ListaProductos';
 import { ListaUsuarios } from '../pages/ListaUsuarios';
+import { Caracteristicas } from '../pages/Caracteristicas';
 
 
 export const AppRouter = () => {
@@ -20,6 +21,7 @@ export const AppRouter = () => {
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/Vehiculo" element={<VehiculoPage />} />
+          <Route path="/Caracteristicas" element={<Caracteristicas />} />
           <Route path="*" element={<Home />} />
         </Routes>
       );

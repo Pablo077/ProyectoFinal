@@ -12,6 +12,10 @@ export const MenuBotones = () => {
     navigate("/ListaUsuarios");
   };
 
+  const handleClickCaracteristicas = () =>{
+    navigate("/Caracteristicas");
+  }
+
   return (
     <>
       <Buttons
@@ -25,6 +29,12 @@ export const MenuBotones = () => {
         variant="contained"
         styles={{marginRight:"10px"}}
         onClick={handleClickProductos}
+      />
+      <Buttons
+        text="Administrar características"
+        variant="contained"
+        styles={{marginRight:"10px"}}
+        onClick={handleClickCaracteristicas}
       />
     </>
   );
