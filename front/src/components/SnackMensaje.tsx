@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
-import { useSnack } from '../../hook/useSnack';
-import { VehiculoContext } from '../../context/VehiculoContext';
+import { useContext } from 'react'
+import { useSnack } from '../hook/useSnack';
+import { VehiculoContext } from '../context/VehiculoContext';
 
 export const SnackMensaje = () => {
     const { mensajeSnack, openSnack, setOpenSnack, alertSnack } = useContext(VehiculoContext)

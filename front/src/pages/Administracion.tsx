@@ -9,6 +9,7 @@ import { Galeria } from "../views/Home/Galeria";
 import { ListaVehiculos } from "../views/Home/ListaVehiculos";
 import { MenuBotones } from "../views/Administracion/components/MenuBotones";
 import { getCookie } from "../utils/utils";
+import { SnackMensaje } from "../components/SnackMensaje";
 
 export const Administracion = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -53,6 +54,7 @@ export const Administracion = () => {
   return (
     <Box display="flex" flexDirection="column" minHeight="100vh">
       <Navbar />
+      <SnackMensaje />
       {apiData?.rol === "ADMIN" ? (
         <Box textAlign="right" mt={6} marginTop={"90px"}>
           <MenuBotones />

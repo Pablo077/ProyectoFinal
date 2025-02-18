@@ -2,15 +2,14 @@ import { DynamicForm } from "../../components/Formik/DynamicForm";
 import { coloresDesignados } from "../../styles/colors";
 import { campos, formJson } from "./components/DataInputs";
 import { apiUsers } from "../../service/Users/apiUsers";
-import { useSnack } from "../../hook/useSnack";
-import { useState } from "react";
+import { useContext } from "react";
+import { VehiculoContext } from "../../context/VehiculoContext";
+
 
 export const LoginViews = () => {
   const {login} = apiUsers()  
-  const { SnackStatus } = useSnack();
-  const [openSnack, setOpenSnack] = useState(false);
-  const [alertSnack, setAlertSnack] = useState<"success" | "error" | "info" | "warning">("success");
-  const [mensajeSnack, setMensajeSnack] = useState("");
+  const { setOpenSnack, setMensajeSnack, setAlertSnack } =
+  useContext(VehiculoContext);
   
   const onSubmit = async (values: campos) => {
    
@@ -36,12 +35,7 @@ export const LoginViews = () => {
 
   return (
     <>
-    <SnackStatus
-        mensaje={mensajeSnack}
-        open={openSnack}
-        setOpen={setOpenSnack}
-        tipoAlert={alertSnack}
-      />
+   
     <div style={{ margin: "auto" }}>
       <div style={{ textAlign: "center", color:coloresDesignados.Letra }}>
         <h1>Login</h1>

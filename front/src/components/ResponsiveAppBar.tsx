@@ -84,8 +84,6 @@ function ResponsiveAppBar() {
     }
   };
 
-  console.log(apiData);
-
   useEffect(() => {
     // Obtener la respuesta de la API de las cookies
     const cookieData = getCookie("user");

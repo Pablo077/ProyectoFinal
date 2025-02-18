@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { coloresDesignados } from "../../styles/colors";
 import { SubirImagenes } from "./components/SubirImagenes";
 import Grid from "@mui/material/Grid2";
@@ -9,7 +9,8 @@ import { CargarInputGrid } from "../../components/Formik/components/CargarInputG
 import { Formik, Form } from "formik";
 import { Button } from "@mui/material";
 import { apiVehiculo } from "../../service/Vehiculo/apiVehiculo";
-import { useSnack } from "../../hook/useSnack";
+import { VehiculoContext } from "../../context/VehiculoContext";
+
 
 export const IngresarProductosViews = () => {
   const column = 2;
@@ -20,10 +21,8 @@ export const IngresarProductosViews = () => {
   const formJson = JsonInfo;
   const { cargarInputGrid } = CargarInputGrid();
   const { cargarVehiculo } = apiVehiculo();
-  const { SnackStatus } = useSnack();
-  const [openSnack, setOpenSnack] = useState(false);
-  const [alertSnack, setAlertSnack] = useState<"success" | "error" | "info" | "warning">("success");
-  const [mensajeSnack, setMensajeSnack] = useState("");
+ const { setOpenSnack, setMensajeSnack, setAlertSnack } =
+     useContext(VehiculoContext);
 
   const onSubmit = async (values: any) => {
     // Combinar imágenes y valores del formulario
@@ -88,13 +87,6 @@ export const IngresarProductosViews = () => {
       <div style={{ textAlign: "center", color: coloresDesignados.Letra }}>
         <h1>Agregar vehículo</h1>
       </div>
-
-      <SnackStatus
-        mensaje={mensajeSnack}
-        open={openSnack}
-        setOpen={setOpenSnack}
-        tipoAlert={alertSnack}
-      />
 
       <div>
         <Formik

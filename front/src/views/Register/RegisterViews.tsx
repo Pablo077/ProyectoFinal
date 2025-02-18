@@ -1,22 +1,18 @@
-import { useState } from "react";
-import { useSnack } from "../../hook/useSnack";
+import { useContext } from "react";
 import { coloresDesignados } from "../../styles/colors";
 import { DynamicForm } from "../../components/Formik/DynamicForm";
 import { formJson } from "./components/DataInputs";
 import { apiUsers } from "../../service/Users/apiUsers";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { erroresAxios } from "../../utils/utils";
+import { VehiculoContext } from "../../context/VehiculoContext";
 
 
 export const RegisterViews = () => {
-    const { SnackStatus } = useSnack();
-    const [openSnack, setOpenSnack] = useState(false);
-    const [alertSnack, setAlertSnack] = useState<"success" | "error" | "info" | "warning">("success");
-    const [mensajeSnack, setMensajeSnack] = useState("");
     const { register } = apiUsers();
     const navigate = useNavigate();
-
+    const { setOpenSnack, setMensajeSnack, setAlertSnack } =
+    useContext(VehiculoContext);
 
     const onSubmit = async (values: any) => {
 
@@ -49,12 +45,7 @@ export const RegisterViews = () => {
 
     return (
         <>
-            <SnackStatus
-                mensaje={mensajeSnack}
-                open={openSnack}
-                setOpen={setOpenSnack}
-                tipoAlert={alertSnack}
-            />
+          
             <div style={{ margin: "auto" }}>
                 <div style={{ textAlign: "center", color: coloresDesignados.Letra }}>
                     <h1>Registro</h1>

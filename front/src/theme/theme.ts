@@ -135,7 +135,7 @@ export const themeDriver: ThemeOptions = createTheme({
       styleOverrides: {
         root: {
           borderCollapse: "separate",
-          borderSpacing: "0 8px", // Espacio entre filas
+          borderSpacing: "0 7px", // Espacio entre filas
           backgroundColor: coloresDesignados.Fondo,
         },
       },
@@ -153,6 +153,7 @@ export const themeDriver: ThemeOptions = createTheme({
           borderBottom: `1px solid ${colores.SlateGray}`, // Borde entre filas
           color: coloresDesignados.Letra, // Color del texto de las celdas
           backgroundColor: coloresDesignados.Fondo,
+          padding:"1px 1px",
         },
         head: {
           fontWeight: "bold", // Texto en negrita para el encabezado
@@ -172,6 +173,7 @@ export const themeDriver: ThemeOptions = createTheme({
           // "&:hover": {
           //   backgroundColor: "#e0e0e0", // Color de fondo al pasar el mouse
           // },
+         
         },
       },
     },

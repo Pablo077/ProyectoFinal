@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { apiUsers, userList } from "../../service/Users/apiUsers";
 import { ColumnTablas, Tablas } from "../../components/Tablas";
-import { AccionesListaUsuarios } from "./AccionesListaUsuarios";
+import { AccionesListaUsuarios } from "./components/AccionesListaUsuarios";
 
 const columns: ColumnTablas[] = [
   { id: "id", label: "Id" },

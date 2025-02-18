@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface ColumnTablas {
   id: string;
@@ -35,6 +36,14 @@ export const Tablas = (props:Props) =>{
     setPage(0);
   };
 
+  const generarId = (id:any) => {
+    const newUuid = uuidv4();
+    if(id===undefined){
+      return newUuid;
+    }
+    return id;
+  }
+
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
@@ -43,9 +52,9 @@ export const Tablas = (props:Props) =>{
             <TableRow>
               {columns.map((column) => (
                 <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  key={column?.id}
+                  align={column?.align}
+                  style={{ minWidth: column?.minWidth }}
                 >
                   {column.label}
                 </TableCell>
@@ -57,11 +66,11 @@ export const Tablas = (props:Props) =>{
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                  <TableRow hover role="checkbox" tabIndex={-1} key={generarId(row.id)}>
                     {columns.map((column) => {
-                      const value = row[column.id];
+                      const value = row[column?.id];
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell key={column?.id} align={column?.align}>
                           {column.format && typeof value === 'number'
                             ? column.format(value)
                             : value}

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { userList } from "../../service/Users/apiUsers";
+import { userList } from "../../../service/Users/apiUsers";
+import { colores } from "../../../styles/colors";
 import { ModalEditarUsuarios } from "./ModalEditarUsuarios";
-import { colores } from "../../styles/colors";
 
 interface Props {
   user: userList;

@@ -1,6 +1,5 @@
-import React from 'react'
-import { FormJson } from '../../components/Formik/interface';
-import { userList } from '../../service/Users/apiUsers';
+import { FormJson } from '../../../components/Formik/interface';
+import { userList } from '../../../service/Users/apiUsers';
 
 
 const roles = [

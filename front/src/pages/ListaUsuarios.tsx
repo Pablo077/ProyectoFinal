@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import { Footer } from "../views/Home/Footer";
 import { Navbar } from "../views/Home/Navbar";
 import { ListaUsuariosView } from "../views/ListaUsuarios/ListaUsuariosView";
-import { SnackMensaje } from "../views/Home/SnackMensaje";
+import { SnackMensaje } from "../components/SnackMensaje";
 
 
 export const ListaUsuarios = () => {

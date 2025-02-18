@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Vehiculo } from "../../service/Vehiculo/apiVehiculo";
+import { Vehiculo } from "../../../service/Vehiculo/apiVehiculo";
+import { colores } from "../../../styles/colors";
 import { ModalProducto } from "./ModalProducto";
-import { colores } from "../../styles/colors";
 import { ModalEditarProducto } from "./ModalEditarProducto";
+
 
 interface Props {
   vehiculo: Vehiculo;

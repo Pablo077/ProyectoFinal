@@ -1,12 +1,11 @@
-import { Buttons } from "../../components/Buttons";
-import { Modals } from "../../components/Modals";
-import { Vehiculo } from "../../service/Vehiculo/apiVehiculo";
+import { Buttons } from "../../../components/Buttons";
+import { Modals } from "../../../components/Modals";
+import { Vehiculo } from "../../../service/Vehiculo/apiVehiculo";
 import { Typography } from "@mui/material";
-import { colores } from "../../styles/colors";
-import { apiVehiculo } from "../../service/Vehiculo/apiVehiculo";
-import { useContext, useState } from "react";
-import { useSnack } from "../../hook/useSnack";
-import { VehiculoContext } from "../../context/VehiculoContext";
+import { colores } from "../../../styles/colors";
+import { apiVehiculo } from "../../../service/Vehiculo/apiVehiculo";
+import { useContext } from "react";
+import { VehiculoContext } from "../../../context/VehiculoContext";
 
 interface Props {
   openModal: boolean;
@@ -16,15 +15,9 @@ interface Props {
 
 export const ModalProducto = (props: Props) => {
   const { openModal, setOpenModal, vehiculo } = props;
-  const { cargarVehiculos } = useContext(VehiculoContext);
+  const { cargarVehiculos, setOpenSnack, setMensajeSnack, setAlertSnack } = useContext(VehiculoContext);
   const { deleteVehiculo } = apiVehiculo();
-  const { SnackStatus } = useSnack();
-  const [openSnack, setOpenSnack] = useState(false);
-  const [alertSnack, setAlertSnack] = useState<
-    "success" | "error" | "info" | "warning"
-  >("success");
-  const [mensajeSnack, setMensajeSnack] = useState("");
-
+ 
   const handleOk = async (vehiculo: Vehiculo) => {
     try {
       const response = await deleteVehiculo(vehiculo.id);
@@ -49,13 +42,6 @@ export const ModalProducto = (props: Props) => {
 
   return (
     <>
-      <SnackStatus
-        mensaje={mensajeSnack}
-        open={openSnack}
-        setOpen={setOpenSnack}
-        tipoAlert={alertSnack}
-      />
-
       <Modals open={openModal} setOpen={setOpenModal}>
         <Typography textAlign={"center"} color={colores.Jasper}>
           Desea eliminar el siguiente vehículo

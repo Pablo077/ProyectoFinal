@@ -6,12 +6,14 @@ import { Recomendaciones } from "../views/Home/Recomendaciones";
 import { Footer } from "../views/Home/Footer";
 import { Galeria } from "../views/Home/Galeria";
 import { ListaVehiculos } from "../views/Home/ListaVehiculos";
+import { SnackMensaje } from "../components/SnackMensaje";
 
 export const Home = () => {
   return (
     <>
       <Box display="flex" flexDirection="column" minHeight="100vh">
         <Navbar />
+        <SnackMensaje />
         <Box flex={1} mt={10} textAlign="center">
           <Typography variant="h4" component="h1">
             Flota de vehículos en alquiler

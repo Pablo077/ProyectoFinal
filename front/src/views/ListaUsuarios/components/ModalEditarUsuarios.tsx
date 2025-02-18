@@ -1,13 +1,13 @@
-import { Modals } from "../../components/Modals";
-import { userList } from "../../service/Users/apiUsers";
+import { Modals } from "../../../components/Modals";
+import { userList } from "../../../service/Users/apiUsers";
 import { Typography } from "@mui/material";
-import { colores } from "../../styles/colors";
-import { DynamicForm } from "../../components/Formik/DynamicForm";
+import { colores } from "../../../styles/colors";
+import { DynamicForm } from "../../../components/Formik/DynamicForm";
 import { DataInputs } from "./DataInputs";
 import { useContext } from "react";
-import { VehiculoContext } from "../../context/VehiculoContext";
-import { apiUsers } from "../../service/Users/apiUsers";
-import { erroresAxios } from "../../utils/utils";
+import { VehiculoContext } from "../../../context/VehiculoContext";
+import { apiUsers } from "../../../service/Users/apiUsers";
+import { erroresAxios } from "../../../utils/utils";
 
 interface Props {
   openModal: boolean;

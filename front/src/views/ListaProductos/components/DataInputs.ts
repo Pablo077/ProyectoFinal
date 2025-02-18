@@ -1,5 +1,5 @@
-import { FormJson } from "../../components/Formik/interface";
-import { Caja, Categoria, Direccion, Vehiculo } from "../../service/Vehiculo/apiVehiculo";
+import { FormJson } from "../../../components/Formik/interface";
+import { Caja, Categoria, Direccion, Vehiculo } from "../../../service/Vehiculo/apiVehiculo";
 
 export const DataInputs = () => {
 
