@@ -2,6 +2,7 @@ package com.dh.Back.controller;
 
 import com.dh.Back.entity.Caja;
 import com.dh.Back.entity.Categoria;
+import com.dh.Back.exception.ResourceNotFoundException;
 import com.dh.Back.service.ICategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,14 +22,8 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public ResponseEntity<Categoria> save(@RequestBody Categoria categoria){
-        try{
-            return ResponseEntity.ok(iCategoriaService.save(categoria));
-        }catch (Exception e){
-            System.out.println(e);
-            return ResponseEntity.badRequest().build();
-        }
-
+    public ResponseEntity<Categoria> save(@RequestBody Categoria categoria) throws ResourceNotFoundException {
+        return ResponseEntity.ok(iCategoriaService.save(categoria));
     }
 
     @GetMapping

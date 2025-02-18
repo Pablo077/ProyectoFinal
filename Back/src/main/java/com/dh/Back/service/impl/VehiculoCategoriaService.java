@@ -1,6 +1,7 @@
 package com.dh.Back.service.impl;
 
 import com.dh.Back.entity.VehiculoCategoria;
+import com.dh.Back.exception.ResourceNotFoundException;
 import com.dh.Back.repository.IVehiculoCategoriaRepository;
 import com.dh.Back.service.IVehiculoCategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,13 @@ public class VehiculoCategoriaService  implements IVehiculoCategoriaService {
     }
 
     @Override
-    public VehiculoCategoria save(VehiculoCategoria vehiculoCategoria) {
-        return vehiculoCategoriaRepository.save(vehiculoCategoria);
+    public VehiculoCategoria save(VehiculoCategoria vehiculoCategoria) throws ResourceNotFoundException {
+        try{
+            return vehiculoCategoriaRepository.save(vehiculoCategoria);
+        }catch (Exception e){
+            throw new ResourceNotFoundException(e.getMessage());
+        }
+
     }
 
     @Override

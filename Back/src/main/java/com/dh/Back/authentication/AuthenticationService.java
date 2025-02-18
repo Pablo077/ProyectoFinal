@@ -92,6 +92,10 @@ public class AuthenticationService {
 
         Role rol = Role.ADMIN;
 
+        if (request.getId() == null) {
+            throw new ResourceNotFoundException("El ID del usuario no puede ser nulo");
+        }
+
         var user = userRepository.findById(request.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con ID: " + request.getId()));
 

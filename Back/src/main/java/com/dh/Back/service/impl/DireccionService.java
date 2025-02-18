@@ -1,6 +1,7 @@
 package com.dh.Back.service.impl;
 
 import com.dh.Back.entity.Direccion;
+import com.dh.Back.exception.ResourceNotFoundException;
 import com.dh.Back.repository.IDireccionRepository;
 import com.dh.Back.service.IDireccionService;
 import jakarta.annotation.PostConstruct;
@@ -19,8 +20,12 @@ public class DireccionService implements IDireccionService {
     public DireccionService(IDireccionRepository direccionRepository){this.direccionRepository = direccionRepository;}
 
     @Override
-    public Direccion save(Direccion direccion) {
-        return direccionRepository.save(direccion);
+    public Direccion save(Direccion direccion) throws ResourceNotFoundException  {
+        try{
+            return direccionRepository.save(direccion);
+        }catch (Exception e){
+            throw new ResourceNotFoundException(e.getMessage());
+        }
     }
 
     @Override

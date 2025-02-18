@@ -1,0 +1,4 @@
+[2025-02-18 12:20:39] [ WARN ] [ResourceNotFoundException:10] Usuario no encontrado con ID: 2
+[2025-02-18 12:26:42] [ WARN ] [ResourceNotFoundException:10] El ID del usuario no puede ser nulo
+[2025-02-18 12:28:13] [ WARN ] [ResourceNotFoundException:10] El ID del usuario no puede ser nuloAuthenticationUpdate(id=null, firstname=Pedro, lastname=Perez, email=pedro@gmail.com, password=null, rol=ADMIN)
+[2025-02-18 12:29:50] [ WARN ] [ResourceNotFoundException:10] El ID del usuario no puede ser nulonull

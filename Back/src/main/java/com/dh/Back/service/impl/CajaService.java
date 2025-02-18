@@ -1,6 +1,7 @@
 package com.dh.Back.service.impl;
 
 import com.dh.Back.entity.Caja;
+import com.dh.Back.exception.ResourceNotFoundException;
 import com.dh.Back.repository.ICajaRepository;
 import com.dh.Back.service.ICajaService;
 import jakarta.annotation.PostConstruct;
@@ -19,8 +20,13 @@ public class CajaService implements ICajaService {
     public CajaService(ICajaRepository cajaRepository){this.cajaRepository = cajaRepository;}
 
     @Override
-    public Caja save(Caja caja) {
-        return cajaRepository.save(caja);
+    public Caja save(Caja caja) throws ResourceNotFoundException {
+        try{
+            return cajaRepository.save(caja);
+        }catch (Exception e){
+            throw new ResourceNotFoundException(e.getMessage());
+        }
+
     }
 
     @Override

@@ -1,11 +1,12 @@
 package com.dh.Back.controller;
 
 import com.dh.Back.entity.Caja;
+import com.dh.Back.exception.ResourceNotFoundException;
 import com.dh.Back.service.ICajaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.apache.log4j.Logger;
+
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
 public class CajaController {
 
     private ICajaService iCajaService;
-    private static final Logger LOGGER = Logger.getLogger(DireccionController.class);
+
 
     @Autowired
     public CajaController(ICajaService iCajaService) {
@@ -22,15 +23,8 @@ public class CajaController {
     }
 
     @PostMapping
-    public ResponseEntity<Caja> save(@RequestBody Caja caja){
-        try{
-            return ResponseEntity.ok(iCajaService.save(caja));
-        }catch (Exception e){
-            System.out.println(e);
-            LOGGER.warn(e);
-            return ResponseEntity.badRequest().build();
-        }
-
+    public ResponseEntity<Caja> save(@RequestBody Caja caja) throws ResourceNotFoundException {
+        return ResponseEntity.ok(iCajaService.save(caja));
     }
 
     @GetMapping
