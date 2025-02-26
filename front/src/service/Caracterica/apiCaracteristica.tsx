@@ -1,4 +1,4 @@
-import { deleteApiLocal, getApiLocal, putApiLocal } from "../Api/apiBack";
+import { deleteApiLocal, getApiLocal, postApiLocal, putApiLocal } from "../Api/apiBack";
 import { Vehiculo } from "../Vehiculo/apiVehiculo";
 
 export interface ICaracteristca {
@@ -16,6 +16,11 @@ export const apiCaracteristica = () => {
         return result;
     };
 
+    const saveCaracteristica = async (valores: ICaracteristca) => {
+        const result = await postApiLocal({ url, valores });
+        return result
+    }
+
     const updateCaracteristica = async (valores: ICaracteristca) => {
         const result = await putApiLocal({ url, valores });
         return result.data
@@ -30,5 +35,6 @@ export const apiCaracteristica = () => {
         getCaracteristicas,
         updateCaracteristica,
         deleteCaracteristica,
+        saveCaracteristica,
     }
 }
