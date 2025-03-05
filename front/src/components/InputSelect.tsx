@@ -5,6 +5,7 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { SxProps, Theme } from "@mui/material";
 import FormHelperText from "@mui/material/FormHelperText";
+import { Iconos } from "../views/Caracteristicas/components/Iconos";
 
 interface PropsSelect {
   datos: any | undefined;
@@ -50,10 +51,14 @@ export const InputSelect = (props: PropsSelect) => {
         >
           {datos
             ? datos.map((option: any) => (
-                <MenuItem key={option.id} value={option.id}>
-                  {option[datosMostrar]}
-                </MenuItem>
-              ))
+              <MenuItem key={option.id} value={option.iconNumber ? option.iconNumber : option.id}>
+                {
+                  option.iconNumber ? <Iconos iconNumber={option.iconNumber} />
+                    :
+                    option[datosMostrar]
+                }
+              </MenuItem>
+            ))
             : ""}
         </Select>
         <FormHelperText error={touched[Name] && Boolean(errors[Name])}>

@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { useContext, useEffect, useState } from 'react';
 import { ColumnTablas, Tablas } from '../../components/Tablas';
 import { VehiculoContext } from '../../context/VehiculoContext';
+import { AccionesListaProductos } from "./components/AccionesListaProductos";
 
 const columns: ColumnTablas[] = [
   { id: "id", label: "Id" },
@@ -19,7 +20,7 @@ export const CaracteristicasViews = () => {
       id: vehiculo.id,
       marca: vehiculo.marca,
       modelo: vehiculo.modelo,
-      //acciones: <AccionesListaProductos vehiculo={vehiculo}/>
+      acciones: <AccionesListaProductos vehiculo={vehiculo}/>
     }));
     setRows(mappedRows);
   }, [vehiculos]);

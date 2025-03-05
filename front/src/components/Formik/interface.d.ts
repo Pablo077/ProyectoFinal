@@ -26,4 +26,7 @@ export interface Props {
   formJson: FormJson[];
   onSubmit: (values: any) => Promise<void>;
   textoBoton: string;
+  textoBotonSecondary?: string;
+  ButtonSecondary?: boolean;
+  functionSecondary?: () => void;
 }

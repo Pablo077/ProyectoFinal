@@ -8,8 +8,13 @@ import { SwitchInput } from "./components/SwitchInput";
 import { Buttons } from "../Buttons";
 
 export const DynamicForm = (props: Props) => {
-  const { formJson, onSubmit, textoBoton, column } = props;
+  const { formJson, onSubmit, textoBoton, column, textoBotonSecondary = "", ButtonSecondary = false, functionSecondary } = props;
   const { cargarInputGrid } = CargarInputGrid();
+
+  const handleSecondary = () => {
+    if (functionSecondary)
+      functionSecondary();
+  }
 
   return (
     <div>
@@ -43,14 +48,24 @@ export const DynamicForm = (props: Props) => {
               </Grid>
             )}
             <div style={{ textAlign: "center", marginTop: "20px" }}>
-              
+
+              <Buttons
+                tipo="submit"
+                variant="contained"
+                styles={{ marginTop: "10px" }}
+                text={textoBoton}
+              />
+
+              {
+                ButtonSecondary &&
                 <Buttons
-                  tipo="submit"
+                  onClick={handleSecondary}
                   variant="contained"
-                  styles={{ marginTop: "10px" }}
-                  text={textoBoton}
+                  styles={{ marginTop: "10px", marginLeft: "10px" }}
+                  text={textoBotonSecondary}
                 />
-              
+              }
+
             </div>
           </Form>
         )}

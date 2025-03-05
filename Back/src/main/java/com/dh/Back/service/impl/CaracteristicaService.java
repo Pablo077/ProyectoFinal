@@ -1,9 +1,10 @@
 package com.dh.Back.service.impl;
 
-import com.dh.Back.entity.Caracteristica;
+import com.dh.Back.entity.*;
 import com.dh.Back.exception.ResourceNotFoundException;
 import com.dh.Back.repository.ICaracteristicaRepository;
 import com.dh.Back.service.ICaracteristicaService;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,4 +40,20 @@ public class CaracteristicaService implements ICaracteristicaService {
     public Optional<Caracteristica> findById(Long id) {
         return caracteristicaRepository.findById(id);
     }
+
+    @Override
+    public List<Caracteristica> findByVehiculo(Vehiculo vehiculo) throws ResourceNotFoundException{
+        try{
+            return caracteristicaRepository.findByVehiculo(vehiculo);
+        }catch (Exception e){
+            throw new ResourceNotFoundException(e.getMessage());
+        }
+    }
+
+    @Override
+    public Caracteristica update(Caracteristica caracteristica) {
+        return caracteristicaRepository.save(caracteristica);
+    }
+
+
 }

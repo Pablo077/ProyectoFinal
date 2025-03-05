@@ -9,19 +9,20 @@ export interface ICaracteristca {
 }
 
 export const apiCaracteristica = () => {
-    const url = "caracteristica";
+    let url = "caracteristica";
 
     const getCaracteristicas = async () => {
         const result = await getApiLocal({ url });
         return result;
     };
 
-    const saveCaracteristica = async (valores: ICaracteristca) => {
+    const saveCaracteristica = async (valores: any) => {
+        url = "caracteristica";
         const result = await postApiLocal({ url, valores });
         return result
     }
 
-    const updateCaracteristica = async (valores: ICaracteristca) => {
+    const updateCaracteristica = async (valores: any) => {
         const result = await putApiLocal({ url, valores });
         return result.data
     }
@@ -31,10 +32,17 @@ export const apiCaracteristica = () => {
         return result;
     };
 
+    const getCaracteristicasVehiculo = async (valores:Vehiculo) => {
+        url = "caracteristica/caracteristicaVehiculo"
+        const result = await postApiLocal({ url, valores });
+        return result;
+    };
+
     return {
         getCaracteristicas,
         updateCaracteristica,
         deleteCaracteristica,
         saveCaracteristica,
+        getCaracteristicasVehiculo
     }
 }

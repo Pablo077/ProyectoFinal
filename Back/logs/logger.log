@@ -2,3 +2,28 @@
 [2025-02-18 12:26:42] [ WARN ] [ResourceNotFoundException:10] El ID del usuario no puede ser nulo
 [2025-02-18 12:28:13] [ WARN ] [ResourceNotFoundException:10] El ID del usuario no puede ser nuloAuthenticationUpdate(id=null, firstname=Pedro, lastname=Perez, email=pedro@gmail.com, password=null, rol=ADMIN)
 [2025-02-18 12:29:50] [ WARN ] [ResourceNotFoundException:10] El ID del usuario no puede ser nulonull
+[2025-03-05 00:56:17] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-03-05 00:56:17] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-03-05 00:56:17] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-03-05 00:56:17] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-03-05 00:56:17] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-03-05 00:56:17] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-03-05 00:56:17] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-03-05 00:56:17] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-03-05 00:56:17] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-03-05 00:56:17] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-03-05 00:56:17] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-03-05 00:56:17] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-03-05 00:56:17] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-03-05 00:56:17] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-03-05 00:56:17] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-03-05 00:56:17] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-03-05 00:56:17] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-03-05 00:56:17] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-03-05 00:56:17] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-03-05 00:56:17] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-03-05 02:23:40] [ WARN ] [ResourceNotFoundException:10] Query did not return a unique result: 2 results were returned
+[2025-03-05 02:24:20] [ WARN ] [ResourceNotFoundException:10] Query did not return a unique result: 2 results were returned
+[2025-03-05 02:24:41] [ WARN ] [ResourceNotFoundException:10] Query did not return a unique result: 2 results were returned
+[2025-03-05 02:25:46] [ WARN ] [ResourceNotFoundException:10] Query did not return a unique result: 2 results were returned
+[2025-03-05 02:26:06] [ WARN ] [ResourceNotFoundException:10] Query did not return a unique result: 2 results were returned
