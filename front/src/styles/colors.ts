@@ -6,6 +6,7 @@ export const colores = {
     SlateGray:"#747C92",
     HookersGreen:"#5A716A",
     Jasper:"#DB504A",
+    Saffron:"#E3B505",
 }
 
 export const coloresDesignados = {

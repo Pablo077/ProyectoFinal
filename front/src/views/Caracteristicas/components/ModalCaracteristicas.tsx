@@ -22,7 +22,7 @@ interface Props {
 export const ModalCaracteristicas = (props: Props) => {
     const { openModal, setOpenModal, vehiculo } = props;
     const { formData } = DataInputs();
-    const { getCaracteristicasVehiculo, saveCaracteristica, updateCaracteristica } = apiCaracteristica();
+    const { getCaracteristicasVehiculo, saveCaracteristica, updateCaracteristica, deleteCaracteristica } = apiCaracteristica();
     const [caracteristica, setCaracteristicas] = useState([]);
     const [edit, setEdit] = useState(false);
     const [borrar, setBorrar] = useState(false);
@@ -37,33 +37,57 @@ export const ModalCaracteristicas = (props: Props) => {
 
     const onSubmit = async (values: any) => {
         try {
-            const caracteristica = edit ? { id:values.id, nombre: values.Nombre, icono: values.icono, vehiculo: vehiculo } 
-            : { nombre: values.Nombre, icono: values.icono, vehiculo: vehiculo };
+            const caracteristica = edit ? { id: selected.id, nombre: values.Nombre, icono: values.icono, vehiculo: vehiculo }
+                : { nombre: values.Nombre, icono: values.icono, vehiculo: vehiculo };
 
-            console.log(values)
-            // let response
-            // if(edit){
-            //     response = await updateCaracteristica(caracteristica);
-            // }
-            // else{
-            //     response = await saveCaracteristica(caracteristica);
-            // }
-            // if (response.id) {
-            //     CargarCaracteristicas();
-            //     setMensajeSnack(edit ? "Se actualiza correctamente" :"Se ingresa valor correctamente");
-            //     setAlertSnack("success");
-            //     setOpenSnack(true);
-            // } else {
-            //     setMensajeSnack("Error al actualizar");
-            //     setAlertSnack("error");
-            //     setOpenSnack(true);
-            // }
+            let response
+            if (edit) {
+                response = await updateCaracteristica(caracteristica);
+            }
+            else {
+                response = await saveCaracteristica(caracteristica);
+            }
+            if (response.id) {
+                CargarCaracteristicas();
+                setMensajeSnack(edit ? "Se actualiza correctamente" : "Se ingresa valor correctamente");
+                setAlertSnack("success");
+                setOpenSnack(true);
+            } else {
+                setMensajeSnack("Error al actualizar");
+                setAlertSnack("error");
+                setOpenSnack(true);
+            }
 
         } catch (error) {
             setMensajeSnack(erroresAxios(error).data);
             setAlertSnack("error");
             setOpenSnack(true);
         }
+    }
+
+    const onDelete = async () => {
+        try {
+            const response = await deleteCaracteristica(selected.id);
+            if (response === "Borrado exitoso") {
+                CargarCaracteristicas();
+                setMensajeSnack("Se elimina correctamente");
+                setAlertSnack("success");
+                setOpenSnack(true);
+                back();
+                setEdit(false);
+            } else {
+                setMensajeSnack("Error al eliminar");
+                setAlertSnack("error");
+                setOpenSnack(true);
+            }
+
+        }
+        catch (error) {
+            setMensajeSnack(erroresAxios(error).data);
+            setAlertSnack("error");
+            setOpenSnack(true);
+        }
+
     }
 
     const handleEditClick = (carac: any) => {
@@ -116,13 +140,16 @@ export const ModalCaracteristicas = (props: Props) => {
                             </div>
 
                             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-                                <Buttons variant="contained" text="Aceptar" styles={{}} />
+                                <Buttons variant="contained" text="Aceptar" styles={{}} onClick={onDelete} />
                                 <Buttons variant="contained" text="Volver" styles={{ marginLeft: "10px" }} onClick={back} />
                             </div>
 
                         </>
                         :
                         <>
+                            <Typography textAlign={"left"} color={colores.Saffron} sx={{ fontSize: '18px', marginTop: '20px' }}>
+                                Listado
+                            </Typography>
 
 
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px', marginTop: '20px' }}>
@@ -132,16 +159,16 @@ export const ModalCaracteristicas = (props: Props) => {
                                         <Typography sx={{ marginLeft: "5px" }}>{carac.nombre}</Typography>
                                         <span style={{ marginLeft: "5px" }}>
                                             <span onClick={() => handleEditClick(carac)} style={{ cursor: 'pointer', marginRight: '5px' }}>
-                                                <Icon path={mdiPencil} size={0.7} color={colores.Jasper} />
+                                                <Icon path={mdiPencil} size={0.7} color={colores.PaleDogwood} />
                                             </span>
                                             <span onClick={() => handleDeleteClick(carac)} style={{ cursor: 'pointer' }}>
-                                                <Icon path={mdiDelete} size={0.7} color={colores.SlateGray} />
+                                                <Icon path={mdiDelete} size={0.7} color={colores.Jasper} />
                                             </span>
                                         </span>
                                     </div>
                                 ))}
                             </div>
-                            <Typography textAlign={"center"} color={colores.AntiFlashWhite} sx={{ fontSize: '25px', marginTop: '20px' }}>
+                            <Typography textAlign={"left"} color={colores.Saffron} sx={{ fontSize: '18px', marginTop: '20px' }}>
                                 Agregar caracteristicas
                             </Typography>
                             <div style={{ marginTop: "20px", textAlign: "center", display: 'flex', justifyContent: 'center' }}>
@@ -151,7 +178,7 @@ export const ModalCaracteristicas = (props: Props) => {
                                         column={2}
                                         formJson={formData(selected)}
                                         onSubmit={onSubmit}
-                                        textoBoton={edit ? "Actualizar" : "Ingresar"}
+                                        textoBoton={edit ? "Actualizar" : "Añadir nueva"}
                                         ButtonSecondary={true}
                                         functionSecondary={functionSecondary}
                                         textoBotonSecondary={edit ? "Volver" : "Cancelar"}

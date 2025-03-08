@@ -55,5 +55,16 @@ public class CaracteristicaService implements ICaracteristicaService {
         return caracteristicaRepository.save(caracteristica);
     }
 
+    @Override
+    public void delete(Long id) throws ResourceNotFoundException {
+        Optional<Caracteristica> caracteristicaFindById = findById(id);
+
+        if(caracteristicaFindById.isPresent()){
+            caracteristicaRepository.deleteById(caracteristicaFindById.get().getId());
+        }
+        else {
+            throw new ResourceNotFoundException("No se pudo eliminar la caracteristica con id: " + id);
+        }
+    }
 
 }

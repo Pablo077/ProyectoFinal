@@ -41,4 +41,10 @@ public class CaracteristicaController {
     public ResponseEntity<Caracteristica> update(@RequestBody Caracteristica caracteristica) {
         return ResponseEntity.ok(iCaracteristicaService.update(caracteristica));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) throws ResourceNotFoundException {
+        iCaracteristicaService.delete(id);
+        return ResponseEntity.ok("Borrado exitoso");
+    }
 }
