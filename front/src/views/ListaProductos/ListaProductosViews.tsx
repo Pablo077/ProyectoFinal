@@ -22,12 +22,15 @@ useEffect(() => {
       modelo: vehiculo.modelo,
       acciones: <AccionesListaProductos vehiculo={vehiculo}/>
     }));
-    setRows(mappedRows);
+
+    
+    const sortedRows = mappedRows.sort((a, b) => a.id - b.id);
+    setRows(sortedRows);
   }, [vehiculos]);
 
   return (
     <>
-      <Box flex={1} mt={10} textAlign="center" marginTop={"70px"}>
+      <Box flex={1} mt={10} textAlign="center" marginTop={"80px"}>
         <Typography variant="h4" component="h1">
           Lista de productos
         </Typography>

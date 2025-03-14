@@ -26,7 +26,7 @@ export const AccionesListaUsuarios = (props: Props) => {
       />
       <div style={{ display: "flex", textAlign: "center" }}>
         <h3
-          style={{ cursor: "pointer", color: colores.Jasper }}
+          style={{ cursor: "pointer", color: colores.Jasper, margin:"5px" }}
           onClick={handleClickEditar}
         >
           Editar rol

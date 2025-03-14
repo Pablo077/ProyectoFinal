@@ -28,8 +28,8 @@ export const AccionesListaProductos = (props: Props) => {
       <ModalProducto openModal={openModalEliminar} setOpenModal={setOpenModalEliminar} vehiculo={vehiculo} />
       <ModalEditarProducto openModal={openModalEditar} setOpenModal={setOpenModalEditar} vehiculo={vehiculo}/>
       <div style={{ display: "flex", textAlign:"center" }}>
-        <h5 style={{ cursor: "pointer", color: colores.Jasper }} onClick={handleClickEditar}>Editar producto</h5>
-        <h5 style={{ cursor: "pointer", color: colores.Jasper, marginLeft: "30px" }} onClick={handleClickEliminar}>Eliminar producto</h5>
+        <h5 style={{ cursor: "pointer", color: colores.Jasper, margin:"5px" }} onClick={handleClickEditar}>Editar producto</h5>
+        <h5 style={{ cursor: "pointer", color: colores.Jasper, margin: "5px 5px 5px 30px" }} onClick={handleClickEliminar}>Eliminar producto</h5>
       </div>
     </>
   );

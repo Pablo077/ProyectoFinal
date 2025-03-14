@@ -12,6 +12,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,6 +52,8 @@ public class AuthenticationService {
                 .build();
 
         userRepository.save(user);
+
+        /*sendRegistrationEmail(request.getEmail(), request.getLastname());*/
 
         var jwt = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
@@ -124,8 +129,21 @@ public class AuthenticationService {
         return new AuthenticationUpdate(user.getId(), user.getFirstname(), user.getLastname(), user.getEmail(), "",user.getRole().toString());
 
     }
+/*
+    
+    private JavaMailSender mailSender;
 
+    public void sendRegistrationEmail(String toEmail, String userName) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(toEmail);
+        message.setSubject("Bienvenido a nuestra aplicación");
+        message.setText("Hola " + userName + "\n\n Tu correo " + toEmail + " fue registrado con éxito."
+                + "\n\n Ya puedes ingresar a nuestra página " + "http://localhost:5173/"
+                + ",\n\nGracias por registrarte en nuestra aplicación.");
 
+        mailSender.send(message);
+    }
+*/
     @PostConstruct
     public void initData() {
         var user = User.builder()

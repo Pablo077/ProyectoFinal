@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { VehiculoContext } from "../../context/VehiculoContext";
 import { ColumnTablas, Tablas } from "../../components/Tablas";
+import { Vehiculo } from "../../service/Vehiculo/apiVehiculo";
 
 const columns: ColumnTablas[] = [
     { id: 'marca', label: 'Marca' },
@@ -28,7 +29,11 @@ export const ListaVehiculos = () => {
             cajaTipo: vehiculo.caja?.tipo,
             direccionTipo: vehiculo.direccion?.tipo,
         }));
-        setRows(mappedRows);
+
+        // Ordenar las filas por marca
+    const sortedRows = mappedRows.sort((a, b) => a.marca.localeCompare(b.marca));
+    setRows(sortedRows);
+       
     }, [vehiculos]);
 
     return (
