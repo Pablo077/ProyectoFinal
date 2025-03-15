@@ -130,7 +130,7 @@ public class AuthenticationService {
 
     }
 /*
-    
+
     private JavaMailSender mailSender;
 
     public void sendRegistrationEmail(String toEmail, String userName) {

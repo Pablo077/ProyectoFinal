@@ -93,7 +93,9 @@ export const themeDriver: ThemeOptions = createTheme({
           fontWeight: "bold",
           backgroundColor: coloresDesignados.Fondo,
           color: coloresDesignados.Letra,
-          fontSize: "18px",
+          fontSize: "14px",
+          margin:"0px",
+          padding:"0px",
           //Efecto cuando selecciona
           "& .MuiTouchRipple-root": {
             color: coloresDesignados.Hover,

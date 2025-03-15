@@ -6,10 +6,11 @@ import { Categorias } from "../views/Home/Categorias";
 import { Recomendaciones } from "../views/Home/Recomendaciones";
 import { Footer } from "../views/Home/Footer";
 import { Galeria } from "../views/Home/Galeria";
-import { ListaVehiculos } from "../views/Home/ListaVehiculos";
+
 import { MenuBotones } from "../views/Administracion/components/MenuBotones";
 import { getCookie } from "../utils/utils";
 import { SnackMensaje } from "../components/SnackMensaje";
+import { ListaVehiculos } from "../views/Home/ListaVehiculos/ListaVehiculos";
 
 export const Administracion = () => {
   const [isMobile, setIsMobile] = useState(false);

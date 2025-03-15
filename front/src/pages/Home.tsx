@@ -5,8 +5,8 @@ import { Categorias } from "../views/Home/Categorias";
 import { Recomendaciones } from "../views/Home/Recomendaciones";
 import { Footer } from "../views/Home/Footer";
 import { Galeria } from "../views/Home/Galeria";
-import { ListaVehiculos } from "../views/Home/ListaVehiculos";
 import { SnackMensaje } from "../components/SnackMensaje";
+import { ListaVehiculos } from "../views/Home/ListaVehiculos/ListaVehiculos";
 
 export const Home = () => {
   return (
