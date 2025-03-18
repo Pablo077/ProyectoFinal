@@ -31,33 +31,51 @@ export interface Categoria {
 }
 
 export const apiVehiculo = () => {
-  let url = "vehiculo";
+  const tabla = "vehiculo";
   
   const cargarVehiculo = async (valores: any) => {
+    const url = tabla;
     const result = await postApiLocal({ valores, url });
     return result;
   };
 
   const deleteVehiculo = async (id: number) => {
+    const url = tabla;
     const result = await deleteApiLocal(url, id);
     return result;
   };
 
   const putVehiculo = async (valores: any) =>{
+    const url = tabla;
     const result = await putApiLocal({valores, url});
     return result.data;
   }
 
   const getVehiculos = async () => {
-    url = "vehiculo/getVehiculos";
+    // url = "vehiculo/getVehiculos";
+    const url = `${tabla}/getVehiculos`;
     const result = await getApiLocal({ url });
     return result;
   };
+
+  const getMarcas = async () => {
+    const url = `${tabla}/getMarcas`;
+    const result = await getApiLocal({ url });
+    return result;
+  }
+
+  const getModelos = async (marca: string) => {
+    const url = `${tabla}/getModelos/${marca}`;
+    const result = await getApiLocal({ url });
+    return result;
+  }
 
   return {
     cargarVehiculo,
     getVehiculos,
     deleteVehiculo,
     putVehiculo,
+    getMarcas,
+    getModelos,
   };
 };

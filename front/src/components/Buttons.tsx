@@ -4,7 +4,7 @@ import { SxProps, Theme } from "@mui/material/styles";
 interface Props {
   variant: "contained" | "outlined" | "text"; 
   text: string;
-  styles: SxProps<Theme> | undefined;
+  styles?: SxProps<Theme> | undefined;
   href?: string;
   tipo?: "button" | "submit" | "reset";
   onClick?: () => void;

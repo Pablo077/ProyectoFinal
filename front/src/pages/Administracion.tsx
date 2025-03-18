@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import { Navbar } from "../views/Home/Navbar";
-import { Buscador } from "../views/Home/Buscador";
+import { Buscador } from "../views/Home/Buscador/Buscador";
 import { Categorias } from "../views/Home/Categorias";
 import { Recomendaciones } from "../views/Home/Recomendaciones";
 import { Footer } from "../views/Home/Footer";

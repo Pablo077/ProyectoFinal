@@ -14,9 +14,11 @@ import com.dh.Back.service.ICajaService;
 import com.dh.Back.service.IDireccionService;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class VehiculoService implements IVehiculoService {
@@ -76,6 +78,28 @@ public class VehiculoService implements IVehiculoService {
     @Override
     public Vehiculo update(Vehiculo vehiculo) {
         return vehiculoRepository.save(vehiculo);
+    }
+
+    @Override
+    public List<String> getMarcas() {
+        return vehiculoRepository.findAll().stream()
+                .map(Vehiculo::getMarca)
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<String> getModelosByMarca(String marca) {
+        return vehiculoRepository.findModelosByMarca(marca);
+    }
+
+    @Override
+    public List<Vehiculo> buscarVehiculosDisponibles(String marca, String modelo, Integer pasajeros) {
+        // Buscar vehículos según los criterios
+        List<Vehiculo> vehiculos = vehiculoRepository.buscarPorCriterios(marca, modelo, pasajeros);
+
+        return vehiculos;
+
     }
 
     public boolean deleteFolder(File folder) {

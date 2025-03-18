@@ -174,4 +174,30 @@ public class VehiculoController {
         return ResponseEntity.ok(vehiculoService.update(vehiculo));
     }
 
+    @GetMapping("/getMarcas")
+    public ResponseEntity<List<String>> getMarcas() {
+        List<String> marcas = vehiculoService.getMarcas();
+        Collections.shuffle(marcas);
+
+        if (marcas.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(marcas);
+    }
+
+    @GetMapping("/getModelos/{marca}")
+    public ResponseEntity<List<String>> getModelos(@PathVariable String marca) {
+        System.out.println(marca);
+        List<String> modelos = vehiculoService.getModelosByMarca(marca);
+
+        Collections.shuffle(modelos);
+
+        if (modelos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(modelos);
+    }
+
 }
