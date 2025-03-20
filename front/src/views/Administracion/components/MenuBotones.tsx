@@ -16,6 +16,10 @@ export const MenuBotones = () => {
     navigate("/Caracteristicas");
   }
 
+  const handleClickCategorias = () =>{
+    navigate("/Categorias");
+  }
+
   return (
     <>
       <Buttons
@@ -35,6 +39,12 @@ export const MenuBotones = () => {
         variant="contained"
         styles={{marginRight:"10px"}}
         onClick={handleClickCaracteristicas}
+      />
+      <Buttons
+        text="Agregar categoría"
+        variant="contained"
+        styles={{marginRight:"10px"}}
+        onClick={handleClickCategorias}
       />
     </>
   );

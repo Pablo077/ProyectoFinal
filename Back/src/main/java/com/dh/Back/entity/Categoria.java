@@ -16,6 +16,12 @@ public class Categoria {
     @Column(name="nombre")
     private String nombre;
 
+    @Column(name="descripcion")
+    private String descripcion;
+
+    @Column(name="mainImage")
+    private String mainImage;
+
     @OneToMany(mappedBy = "categoria")
     private Set<VehiculoCategoria> vehiculoCategorias = new HashSet<>();
 
@@ -23,9 +29,12 @@ public class Categoria {
 
     }
 
-    public Categoria(String nombre){
+    public Categoria(String nombre, String mainImage, String descripcion){
         this.nombre = nombre;
+        this.mainImage = mainImage;
+        this.descripcion = descripcion;
     }
+
 
     public Long getId() {
         return id;
@@ -41,6 +50,22 @@ public class Categoria {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getMainImage() {
+        return mainImage;
+    }
+
+    public void setMainImage(String mainImage) {
+        this.mainImage = mainImage;
     }
 
     public Set<VehiculoCategoria> getVehiculoCategorias() {

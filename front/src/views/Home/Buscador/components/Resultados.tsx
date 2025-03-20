@@ -1,4 +1,4 @@
-import { SxProps, Theme, Grid2, Typography } from "@mui/material";
+import { SxProps, Theme, Grid2, Typography, Button } from "@mui/material";
 import { Cards } from "../../../../components/Cards";
 import { Vehiculo } from "../../../../service/Vehiculo/apiVehiculo";
 import { colores } from "../../../../styles/colors";
@@ -28,6 +28,7 @@ export const Resultados = (props: Props) => {
             actions={true}
             sxCard={sxCard}
             cardMedia={true}
+            cardContent={true}
             image={linkFotosArchivos(
               vehiculo.marca,
               vehiculo.modelo,
@@ -35,8 +36,8 @@ export const Resultados = (props: Props) => {
             )}
             tituloImagen={vehiculo.modelo}
             sxCardMedia={sxCardMedia}
-            onClickButton={() => console.log("Click en botón")}
-            tituloButton="Ver más"
+            sxBox={{ minWidth: 275 }}
+            children2={<Button size="small">Ver más</Button>}
           >
             <Typography component="div" variant="h5">{vehiculo.marca}</Typography>
             <Typography variant="body2">

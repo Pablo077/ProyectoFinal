@@ -69,7 +69,7 @@ export const IngresarProductosViews = () => {
     // Enviar datos al servidor
     try {
       const response = await cargarVehiculo(formData);
-      setMensajeSnack(response);
+      setMensajeSnack(response as string);
       setAlertSnack(() => response === "Vehículo guardado correctamente" ? "success" : "error");
       setOpenSnack(true);
       if (response === "Vehículo guardado correctamente") {

@@ -8,6 +8,7 @@ import { Administracion } from '../pages/Administracion';
 import { ListaProductos } from '../pages/ListaProductos';
 import { ListaUsuarios } from '../pages/ListaUsuarios';
 import { Caracteristicas } from '../pages/Caracteristicas';
+import { Categorías } from '../pages/Categorías';
 
 
 export const AppRouter = () => {
@@ -15,13 +16,14 @@ export const AppRouter = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/administracion" element={<Administracion />} />
+          <Route path="/Caracteristicas" element={<Caracteristicas />} />
+          <Route path="/Categorias" element={<Categorías />} />
           <Route path="/IngresarProductos" element={<IngresarProductos />} />
           <Route path="/ListaProductos" element={<ListaProductos />} />
           <Route path="/ListaUsuarios" element={<ListaUsuarios />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/Vehiculo" element={<VehiculoPage />} />
-          <Route path="/Caracteristicas" element={<Caracteristicas />} />
           <Route path="*" element={<Home />} />
         </Routes>
       );

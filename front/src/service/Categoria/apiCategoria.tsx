@@ -1,4 +1,4 @@
-import { getApiLocal } from "../Api/apiBack";
+import { getApiLocal, postApiLocal } from "../Api/apiBack";
 
 export interface ICategoria {
     id:number;
@@ -19,7 +19,14 @@ export const apiCategoria = () =>{
         return result;
     }
 
+    const saveCategoria = async (valores: any) =>{
+        const url = "categoria";
+        const result = await postApiLocal({url, valores});
+        return result;
+    }
+
     return {
         getCategoria,
+        saveCategoria,
     }
 }

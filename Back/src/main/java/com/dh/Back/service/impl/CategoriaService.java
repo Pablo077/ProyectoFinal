@@ -52,12 +52,12 @@ public class CategoriaService implements ICategoriaService {
            return;
         }
 
-        categoriaRepository.save(new Categoria("Furgoneta"));
-        categoriaRepository.save(new Categoria("Hatchback compacto"));
-        categoriaRepository.save(new Categoria("Hatchback subcompacto"));
-        categoriaRepository.save(new Categoria("Pick-up mediano"));
-        categoriaRepository.save(new Categoria("Sedán compacto"));
-        categoriaRepository.save(new Categoria("SUV"));
+        categoriaRepository.save(new Categoria("Furgoneta", "", ""));
+        categoriaRepository.save(new Categoria("Hatchback compacto", "", ""));
+        categoriaRepository.save(new Categoria("Hatchback subcompacto", "", ""));
+        categoriaRepository.save(new Categoria("Pick-up mediano", "", ""));
+        categoriaRepository.save(new Categoria("Sedán compacto", "", ""));
+        categoriaRepository.save(new Categoria("SUV","", ""));
 
     }
 

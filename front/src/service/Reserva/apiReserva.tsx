@@ -1,5 +1,5 @@
 import { postApiLocal } from "../Api/apiBack";
-import { Vehiculo } from "../Vehiculo/apiVehiculo";
+
 
 export interface IReserva {
   marca: string | null;
@@ -14,7 +14,7 @@ export const apiReserva = () => {
 
   const disponibilidad = async (valores: any) => {
     const url = `${tabla}/disponibilidad`;
-    const result = await postApiLocal<Vehiculo[]>({ valores, url });
+    const result = await postApiLocal({ valores, url });
     return result;
   };
 

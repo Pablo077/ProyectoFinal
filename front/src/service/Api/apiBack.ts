@@ -41,7 +41,7 @@ api.interceptors.request.use((config) => {
 });
 
 // 🔹 Función para Enviar Peticiones POST
-export const postApiLocal = async <T>(props: Props) => {
+export const postApiLocal = async(props: Props) => {
   const { url, valores = {} } = props;
 
   const result = await api.post(`/${url}`, valores, {
@@ -49,7 +49,7 @@ export const postApiLocal = async <T>(props: Props) => {
       Accept: "application/json",
     },
   });
-  return result.data as T;
+  return result.data;
 };
 
 // 🔹 Función para Enviar Peticiones POST
