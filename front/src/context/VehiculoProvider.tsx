@@ -6,6 +6,7 @@ import { apiVehiculo } from "../service/Vehiculo/apiVehiculo";
 export const VehiculoProvider = ({ children }: any) => {
   const [vehiculos, setVehiculos] = useState<Vehiculo[]>([]);
   const [vehiculo, setVehiculo] = useState<Vehiculo>({} as Vehiculo);
+  const [vehiculosDisponibles, setVehiculosDisponibles] = useState<Vehiculo[]>([]);
   const { getVehiculos } = apiVehiculo();
 
   const [openSnack, setOpenSnack] = useState(false);
@@ -21,7 +22,22 @@ export const VehiculoProvider = ({ children }: any) => {
 
   return (
     <VehiculoContext.Provider
-      value={{ vehiculos, setVehiculos, vehiculo, setVehiculo, cargarVehiculos, alertSnack, mensajeSnack, openSnack, setMensajeSnack, setOpenSnack, setAlertSnack }}>
+      value={{
+        vehiculos,
+        setVehiculos,
+        vehiculo,
+        setVehiculo,
+        vehiculosDisponibles,
+        setVehiculosDisponibles,
+        cargarVehiculos,
+        alertSnack,
+        mensajeSnack,
+        openSnack,
+        setMensajeSnack,
+        setOpenSnack,
+        setAlertSnack,
+      }}
+    >
       {children}
     </VehiculoContext.Provider>
   );

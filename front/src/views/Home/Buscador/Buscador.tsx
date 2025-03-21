@@ -1,12 +1,12 @@
 import { Typography } from "@mui/material";
 import { InputsBuscador } from "./components/InputsBuscador";
-import { Vehiculo } from "../../../service/Vehiculo/apiVehiculo";
-import { useState } from "react";
+import { useContext } from "react";
 import { Resultados } from "./components/Resultados";
 import { colores } from "../../../styles/colors";
+import { VehiculoContext } from "../../../context/VehiculoContext";
 
 export const Buscador = () => {
-  const [vehiculos, setVehiculos] = useState<Vehiculo[]>([]);
+  const {vehiculosDisponibles, setVehiculosDisponibles} = useContext(VehiculoContext);
 
   return (
     <div
@@ -22,10 +22,10 @@ export const Buscador = () => {
         Buscar
       </Typography>
       <div style={{ width: "70%", margin: "auto" }}>
-        <InputsBuscador setVehiculos={setVehiculos} />
+        <InputsBuscador setVehiculos={setVehiculosDisponibles} />
       </div>
       <div style={{ marginLeft: "-10px" }}>
-        <Resultados vehiculos={vehiculos} />
+        <Resultados vehiculos={vehiculosDisponibles} />
       </div>
     </div>
   );

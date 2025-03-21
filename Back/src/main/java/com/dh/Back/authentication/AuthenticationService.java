@@ -1,6 +1,7 @@
 package com.dh.Back.authentication;
 
 import com.dh.Back.configuration.JwtService;
+import com.dh.Back.data.UserDataLoader;
 import com.dh.Back.entity.Role;
 import com.dh.Back.entity.User;
 import com.dh.Back.exception.GlobalException;
@@ -27,6 +28,7 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final UserDataLoader userDataLoader;
 
     public AuthenticationResponse register(RegisterRequest request) throws ResourceNotFoundException {
         Role rol = Role.ADMIN;
@@ -146,15 +148,27 @@ public class AuthenticationService {
 */
     @PostConstruct
     public void initData() {
-        var user = User.builder()
-                .firstname("Juan")
-                .lastname("Perez")
-                .email("admin@gmail.com")
-                .password(passwordEncoder.encode("1234"))
+        UserDataLoader users = new UserDataLoader();
+
+        var admin = User.builder()
+                .firstname(users.getUser().get(0).getFirstname())
+                .lastname(users.getUser().get(0).getLastname())
+                .email(users.getUser().get(0).getEmail())
+                .password(passwordEncoder.encode(users.getUser().get(0).getPassword()))
                 .role(Role.ADMIN)
                 .build();
 
+        var user = User.builder()
+                .firstname(users.getUser().get(1).getFirstname())
+                .lastname(users.getUser().get(1).getLastname())
+                .email(users.getUser().get(1).getEmail())
+                .password(passwordEncoder.encode(users.getUser().get(1).getPassword()))
+                .role(Role.USER)
+                .build();
+
+        userRepository.save(admin);
         userRepository.save(user);
+
     }
 
 

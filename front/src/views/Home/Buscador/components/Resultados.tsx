@@ -3,6 +3,9 @@ import { Cards } from "../../../../components/Cards";
 import { Vehiculo } from "../../../../service/Vehiculo/apiVehiculo";
 import { colores } from "../../../../styles/colors";
 import { linkFotosArchivos } from "../../../../utils/utils";
+import { useContext } from "react";
+import { VehiculoContext } from "../../../../context/VehiculoContext";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   vehiculos: Vehiculo[];
@@ -19,6 +22,13 @@ const sxCardMedia: SxProps<Theme> = {
 
 export const Resultados = (props: Props) => {
   const { vehiculos } = props;
+  const { setVehiculo } = useContext(VehiculoContext);
+  const navigate = useNavigate();
+
+  const handleClick = (vehiculo: Vehiculo) => {
+    setVehiculo(vehiculo);
+    navigate("/Vehiculo");
+  };
 
   return (
     <Grid2 container columns={10}>
@@ -37,7 +47,7 @@ export const Resultados = (props: Props) => {
             tituloImagen={vehiculo.modelo}
             sxCardMedia={sxCardMedia}
             sxBox={{ minWidth: 275 }}
-            children2={<Button size="small">Ver más</Button>}
+            children2={<Button size="small" onClick={()=>handleClick(vehiculo)}>Ver más</Button>}
           >
             <Typography component="div" variant="h5">{vehiculo.marca}</Typography>
             <Typography variant="body2">

@@ -1,12 +1,14 @@
 package com.dh.Back.repository;
 
 import com.dh.Back.entity.Reserva;
+import com.dh.Back.entity.Vehiculo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 import org.springframework.data.repository.query.Param;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Repository
 public interface IReservaRepository extends JpaRepository<Reserva, Long> {
@@ -17,4 +19,5 @@ public interface IReservaRepository extends JpaRepository<Reserva, Long> {
     List<Reserva> verificarDisponibilidad(@Param("vehiculoId") Long vehiculoId,
                                           @Param("fechaInicio") LocalDate fechaInicio,
                                           @Param("fechaFin") LocalDate fechaFin);
+    Optional<List<Reserva>> findByVehiculo(Vehiculo vehiculo);
 }

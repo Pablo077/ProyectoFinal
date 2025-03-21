@@ -1,6 +1,6 @@
-
 import { ThemeOptions, createTheme } from "@mui/material";
 import { colores, coloresDesignados } from "../styles/colors";
+
 
 export const themeDriver: ThemeOptions = createTheme({
   components: {
@@ -201,8 +201,12 @@ export const themeDriver: ThemeOptions = createTheme({
         },
       },
     },
+
   },
 });
+
+
+
 
 
 

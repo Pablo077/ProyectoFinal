@@ -6,6 +6,8 @@ interface VehiculoContextType {
   setVehiculos: (vehiculos: Vehiculo[]) => void;
   vehiculo: Vehiculo;
   setVehiculo: (vehiculo: Vehiculo) => void;
+  vehiculosDisponibles: Vehiculo[];
+  setVehiculosDisponibles: React.Dispatch<React.SetStateAction<Vehiculo[]>>;
   cargarVehiculos: () => Promise<void>;
   openSnack: boolean;
   setOpenSnack : React.Dispatch<React.SetStateAction<boolean>>;

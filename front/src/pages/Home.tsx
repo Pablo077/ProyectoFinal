@@ -14,10 +14,8 @@ export const Home = () => {
   const [apiData, setApiData] = useState<any>(null);
 
   useEffect(() => {
-    // Obtener la respuesta de la API de las cookies
     const cookieData = getCookie("user");
     if (cookieData) {
-      // Convertir la cadena JSON en un objeto
       const parsedData = JSON.parse(cookieData);
       setApiData(parsedData);
     }
