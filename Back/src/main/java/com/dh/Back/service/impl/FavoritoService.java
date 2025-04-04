@@ -1,4 +1,45 @@
 package com.dh.Back.service.impl;
 
-public class FavoritoService {
+import com.dh.Back.entity.Favorito;
+import com.dh.Back.entity.User;
+import com.dh.Back.exception.ResourceNotFoundException;
+import com.dh.Back.repository.IFavoritoRepository;
+import com.dh.Back.service.IFavoritoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+public class FavoritoService implements IFavoritoService {
+    private IFavoritoRepository favoritoRepository;
+
+    @Autowired
+    public FavoritoService(IFavoritoRepository favoritoRepository){
+        this.favoritoRepository = favoritoRepository;
+    }
+
+    @Override
+    public Favorito save(Favorito favorito) throws ResourceNotFoundException {
+        try{
+            return favoritoRepository.save(favorito);
+        }catch (Exception e){
+            throw new ResourceNotFoundException(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Favorito> findByUser(User user) {
+        return favoritoRepository.findByUser(user.getId());
+    }
+
+    @Override
+    public List<Favorito> findAll() {
+        return favoritoRepository.findAll();
+    }
+
+
 }

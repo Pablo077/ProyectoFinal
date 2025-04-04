@@ -1,21 +1,69 @@
-import { useEffect, useContext } from "react";
-import { Vehiculo } from "../../service/Vehiculo/apiVehiculo";
-import { Card, CardMedia } from "@mui/material";
+import { useEffect, useContext, useState } from "react";
+import { Vehiculo } from '../../service/Vehiculo/apiVehiculo';
 import Grid from "@mui/material/Grid2";
-import {
-  mdiAccountMultiple,
-  mdiBagSuitcase,
-  mdiBagChecked,
-  mdiCarShiftPattern,
-  mdiSteering,
-} from "@mdi/js";
-import { CajaDireccion } from "../../components/CajaDireccion";
 import { VehiculoContext } from "../../context/VehiculoContext";
 import { useNavigate } from "react-router-dom";
-import { linkFotosArchivos } from "../../utils/utils";
+import { getCookie, linkFotosArchivos } from "../../utils/utils";
+import { CardReview } from "../../components/CardReview";
+import { apiFavorito } from "../../service/Favorito/apiFavorito";
+
+const Filas = ({
+  vehiculos,
+  handleClick,
+  inicio,
+  final,
+  apiData,
+  cargarFavorito,
+  user,
+}: {
+  vehiculos: Vehiculo[];
+  handleClick: (vehiculo: Vehiculo) => void;
+  inicio: number;
+  final: number;
+  apiData: any;
+  cargarFavorito: ({
+    vehiculo,
+    user,
+  }: {
+    vehiculo: Vehiculo;
+    user: any;
+  }) => Promise<void>;
+  user: any;
+}) => {
+  return (
+    <div style={{ marginTop: "10px" }}>
+      <Grid container spacing={1} justifyContent="center" alignItems="center">
+        {vehiculos ? (
+          vehiculos.slice(inicio, final).map((vehiculo) => (
+            <Grid size={2.3} key={vehiculo?.id}>
+              <CardReview
+                vehiculo={vehiculo}
+                image={linkFotosArchivos(
+                  vehiculo.marca,
+                  vehiculo.modelo,
+                  vehiculo.mainImage
+                )}
+                handleClick={handleClick}
+                actions={apiData ? true : false}
+                cargarFavorito={cargarFavorito}
+                user={user}
+              />
+            </Grid>
+          ))
+        ) : (
+          <></>
+        )}
+      </Grid>
+    </div>
+  );
+};
 
 export const Recomendaciones = () => {
-  const { setVehiculo, vehiculos, cargarVehiculos } = useContext(VehiculoContext);
+  const { setVehiculo, vehiculos, cargarVehiculos } =
+    useContext(VehiculoContext);
+  const{saveFavoritos} = apiFavorito();
+  const [apiData, setApiData] = useState<any>(null);
+
   const navigate = useNavigate();
 
   const handleClick = (vehiculo: Vehiculo) => {
@@ -23,104 +71,47 @@ export const Recomendaciones = () => {
     navigate("/Vehiculo");
   };
 
+  const cargarFavorito = async({vehiculo, user}:{vehiculo:Vehiculo, user: any}) =>{
+    const userData = {
+      id: user.id,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      role: user.rol,
+    };
+    const valores = {vehiculo:{id:vehiculo.id}, user:userData}
+    const response = await saveFavoritos(valores)
+    console.log(response)
+  }
+
   useEffect(() => {
     cargarVehiculos();
+    const cookieData = getCookie("user");
+    if (cookieData) {
+      const parsedData = JSON.parse(cookieData);
+      setApiData(parsedData);
+    }
   }, []);
 
   return (
     <>
       <div>
-        <Grid container spacing={1} justifyContent="center" alignItems="center" columns={10}>
-          {
-            vehiculos ?
-              vehiculos.slice(0, 10).map((vehiculo) => (
-                <Grid columns={{ xs: 2, md: 1 }} key={vehiculo?.id}>
-                  <Card
-                    sx={{
-                      cursor: "pointer",
-                      "&:hover": { opacity: 0.7 },
-                    }}
-                  >
-                    <CardMedia
-                      component="img"
-                      height="200vh"
-                      onClick={() => handleClick(vehiculo)}
-                      image={linkFotosArchivos(
-                        vehiculo.marca,
-                        vehiculo.modelo,
-                        vehiculo.mainImage
-                      )}
-                      alt={`${vehiculo.marca} ${vehiculo.modelo}`}
-                    />
-                  </Card>
-                  <div>
-
-
-                    <div style={{ textAlign: "center", width: "100%" }}>
-                      <p
-                        style={{
-                          margin: "0px",
-                          fontSize: "16px",
-                          textAlign: "center",
-                          wordWrap: "break-word",
-                          overflowWrap: "break-word",
-                          maxWidth: "100%",
-                        }}
-                      >{`${vehiculo.marca} ${vehiculo.modelo} - ${vehiculo.motor} Lts`}</p>
-                    </div>
-
-
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        margin: "0px",
-                        padding: "0px",
-                      }}
-                    >
-                      <CajaDireccion
-                        texto={vehiculo.pasajeros.toString()}
-                        path={mdiAccountMultiple}
-                        size={0.6}
-                      />
-                      <CajaDireccion
-                        texto={vehiculo.valijasGrandes.toString()}
-                        path={mdiBagSuitcase}
-                        size={0.6}
-                      />
-                      <CajaDireccion
-                        texto={vehiculo.valijasChicas.toString()}
-                        path={mdiBagChecked}
-                        size={0.6}
-                      />
-                    </div>
-
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        margin: "0px",
-                        padding: "0px",
-                      }}
-                    >
-                      <CajaDireccion
-                        texto={vehiculo.caja.tipo}
-                        path={mdiCarShiftPattern}
-                        size={0.6}
-                      />
-                      <CajaDireccion
-                        texto={vehiculo.direccion.tipo}
-                        path={mdiSteering}
-                        size={0.6}
-                      />
-                    </div>
-                  </div>
-                </Grid>
-              )) :
-              <></>
-          }
-        </Grid>
-        
+        <Filas
+          vehiculos={vehiculos}
+          handleClick={handleClick}
+          inicio={0}
+          final={5}
+          apiData={apiData}
+          cargarFavorito={cargarFavorito} 
+          user={apiData}        />
+        <Filas
+          vehiculos={vehiculos}
+          handleClick={handleClick}
+          inicio={5}
+          final={10}
+          apiData={apiData}
+          cargarFavorito={cargarFavorito}
+          user={apiData}
+        />
       </div>
     </>
   );

@@ -55,6 +55,9 @@ public class Vehiculo {
     @OneToMany(mappedBy = "vehiculo")
     private Set<Reserva> reservas = new HashSet<>();
 
+    @OneToMany(mappedBy = "vehiculo")
+    private Set<Favorito> favoritos = new HashSet<>();
+
     public Vehiculo(){
 
     }
