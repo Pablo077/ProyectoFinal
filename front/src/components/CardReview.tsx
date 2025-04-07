@@ -24,6 +24,7 @@ interface Props {
   image: string;
   handleClick: (vehiculo: Vehiculo) => void;
   actions: boolean;
+  verificarVehiculo: (idVehiculo: any) => boolean
   cargarFavorito: ({
     vehiculo,
     user,
@@ -35,7 +36,7 @@ interface Props {
 }
 
 export const CardReview = (props: Props) => {
-  const { vehiculo, image, handleClick, actions, cargarFavorito, user } = props;
+  const { vehiculo, image, handleClick, actions, cargarFavorito, user, verificarVehiculo } = props;
 
   return (
     <Card sx={{ backgroundColor: colores.CornflowerBlue }}>
@@ -125,9 +126,9 @@ export const CardReview = (props: Props) => {
       {actions && (
         <CardActions disableSpacing sx={{ padding: "0px" }}>
           <IconButton aria-label="add to favorites" onClick={() => cargarFavorito({ vehiculo, user })}>
-            <FavoriteIcon />
+          <FavoriteIcon sx={{ color: verificarVehiculo(vehiculo.id) ? colores.Jasper : "inherit" }} />
           </IconButton>
-          <IconButton aria-label="share">
+          <IconButton aria-label="share"> 
             <ShareIcon />
           </IconButton>
         </CardActions>
