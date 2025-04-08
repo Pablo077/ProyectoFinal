@@ -41,5 +41,22 @@ public class FavoritoService implements IFavoritoService {
         return favoritoRepository.findAll();
     }
 
+    @Override
+    public Optional<Favorito> findById(Long id) {
+        return favoritoRepository.findById(id);
+    }
+
+    @Override
+    public void delete(Long id) throws ResourceNotFoundException {
+        Optional<Favorito> favoritoFindById = findById(id);
+
+        if(favoritoFindById.isPresent()){
+            favoritoRepository.deleteById(favoritoFindById.get().getId());
+        }
+        else{
+            throw new ResourceNotFoundException("No se pudo eliminar el favorito con id: " + id);
+        }
+    }
+
 
 }

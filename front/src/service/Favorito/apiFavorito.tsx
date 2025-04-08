@@ -1,4 +1,4 @@
-import { postApiLocal } from "../Api/apiBack";
+import { postApiLocal, deleteApiLocal } from "../Api/apiBack";
 
 export const apiFavorito = () => {
   const tabla = "favorito";
@@ -15,8 +15,15 @@ export const apiFavorito = () => {
     return result;
   };
 
+  const deleteFavorito = async (id: number) => {
+          const url = tabla;
+          const result = await deleteApiLocal(url, id);
+          return result;
+      };
+
   return {
     saveFavoritos,
     favoritoUser,
+    deleteFavorito,
   };
 };

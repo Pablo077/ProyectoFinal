@@ -56,3 +56,18 @@ export const erroresAxios = (error: unknown) => {
     data: error instanceof Error ? error.message : JSON.stringify(error)
   };
 };
+
+
+export const userData = () =>{
+  const cookieData = getCookie("user");
+  if (cookieData) {
+    const parsedUser = JSON.parse(cookieData);
+    const userData = {
+      id: parsedUser.id,
+      firstname: parsedUser.firstname,
+      lastname: parsedUser.lastname,
+      role: parsedUser.rol,
+    };
+    return userData;
+  }
+}

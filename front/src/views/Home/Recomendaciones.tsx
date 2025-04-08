@@ -3,9 +3,10 @@ import { Vehiculo } from '../../service/Vehiculo/apiVehiculo';
 import Grid from "@mui/material/Grid2";
 import { VehiculoContext } from "../../context/VehiculoContext";
 import { useNavigate } from "react-router-dom";
-import { getCookie, linkFotosArchivos } from "../../utils/utils";
+import { linkFotosArchivos, userData } from "../../utils/utils";
 import { CardReview } from "../../components/CardReview";
 import { apiFavorito } from "../../service/Favorito/apiFavorito";
+
 
 const Filas = ({
   vehiculos,
@@ -32,6 +33,7 @@ const Filas = ({
   }) => Promise<void>;
   user: any;
 }) => {
+  
   return (
     <div style={{ marginTop: "10px" }}>
       <Grid container spacing={1} justifyContent="center" alignItems="center">
@@ -64,9 +66,12 @@ const Filas = ({
 export const Recomendaciones = () => {
   const { setVehiculo, vehiculos, cargarVehiculos } =
     useContext(VehiculoContext);
-  const { saveFavoritos, favoritoUser } = apiFavorito();
+  const { saveFavoritos, favoritoUser, deleteFavorito } = apiFavorito();
   const [apiData, setApiData] = useState<any>(null);
-  const [favoritos, setFavoritos] = useState<any[]>([]);	
+  const [favoritos, setFavoritos] = useState<any[]>([]);
+  const [user, setUser] = useState<any>(null);
+  const { setOpenSnack, setMensajeSnack, setAlertSnack } =
+  useContext(VehiculoContext);	
 
   const navigate = useNavigate();
 
@@ -76,28 +81,34 @@ export const Recomendaciones = () => {
   };
 
   const cargarFavorito = async (user:any) => {
-    const userData = {
-      id: user.id,
-      firstname: user.firstname,
-      lastname: user.lastname,
-      role: user.rol,
-    };
-    
-    const response = await favoritoUser(userData);
+    const response = await favoritoUser(user);
     setFavoritos(response);
   }
 
   const guardarFavorito = async ({ vehiculo, user }: { vehiculo: Vehiculo, user: any }) => {
-    const userData = {
-      id: user.id,
-      firstname: user.firstname,
-      lastname: user.lastname,
-      role: user.rol,
-    };
-    const valores = { vehiculo: { id: vehiculo.id }, user: userData }
-    const response = await saveFavoritos(valores)
-    if (response) {
-      cargarFavorito(userData);
+    const valores = { vehiculo: { id: vehiculo.id }, user: user }
+
+    const existe = verificarVehiculo(vehiculo.id);
+    if (existe) {
+      const idFavorito = favoritos.find((favorito) => favorito.vehiculo.id === vehiculo.id).id;
+      const response = await deleteFavorito(idFavorito);
+      if(response === "Borrado exitoso"){
+        setMensajeSnack("Eliminaste el vehiculo de favoritos");
+        setAlertSnack("info");
+        setOpenSnack(true);
+        cargarFavorito(user);
+
+      }
+      return;
+    }	
+    else{
+      const response = await saveFavoritos(valores)
+      if (response) {
+        cargarFavorito(user);
+        setMensajeSnack("Se agrego a mis favoritos");
+        setAlertSnack("success");
+        setOpenSnack(true);
+      }
     }
   }
 
@@ -112,14 +123,16 @@ export const Recomendaciones = () => {
 
   useEffect(() => {
     cargarVehiculos();
-    const cookieData = getCookie("user");
-    if (cookieData) {
-      const parsedData = JSON.parse(cookieData);
-      cargarFavorito(parsedData)
-      setApiData(parsedData);
+    const userResponse = userData();
+    if (userResponse) {
+      setApiData(userResponse);
+      cargarFavorito(userResponse);
+      setUser(userResponse);
     }
+
   }, []);
 
+  
 
   return (
     <>
@@ -131,7 +144,7 @@ export const Recomendaciones = () => {
           final={5}
           apiData={apiData}
           cargarFavorito={guardarFavorito}
-          user={apiData}
+          user={user}
           verificarVehiculo={verificarVehiculo}
            />
         <Filas
@@ -141,7 +154,7 @@ export const Recomendaciones = () => {
           final={10}
           apiData={apiData}
           cargarFavorito={guardarFavorito}
-          user={apiData}
+          user={user}
           verificarVehiculo={verificarVehiculo}
         />
       </div>
