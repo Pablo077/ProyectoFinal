@@ -1,4 +1,12 @@
 import { postApiLocal, deleteApiLocal } from "../Api/apiBack";
+import { userList } from "../Users/apiUsers";
+import { Vehiculo } from "../Vehiculo/apiVehiculo";
+
+export interface IFavorito {
+  id: number;
+  user: userList;
+  vehiculo: Vehiculo;
+}
 
 export const apiFavorito = () => {
   const tabla = "favorito";

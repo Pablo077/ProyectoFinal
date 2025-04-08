@@ -9,6 +9,7 @@ import { ListaProductos } from '../pages/ListaProductos';
 import { ListaUsuarios } from '../pages/ListaUsuarios';
 import { Caracteristicas } from '../pages/Caracteristicas';
 import { Categorías } from '../pages/Categorías';
+import { ListaFavoritos } from '../pages/ListaFavoritos';
 
 
 export const AppRouter = () => {
@@ -19,6 +20,7 @@ export const AppRouter = () => {
           <Route path="/Caracteristicas" element={<Caracteristicas />} />
           <Route path="/Categorias" element={<Categorías />} />
           <Route path="/IngresarProductos" element={<IngresarProductos />} />
+          <Route path="/ListaFavoritos" element={<ListaFavoritos />} />
           <Route path="/ListaProductos" element={<ListaProductos />} />
           <Route path="/ListaUsuarios" element={<ListaUsuarios />} />
           <Route path="/Login" element={<Login />} />
