@@ -27,3 +27,5 @@
 [2025-03-05 02:24:41] [ WARN ] [ResourceNotFoundException:10] Query did not return a unique result: 2 results were returned
 [2025-03-05 02:25:46] [ WARN ] [ResourceNotFoundException:10] Query did not return a unique result: 2 results were returned
 [2025-03-05 02:26:06] [ WARN ] [ResourceNotFoundException:10] Query did not return a unique result: 2 results were returned
+[2025-04-08 03:17:27] [ WARN ] [ResourceNotFoundException:10] No se pudo eliminar el favorito con id: 3
+[2025-04-08 03:17:41] [ WARN ] [ResourceNotFoundException:10] No se pudo eliminar el favorito con id: 3

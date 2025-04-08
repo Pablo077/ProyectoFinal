@@ -24,7 +24,7 @@ export const Caracteristicas = () => {
   return (
     <div>
       <Divider sx={{ borderColor: colores.AntiFlashWhite, margin: "10px" }} />
-      <Typography variant="h6" component="h2" margin={"20px 10px 10px 10px"}>
+      <Typography variant="h5" component="h2" margin={"20px 10px 10px 10px"}>
         Caracteristicas del vehículo
       </Typography>
       <div

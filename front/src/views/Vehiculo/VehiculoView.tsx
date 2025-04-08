@@ -3,6 +3,7 @@ import { Caracteristicas } from "./components/Caracteristicas"
 import { FotosDetalles } from "./components/FotosDetalles"
 import { getCookie } from "../../utils/utils";
 import { Reservas } from "./components/Reservas";
+import { PoliticasUso } from "./components/PoliticasUso";
 
 
 export const VehiculoView = () => {
@@ -21,6 +22,7 @@ export const VehiculoView = () => {
       <FotosDetalles />
       {apiData && <Reservas />}
       <Caracteristicas />
+      <PoliticasUso />
     </div>
   )
 }

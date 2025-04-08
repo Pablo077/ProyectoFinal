@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { apiFavorito, IFavorito } from "../../service/Favorito/apiFavorito"
+import { apiFavorito } from "../../service/Favorito/apiFavorito"
 import { userData } from "../../utils/utils";
 import { Box, Typography } from "@mui/material";
 import { ColumnTablas, Tablas } from "../../components/Tablas";
