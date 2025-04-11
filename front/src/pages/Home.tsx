@@ -2,7 +2,6 @@ import { Box, Typography } from "@mui/material";
 import { Navbar } from "../views/Home/Navbar";
 import { Buscador } from "../views/Home/Buscador/Buscador";
 import { Categorias } from "../views/Home/Categorias";
-import { Recomendaciones } from "../views/Home/Recomendaciones";
 import { Footer } from "../views/Home/Footer";
 import { Galeria } from "../views/Home/Galeria";
 import { SnackMensaje } from "../components/SnackMensaje";
@@ -10,6 +9,7 @@ import { ListaVehiculos } from "../views/Home/ListaVehiculos/ListaVehiculos";
 import { useEffect, useState } from "react";
 import { getCookie } from "../utils/utils";
 import { MenuBotonesUser } from "../views/Home/MenuBotonesUser";
+import { Recomendaciones } from "../views/Home/Recomendaciones/Recomendaciones";
 
 export const Home = () => {
   const [apiData, setApiData] = useState<any>(null);

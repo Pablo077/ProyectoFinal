@@ -34,6 +34,7 @@ export const SwitchInput = (props: Props) => {
             case "password":
             case "date":
             case "number":
+            case "textarea":  
               return (
                 <div
                   key={name}

@@ -1,11 +1,12 @@
 import { useEffect, useContext, useState } from "react";
-import { Vehiculo } from '../../service/Vehiculo/apiVehiculo';
+import { Vehiculo } from '../../../service/Vehiculo/apiVehiculo';
 import Grid from "@mui/material/Grid2";
-import { VehiculoContext } from "../../context/VehiculoContext";
+import { VehiculoContext } from "../../../context/VehiculoContext";
 import { useNavigate } from "react-router-dom";
-import { linkFotosArchivos, userData } from "../../utils/utils";
-import { CardReview } from "../../components/CardReview";
-import { apiFavorito } from "../../service/Favorito/apiFavorito";
+import { apiFavorito } from "../../../service/Favorito/apiFavorito";
+import { CardReview } from "../../../components/CardReview";
+import { linkFotosArchivos, userData } from "../../../utils/utils";
+import { ModalCompartir } from "./components/ModalCompartir";
 
 
 const Filas = ({
@@ -17,13 +18,15 @@ const Filas = ({
   verificarVehiculo,
   cargarFavorito,
   user,
+  compartirVehiculo,
 }: {
   vehiculos: Vehiculo[];
   handleClick: (vehiculo: Vehiculo) => void;
   inicio: number;
   final: number;
   apiData: any;
-  verificarVehiculo: (idVehiculo: any) => boolean
+  verificarVehiculo: (idVehiculo: any) => boolean;
+  compartirVehiculo: (vehiculo: any) => void;
   cargarFavorito: ({
     vehiculo,
     user,
@@ -33,7 +36,7 @@ const Filas = ({
   }) => Promise<void>;
   user: any;
 }) => {
-  
+
   return (
     <div style={{ marginTop: "10px" }}>
       <Grid container spacing={1} justifyContent="center" alignItems="center">
@@ -52,6 +55,7 @@ const Filas = ({
                 cargarFavorito={cargarFavorito}
                 user={user}
                 verificarVehiculo={verificarVehiculo}
+                compartirVehiculo={compartirVehiculo}
               />
             </Grid>
           ))
@@ -66,12 +70,14 @@ const Filas = ({
 export const Recomendaciones = () => {
   const { setVehiculo, vehiculos, cargarVehiculos } =
     useContext(VehiculoContext);
+  const { setOpenSnack, setMensajeSnack, setAlertSnack } =
+    useContext(VehiculoContext);
   const { saveFavoritos, favoritoUser, deleteFavorito } = apiFavorito();
   const [apiData, setApiData] = useState<any>(null);
   const [favoritos, setFavoritos] = useState<any[]>([]);
+ const[vehiculoCompartir, setVehiculoCompartir] = useState<any>(null);
   const [user, setUser] = useState<any>(null);
-  const { setOpenSnack, setMensajeSnack, setAlertSnack } =
-  useContext(VehiculoContext);	
+  const [openModal, setOpenModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -80,7 +86,7 @@ export const Recomendaciones = () => {
     navigate("/Vehiculo");
   };
 
-  const cargarFavorito = async (user:any) => {
+  const cargarFavorito = async (user: any) => {
     const response = await favoritoUser(user);
     setFavoritos(response);
   }
@@ -92,7 +98,7 @@ export const Recomendaciones = () => {
     if (existe) {
       const idFavorito = favoritos.find((favorito) => favorito.vehiculo.id === vehiculo.id).id;
       const response = await deleteFavorito(idFavorito);
-      if(response === "Borrado exitoso"){
+      if (response === "Borrado exitoso") {
         setMensajeSnack("Eliminaste el vehiculo de favoritos");
         setAlertSnack("info");
         setOpenSnack(true);
@@ -100,8 +106,8 @@ export const Recomendaciones = () => {
 
       }
       return;
-    }	
-    else{
+    }
+    else {
       const response = await saveFavoritos(valores)
       if (response) {
         cargarFavorito(user);
@@ -112,13 +118,18 @@ export const Recomendaciones = () => {
     }
   }
 
-  const verificarVehiculo = (idVehiculo:any) => {
+  const verificarVehiculo = (idVehiculo: any) => {
     for (let i = 0; i < favoritos.length; i++) {
       if (favoritos[i].vehiculo.id === idVehiculo) {
         return true;
       }
     }
     return false;
+  }
+
+  const compartirVehiculo = (vehiculo: any) => {
+    setVehiculoCompartir(vehiculo);
+    setOpenModal(true);
   }
 
   useEffect(() => {
@@ -132,10 +143,11 @@ export const Recomendaciones = () => {
 
   }, []);
 
-  
+
 
   return (
     <>
+    <ModalCompartir openModal={openModal} setOpenModal={setOpenModal} vehiculo={vehiculoCompartir}/>
       <div>
         <Filas
           vehiculos={vehiculos}
@@ -146,7 +158,8 @@ export const Recomendaciones = () => {
           cargarFavorito={guardarFavorito}
           user={user}
           verificarVehiculo={verificarVehiculo}
-           />
+          compartirVehiculo={compartirVehiculo}
+        />
         <Filas
           vehiculos={vehiculos}
           handleClick={handleClick}
@@ -156,6 +169,7 @@ export const Recomendaciones = () => {
           cargarFavorito={guardarFavorito}
           user={user}
           verificarVehiculo={verificarVehiculo}
+          compartirVehiculo={compartirVehiculo}
         />
       </div>
     </>

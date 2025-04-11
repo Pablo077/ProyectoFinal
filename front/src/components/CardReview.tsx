@@ -24,7 +24,8 @@ interface Props {
   image: string;
   handleClick: (vehiculo: Vehiculo) => void;
   actions: boolean;
-  verificarVehiculo: (idVehiculo: any) => boolean
+  verificarVehiculo: (idVehiculo: any) => boolean;
+  compartirVehiculo: (vehiculo: any) => void;
   cargarFavorito: ({
     vehiculo,
     user,
@@ -36,7 +37,7 @@ interface Props {
 }
 
 export const CardReview = (props: Props) => {
-  const { vehiculo, image, handleClick, actions, cargarFavorito, user, verificarVehiculo } = props;
+  const { vehiculo, image, handleClick, actions, cargarFavorito, user, verificarVehiculo, compartirVehiculo } = props;
 
   return (
     <Card sx={{ backgroundColor: colores.CornflowerBlue }}>
@@ -128,7 +129,7 @@ export const CardReview = (props: Props) => {
           <IconButton aria-label="add to favorites" onClick={() => cargarFavorito({ vehiculo, user })}>
           <FavoriteIcon sx={{ color: verificarVehiculo(vehiculo.id) ? colores.Jasper : "inherit" }} />
           </IconButton>
-          <IconButton aria-label="share"> 
+          <IconButton aria-label="share" onClick={() => compartirVehiculo(vehiculo)}> 
             <ShareIcon />
           </IconButton>
         </CardActions>

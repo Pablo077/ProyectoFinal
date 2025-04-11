@@ -14,7 +14,7 @@ export interface FormJson {
   selectValues?: Select;
   size: "small" | "medium";
   sxForm?: SxProps<Theme>;
-  type: "input" | "password" | "email" | "select" | "date" | "number" | "checkbox";
+  type: "input" | "password" | "email" | "select" | "date" | "number" | "checkbox" | "textarea";
   validation: Validation[];
   value: any;
   sxSelect?: SxProps<Theme>;

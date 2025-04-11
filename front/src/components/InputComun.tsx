@@ -89,6 +89,7 @@ export const InputComun = (props: Props) => {
       type={type}
       value={value}
       onKeyUp={keyUp}
+      multiline={type === "textarea" ? true : false}
     />
   );
 };
