@@ -57,6 +57,7 @@ public class VehiculoDataLoader {
                 new Vehiculo("Fiat", "Cronos Atractive", 1.3f,5, 1, 2, caja2, direccion, sedan, "Foto1.png", "{\"images\":[\"Foto1.png\",\"Foto2.png\",\"Foto3.png\",\"Foto4.png\",\"Foto5.png\"]}"),
                 new Vehiculo("Fiat", "Cronos Drive", 1.3f,5, 1, 2, caja1, direccion, sedan, "Foto1.png", "{\"images\":[\"Foto1.png\",\"Foto2.png\",\"Foto3.png\",\"Foto4.png\",\"Foto5.png\"]}"),
                 new Vehiculo("Ford", "Territory Titanium", 1.8f,5, 1, 2, caja1, direccion, suv, "Foto1.png", "{\"images\":[\"Foto1.png\",\"Foto2.png\",\"Foto3.png\",\"Foto4.png\",\"Foto5.png\"]}"),
+
                 new Vehiculo("Nissan", "Frontier S 4x4", 2.3f,5, 2, 4, caja1, direccion, pickUp, "Foto1.png", "{\"images\":[\"Foto1.png\",\"Foto2.png\",\"Foto3.png\",\"Foto4.png\",\"Foto5.png\"]}"),
                 new Vehiculo("Toyota", "Etios 5P", 1.5f,5, 1, 2, caja2, direccion, sedan, "Foto1.png", "{\"images\":[\"Foto1.png\",\"Foto2.png\",\"Foto3.png\",\"Foto4.png\",\"Foto5.png\"]}"),
                 new Vehiculo("Toyota", "Yaris", 1.5f,5, 2, 4, caja2, direccion, hatchbackSubcompacto, "Foto1.png", "{\"images\":[\"Foto1.png\",\"Foto2.png\",\"Foto3.png\",\"Foto4.png\",\"Foto5.png\"]}"),

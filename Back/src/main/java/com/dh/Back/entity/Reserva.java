@@ -2,6 +2,8 @@ package com.dh.Back.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -23,6 +25,9 @@ public class Reserva {
 
     @Column(name="fechaFin")
     private LocalDate fechaFin;
+
+    @OneToMany(mappedBy = "reserva")
+    private Set<Puntuacion> puntuaciones = new HashSet<>();
 
     public Reserva(){
 

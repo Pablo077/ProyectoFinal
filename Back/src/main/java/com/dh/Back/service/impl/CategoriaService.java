@@ -46,20 +46,20 @@ public class CategoriaService implements ICategoriaService {
     }
 
 
-    @PostConstruct
-    public void initData() {
-        if (categoriaRepository.count() > 0) {
-           return;
-        }
-
-        categoriaRepository.save(new Categoria("Furgoneta", "", ""));
-        categoriaRepository.save(new Categoria("Hatchback compacto", "", ""));
-        categoriaRepository.save(new Categoria("Hatchback subcompacto", "", ""));
-        categoriaRepository.save(new Categoria("Pick-up mediano", "", ""));
-        categoriaRepository.save(new Categoria("Sedán compacto", "", ""));
-        categoriaRepository.save(new Categoria("SUV","", ""));
-
-    }
+//    @PostConstruct
+//    public void initData() {
+//        if (categoriaRepository.count() > 0) {
+//           return;
+//        }
+//
+//        categoriaRepository.save(new Categoria("Furgoneta", "", ""));
+//        categoriaRepository.save(new Categoria("Hatchback compacto", "", ""));
+//        categoriaRepository.save(new Categoria("Hatchback subcompacto", "", ""));
+//        categoriaRepository.save(new Categoria("Pick-up mediano", "", ""));
+//        categoriaRepository.save(new Categoria("Sedán compacto", "", ""));
+//        categoriaRepository.save(new Categoria("SUV","", ""));
+//
+//    }
 
 
 }

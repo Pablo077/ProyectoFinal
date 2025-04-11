@@ -39,12 +39,12 @@ public class CajaService implements ICajaService {
         return cajaRepository.findById(id);
     }
 
-    @PostConstruct
-    public void initData() {
-        if (cajaRepository.count() == 0) {
-            cajaRepository.save(new Caja("Automático"));
-            cajaRepository.save(new Caja("Manual"));
-            cajaRepository.save(new Caja("Semiautomático"));
-        }
-    }
+//    @PostConstruct
+//    public void initData() {
+//        if (cajaRepository.count() == 0) {
+//            cajaRepository.save(new Caja("Automático"));
+//            cajaRepository.save(new Caja("Manual"));
+//            cajaRepository.save(new Caja("Semiautomático"));
+//        }
+//    }
 }

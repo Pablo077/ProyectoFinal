@@ -38,12 +38,12 @@ public class DireccionService implements IDireccionService {
         return direccionRepository.findById(id);
     }
 
-    @PostConstruct
-    public void initData(){
-        if(direccionRepository.count()==0){
-            direccionRepository.save(new Direccion("Asistido"));
-            direccionRepository.save(new Direccion("Hibrido"));
-            direccionRepository.save(new Direccion("Manual"));
-        }
-    }
+//    @PostConstruct
+//    public void initData(){
+//        if(direccionRepository.count()==0){
+//            direccionRepository.save(new Direccion("Asistido"));
+//            direccionRepository.save(new Direccion("Hibrido"));
+//            direccionRepository.save(new Direccion("Manual"));
+//        }
+//    }
 }

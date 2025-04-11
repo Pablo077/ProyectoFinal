@@ -135,14 +135,14 @@ public class VehiculoService implements IVehiculoService {
     }
 
 
-    @PostConstruct
-    public void initData() {
-        if (vehiculoRepository.count() > 0) {
-            return;
-        }
-        for (Vehiculo vehiculo : vehiculoDataLoader.getVehiculos()) {
-            vehiculoRepository.save(vehiculo);
-        }
-    }
+//    @PostConstruct
+//    public void initData() {
+//        if (vehiculoRepository.count() > 0) {
+//            return;
+//        }
+//        for (Vehiculo vehiculo : vehiculoDataLoader.getVehiculos()) {
+//            vehiculoRepository.save(vehiculo);
+//        }
+//    }
 
 }
