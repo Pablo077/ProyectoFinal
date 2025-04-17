@@ -1,5 +1,6 @@
 package com.dh.Back.repository;
 
+import com.dh.Back.entity.Puntuacion;
 import com.dh.Back.entity.Reserva;
 import com.dh.Back.entity.Vehiculo;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,4 +21,7 @@ public interface IReservaRepository extends JpaRepository<Reserva, Long> {
                                           @Param("fechaInicio") LocalDate fechaInicio,
                                           @Param("fechaFin") LocalDate fechaFin);
     Optional<List<Reserva>> findByVehiculo(Vehiculo vehiculo);
+
+    @Query("SELECT r FROM Reserva r WHERE r.user.id = :userId AND r.vehiculo.id = :vehiculoId")
+    List<Reserva> findByUserAndVehiculo(@Param("userId") Long userId, @Param("vehiculoId") Long vehiculoId);
 }

@@ -71,3 +71,28 @@ export const userData = () =>{
     return userData;
   }
 }
+
+export const obtenerFechaActual = () =>{
+  const ahora = new Date();
+  const año = ahora.getFullYear();
+  const mes = (ahora.getMonth() + 1).toString().padStart(2, '0'); // Meses en JS son 0-indexados
+  const dia = ahora.getDate().toString().padStart(2, '0');
+
+  return `${año}-${mes}-${dia}`;
+}
+
+export const formatearFecha = (fechaString: string): string | null =>{
+  try {
+    const fecha = new Date(fechaString);
+    if (isNaN(fecha.getTime())) {
+      return null; // La cadena de fecha no es válida
+    }
+    const dia = fecha.getDate().toString().padStart(2, '0');
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const anio = fecha.getFullYear().toString();
+    return `${dia}/${mes}/${anio}`;
+  } catch (error) {
+    console.error("Error al formatear la fecha:", error);
+    return null; // O podrías lanzar el error si prefieres
+  }
+}

@@ -123,12 +123,12 @@ export const FotosDetalles = () => {
 
         {/* Detalles del Vehículo */}
         <div style={{ marginLeft: "20px", marginBottom: "80px" }}>
-          <DetalleVehiculo titulo="Caja:" detalle={vehiculo.caja.tipo}/>
-          <DetalleVehiculo titulo="Dirección:" detalle={vehiculo.direccion.tipo}/>
-          <DetalleVehiculo titulo="Categoría:" detalle={vehiculo.categoria.nombre}/>
-          <DetalleVehiculo titulo="Pasajeros:" detalle={vehiculo.pasajeros}/>
-          <DetalleVehiculo titulo="Valijas chicas:" detalle={vehiculo.valijasChicas}/>
-          <DetalleVehiculo titulo="Valijas grandes:" detalle={vehiculo.valijasGrandes}/>
+          <DetalleVehiculo titulo="Caja:" detalle={vehiculo && vehiculo.caja.tipo}/>
+          <DetalleVehiculo titulo="Dirección:" detalle={vehiculo && vehiculo.direccion.tipo}/>
+          <DetalleVehiculo titulo="Categoría:" detalle={vehiculo && vehiculo.categoria.nombre}/>
+          <DetalleVehiculo titulo="Pasajeros:" detalle={vehiculo && vehiculo.pasajeros}/>
+          <DetalleVehiculo titulo="Valijas chicas:" detalle={vehiculo && vehiculo.valijasChicas}/>
+          <DetalleVehiculo titulo="Valijas grandes:" detalle={vehiculo && vehiculo.valijasGrandes}/>
         </div>
       </div>
     </div>

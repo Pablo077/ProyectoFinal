@@ -1,5 +1,6 @@
 package com.dh.Back.controller;
 import com.dh.Back.dto.ReservaDTO;
+import com.dh.Back.dto.ResquestReservaDTO;
 import com.dh.Back.entity.Caja;
 import com.dh.Back.entity.Reserva;
 import com.dh.Back.entity.Vehiculo;
@@ -50,6 +51,13 @@ public class ReservaController {
 
         return ResponseEntity.ok(iReservaService.verificarDisponibilidad(vehiculos,
                 reservaDTO.getFechaInicio(), reservaDTO.getFechaFin()));
+    }
+
+    @PostMapping("/historialReserva")
+    public ResponseEntity<List<Reserva>> findByUserAndVehiculo(@RequestBody ResquestReservaDTO resquestReservaDTO) throws ResourceNotFoundException{
+        return ResponseEntity.ok(
+                iReservaService.findByUserAndVehiculo(resquestReservaDTO.getUserId(), resquestReservaDTO.getVehiculoId())
+        );
     }
 
 }

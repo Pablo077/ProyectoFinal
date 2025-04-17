@@ -4,6 +4,7 @@ import { FotosDetalles } from "./components/FotosDetalles"
 import { getCookie } from "../../utils/utils";
 import { Reservas } from "./components/Reservas";
 import { PoliticasUso } from "./components/PoliticasUso";
+import { HistorialReservas } from "./components/HistorialReservas";
 
 
 export const VehiculoView = () => {
@@ -21,6 +22,7 @@ export const VehiculoView = () => {
     <div>
       <FotosDetalles />
       {apiData && <Reservas />}
+      {apiData && <HistorialReservas userId={apiData.id}/>}
       <Caracteristicas />
       <PoliticasUso />
     </div>

@@ -6,16 +6,10 @@ export interface campos {
   password: string;
 }
 
-const valores : campos = {
-  email: 'email',
-  password: 'password'
-  
-}
-
 export const formJson: FormJson[] = [
   {
     label: "Email",
-    name: valores.email,
+    name: "email",
     type: "input",
     value: "",
     size: "small",
@@ -30,7 +24,7 @@ export const formJson: FormJson[] = [
   },
   {
     label: "Password",
-    name: valores.password,
+    name: "password",
     type: "password",
     value: "",
     size: "small",

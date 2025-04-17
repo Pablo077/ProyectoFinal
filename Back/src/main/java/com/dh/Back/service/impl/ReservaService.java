@@ -58,6 +58,24 @@ public class ReservaService implements IReservaService {
         return reservaRepository.findByVehiculo(vehiculo);
     }
 
+    @Override
+    public List<Reserva> findByUserAndVehiculo(Long userId, Long vehiculoId) throws ResourceNotFoundException {
+        try{
+            return reservaRepository.findByUserAndVehiculo(userId, vehiculoId);
+        }catch (Exception e){
+            throw new ResourceNotFoundException(e.getMessage());
+        }
+    }
+
+    @Override
+    public Optional<Reserva> findById(Long reservaId) throws ResourceNotFoundException {
+        try{
+            return reservaRepository.findById(reservaId);
+        }catch (Exception e){
+            throw new ResourceNotFoundException(e.getMessage());
+        }
+    }
+
 //    @EventListener(ApplicationReadyEvent.class)
 //    public void initData() {
 //        if (reservaDataLoader == null || reservaRepository == null) {
