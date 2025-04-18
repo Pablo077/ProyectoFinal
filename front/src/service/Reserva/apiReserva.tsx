@@ -1,6 +1,8 @@
 import { getApiLocal, postApiLocal } from "../Api/apiBack";
+import { userList } from "../Users/apiUsers";
 
 export interface IReserva {
+  user: userList;
   marca: string | null;
   modelo: string | null;
   pasajeros: number | null;

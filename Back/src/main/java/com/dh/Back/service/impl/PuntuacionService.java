@@ -48,4 +48,13 @@ public class PuntuacionService implements IPuntuacionService {
             throw new ResourceNotFoundException(e.getMessage());
         }
     }
+
+    @Override
+    public List<Puntuacion> findByVehiculo(Long vehiculoId) throws ResourceNotFoundException {
+        try{
+            return puntuacionRepository.findByVehiculo(vehiculoId);
+        }catch (Exception e){
+            throw new ResourceNotFoundException(e.getMessage());
+        }
+    }
 }

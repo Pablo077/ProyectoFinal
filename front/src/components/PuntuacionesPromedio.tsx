@@ -1,15 +1,45 @@
 import { useEffect, useState } from "react";
-import { apiPuntuacion } from "../service/Puntuacion/apiPuntuacion"
+import { apiPuntuacion, iPuntuacion } from "../service/Puntuacion/apiPuntuacion"
 import { HalfRatings } from "./HalfRatings";
 
-export const PuntuacionesPromedio = () => {
+
+interface Props {
+    vehiculoId: number;
+}
+
+
+export const PuntuacionesPromedio = (props:Props) => {
+    const { vehiculoId } = props;
     const { getPuntuacionesPromedio } = apiPuntuacion();
-    const [puntuacion, setPuntuacion] = useState<any[]>([]);
+    const [puntuaciones, setPuntuaciones] = useState<iPuntuacion[]>([]);
+    const [puntuacion, setPuntuacion] = useState<iPuntuacion>({
+        vehiculoId: 0,
+        promedio: 0,
+        cantidad: 0,
+    });
 
     const cargarDatos = async () => {
         const result = await getPuntuacionesPromedio();
-        setPuntuacion(result);
+        setPuntuaciones(result);
     }
+
+    const buscarPuntuacion = () => {
+        const puntuacionEncontrada = puntuaciones.find((p) => p.vehiculoId === vehiculoId);
+        
+        if (puntuacionEncontrada) {
+            setPuntuacion(puntuacionEncontrada);
+        } else {
+            setPuntuacion({
+                vehiculoId: 0,
+                promedio: 0,
+                cantidad: 0,
+            });
+        }
+    }
+    
+    useEffect(() => {
+        buscarPuntuacion();
+    }, [puntuaciones])
 
 
     useEffect(() => {
@@ -18,11 +48,10 @@ export const PuntuacionesPromedio = () => {
 
     return (
         <div>
-            {/* <HalfRatings 
-            cantidad={puntuacion.cantidad} 
-            promedio={puntuacion.promedio}} 
-            value={puntuacion.valor}
-            /> */}
+            <HalfRatings 
+            cantidad={puntuacion.cantidad.toString()} 
+            promedio={parseFloat(puntuacion.promedio.toFixed(1))} 
+            />
         </div>
     )
 }

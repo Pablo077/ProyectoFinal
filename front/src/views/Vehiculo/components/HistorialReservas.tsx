@@ -7,6 +7,7 @@ import { Box, Typography } from "@mui/material";
 import { Ratings } from "../../../components/Ratings";
 import { AccionesHistorialReserva } from "./AccionesHistorialReserva/AccionesHistorialReserva";
 import { formatearFecha } from "../../../utils/utils";
+import { PuntuacionesPromedio } from "../../../components/PuntuacionesPromedio";
 
 const columns: ColumnTablas[] = [
   { id: "fechaInicio", label: "Inicio" },
@@ -30,7 +31,6 @@ export const HistorialReservas = (props: Props) => {
   const [reservas, setReservas] = useState<any[]>([]);
   const [puntuacion, setPuntuacion] = useState<any[]>([]);
   const [rows, setRows] = useState<any[]>([]);
-  const [valueRating, setValueRating] = useState<number | null>(null);
 
   const cargarHistorial = async () => {
     const data = {
@@ -87,6 +87,7 @@ export const HistorialReservas = (props: Props) => {
         <Typography variant="h4" component="h1">
           Historial de reservas
         </Typography>
+
       <div style={{ width:"85%", textAlign: "center", margin: "auto", marginTop: "20px" }}>
         <Tablas columns={columns} rows={rows} />
       </div>

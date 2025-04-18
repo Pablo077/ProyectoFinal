@@ -16,6 +16,8 @@ public interface IPuntuacionRepository extends JpaRepository<Puntuacion, Long> {
     List<Puntuacion> findByUserAndVehiculo(@Param("userId") Long userId,
                                          @Param("vehiculoId") Long vehiculoId
                                          );
+    @Query("SELECT p FROM Puntuacion p WHERE p.reserva.vehiculo.id = :vehiculoId")
+    List<Puntuacion> findByVehiculo(@Param("vehiculoId") Long vehiculoId);
 
     @Query("SELECT new com.dh.Back.dto.PuntuacionPromedioDTO(p.reserva.vehiculo.id, AVG(p.valor), COUNT(p)) " +
             "FROM Puntuacion p GROUP BY p.reserva.vehiculo.id")

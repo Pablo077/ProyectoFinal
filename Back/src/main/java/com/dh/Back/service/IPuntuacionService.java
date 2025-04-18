@@ -12,4 +12,5 @@ public interface IPuntuacionService {
     Puntuacion save(Puntuacion puntuacion) throws ResourceNotFoundException;
     List<Puntuacion> findByUserAndVehiculo (Long userId, Long vehiculoId) throws ResourceNotFoundException;
     List<PuntuacionPromedioDTO> puntuacionPromedioByVehiculo() throws ResourceNotFoundException;;
+    List<Puntuacion> findByVehiculo (Long vehiculoId) throws ResourceNotFoundException;
 }
