@@ -27,7 +27,6 @@ const sxCardMedia: SxProps<Theme> = {
 
 export const Resultados = (props: Props) => {
   const { vehiculos } = props;
-  const { setVehiculo } = useContext(VehiculoContext);
   const { getPuntuacionesPromedio } = apiPuntuacion();
   const [puntuacionesPromedio, setPuntuacionesPromedio] = useState<
     iPuntuacionPromedio[]
@@ -40,8 +39,8 @@ export const Resultados = (props: Props) => {
   };
 
   const handleClick = (vehiculo: Vehiculo) => {
-    setVehiculo(vehiculo);
-    navigate("/Vehiculo");
+    const url = `/Vehiculo/${vehiculo.id}`;
+    navigate(url);
   };
 
   return (

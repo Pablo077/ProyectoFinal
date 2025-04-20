@@ -3,7 +3,7 @@ import { Navbar } from "../views/Home/Navbar";
 import { SnackMensaje } from "../components/SnackMensaje";
 import { VehiculoView } from "../views/Vehiculo/VehiculoView";
 import { useLocation } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { VehiculoContext } from "../context/VehiculoContext";
 
 export const VehiculoPage = () => {
@@ -16,12 +16,19 @@ export const VehiculoPage = () => {
   // Buscar el vehículo por ID
   const vehiculo = vehiculos.find((vehiculo) => vehiculo.id === vehiculoId);
 
+
+  useEffect(() => {
+    // Asegurarse de que la página esté bien arriba
+    window.scrollTo(0, 0);
+  }, []);
+
   if (!vehiculo) {
     cargarVehiculos();
     return <></>;
   }
 
   setVehiculo(vehiculo);
+
 
   return (
     <div>

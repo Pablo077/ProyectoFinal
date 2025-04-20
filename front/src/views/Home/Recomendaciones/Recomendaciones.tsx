@@ -82,7 +82,6 @@ export const Recomendaciones = () => {
   const navigate = useNavigate();
 
   const handleClick = (vehiculo: Vehiculo) => {
-    // setVehiculo(vehiculo);
     const url = `/Vehiculo/${vehiculo.id}`;
     navigate(url);
   };
