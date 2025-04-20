@@ -67,4 +67,10 @@ public class CategoriaController {
     public ResponseEntity<List<Categoria>> findAll(){
         return ResponseEntity.ok(iCategoriaService.findAll());
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) throws ResourceNotFoundException {
+        iCategoriaService.delete(id);
+        return ResponseEntity.ok("Borrado exitoso");
+    }
 }

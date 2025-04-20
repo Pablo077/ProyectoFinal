@@ -10,4 +10,5 @@ public interface ICategoriaService {
     Categoria save(Categoria categoria) throws ResourceNotFoundException;
     List<Categoria> findAll();
     Optional<Categoria> findById(Long id);
+    void delete(Long id) throws ResourceNotFoundException;
 }
