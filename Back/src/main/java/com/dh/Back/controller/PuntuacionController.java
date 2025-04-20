@@ -62,8 +62,8 @@ public class PuntuacionController {
         return ResponseEntity.ok(iPuntuacionService.findByUserAndVehiculo(resquestPuntuacionDTO.getUserId(), resquestPuntuacionDTO.getVehiculoId()));
     }
 
-    @PostMapping("/PuntuacionesByVehiculo")
-    public ResponseEntity<List<Puntuacion>> findByVehiculo(@RequestBody Long vehiculoId) throws ResourceNotFoundException{
+    @GetMapping("/PuntuacionesByVehiculo/{vehiculoId}")
+    public ResponseEntity<List<Puntuacion>> findByVehiculo(@PathVariable Long vehiculoId) throws ResourceNotFoundException{
         return ResponseEntity.ok(iPuntuacionService.findByVehiculo(vehiculoId));
     }
 

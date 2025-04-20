@@ -81,18 +81,22 @@ export const obtenerFechaActual = () =>{
   return `${año}-${mes}-${dia}`;
 }
 
-export const formatearFecha = (fechaString: string): string | null =>{
+export const formatearFecha = (fechaString: string): string | null => {
   try {
-    const fecha = new Date(fechaString);
+    const [anio, mes, dia] = fechaString.split("-").map(Number); 
+    const fecha = new Date(anio, mes - 1, dia); 
+
     if (isNaN(fecha.getTime())) {
-      return null; // La cadena de fecha no es válida
+      return null; 
     }
-    const dia = fecha.getDate().toString().padStart(2, '0');
-    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
-    const anio = fecha.getFullYear().toString();
-    return `${dia}/${mes}/${anio}`;
+
+    const diaFormateado = fecha.getDate().toString().padStart(2, "0");
+    const mesFormateado = (fecha.getMonth() + 1).toString().padStart(2, "0");
+    const anioFormateado = fecha.getFullYear().toString();
+
+    return `${diaFormateado}/${mesFormateado}/${anioFormateado}`;
   } catch (error) {
     console.error("Error al formatear la fecha:", error);
-    return null; // O podrías lanzar el error si prefieres
+    return null; 
   }
-}
+};

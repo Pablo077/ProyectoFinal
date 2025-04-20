@@ -119,7 +119,7 @@ public class DataInitializer implements CommandLineRunner {
         entityManager.persist(reserva2);
 
         LocalDate fechaInicio3 = LocalDate.of(2025, 4, 7);
-        LocalDate fechaFinal3 = LocalDate.of(2025, 4, 8);
+        LocalDate fechaFinal3 = LocalDate.of(2025, 4, 19);
         Reserva reserva3 = new Reserva(user, vehiculo1, fechaInicio3, fechaFinal3);
         entityManager.persist(reserva3);
 
@@ -129,12 +129,12 @@ public class DataInitializer implements CommandLineRunner {
         entityManager.persist(puntuacion1);
 
         LocalDate fechaPuntuacion2 = LocalDate.of(2025, 4, 5);
-        Puntuacion puntuacion2 = new Puntuacion(reserva1,5,fechaPuntuacion2,"Auto muy comodo. Super recomendable");
+        Puntuacion puntuacion2 = new Puntuacion(reserva2,5,fechaPuntuacion2,"Auto muy comodo. Super recomendable");
         entityManager.persist(puntuacion2);
 
-        LocalDate fechaPuntuacion3 = LocalDate.of(2025, 4, 8);
-        Puntuacion puntuacion3 = new Puntuacion(reserva3,4,fechaPuntuacion3,"Auto muy comodo. Super recomendable");
-        entityManager.persist(puntuacion3);
+//        LocalDate fechaPuntuacion3 = LocalDate.of(2025, 4, 8);
+//        Puntuacion puntuacion3 = new Puntuacion(reserva3,4,fechaPuntuacion3,"Auto muy comodo. Super recomendable");
+//        entityManager.persist(puntuacion3);
     }
 }
 

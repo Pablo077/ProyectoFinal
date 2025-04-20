@@ -3,9 +3,14 @@ import { Cards } from "../../../../components/Cards";
 import { Vehiculo } from "../../../../service/Vehiculo/apiVehiculo";
 import { colores } from "../../../../styles/colors";
 import { linkFotosArchivos } from "../../../../utils/utils";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { VehiculoContext } from "../../../../context/VehiculoContext";
 import { useNavigate } from "react-router-dom";
+import { PuntuacionesPromedio } from "../../../../components/PuntuacionesPromedio";
+import {
+  apiPuntuacion,
+  iPuntuacionPromedio,
+} from "../../../../service/Puntuacion/apiPuntuacion";
 
 interface Props {
   vehiculos: Vehiculo[];
@@ -23,7 +28,16 @@ const sxCardMedia: SxProps<Theme> = {
 export const Resultados = (props: Props) => {
   const { vehiculos } = props;
   const { setVehiculo } = useContext(VehiculoContext);
+  const { getPuntuacionesPromedio } = apiPuntuacion();
+  const [puntuacionesPromedio, setPuntuacionesPromedio] = useState<
+    iPuntuacionPromedio[]
+  >([]);
   const navigate = useNavigate();
+
+  const cargarPuntuacionesPromedio = async () => {
+    const result = await getPuntuacionesPromedio();
+    setPuntuacionesPromedio(result);
+  };
 
   const handleClick = (vehiculo: Vehiculo) => {
     setVehiculo(vehiculo);
@@ -47,14 +61,24 @@ export const Resultados = (props: Props) => {
             tituloImagen={vehiculo.modelo}
             sxCardMedia={sxCardMedia}
             sxBox={{ minWidth: 275 }}
-            children2={<Button size="small" onClick={()=>handleClick(vehiculo)}>Ver más</Button>}
+            children2={
+              <Button size="small" onClick={() => handleClick(vehiculo)}>
+                Ver más
+              </Button>
+            }
           >
-            <Typography component="div" variant="h5">{vehiculo.marca}</Typography>
-            <Typography variant="body2">
-              {vehiculo.modelo} con capacidad para {vehiculo.pasajeros} pasajeros
+            <PuntuacionesPromedio
+              vehiculoId={vehiculo.id}
+              puntuacionesPromedio={puntuacionesPromedio}
+              cargarPuntuacionesPromedio={cargarPuntuacionesPromedio}
+            />
+            <Typography component="div" variant="h5">
+              {vehiculo.marca}
             </Typography>
-            
-            
+            <Typography variant="body2" minHeight={40}>
+              {vehiculo.modelo} con capacidad para {vehiculo.pasajeros}{" "}
+              pasajeros
+            </Typography>
           </Cards>
         </Grid2>
       ))}

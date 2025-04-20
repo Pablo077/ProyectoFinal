@@ -38,9 +38,9 @@ export const apiPuntuacion = () => {
     return result;
   };
 
-  const getPuntuacionesByVehiculo = async (valores: any) => {
-    const url = `${tabla}/PuntuacionesByVehiculo`;
-    const result = await postApiLocal({ url, valores });
+  const getPuntuacionesByVehiculo = async (vehiculoId: string) => {
+    const url = `${tabla}/PuntuacionesByVehiculo/${vehiculoId}`;
+    const result = await getApiLocal({ url });
     return result;
   };
 

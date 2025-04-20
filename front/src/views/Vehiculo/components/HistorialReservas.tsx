@@ -7,24 +7,24 @@ import { Box, Typography } from "@mui/material";
 import { Ratings } from "../../../components/Ratings";
 import { AccionesHistorialReserva } from "./AccionesHistorialReserva/AccionesHistorialReserva";
 import { formatearFecha } from "../../../utils/utils";
-import { PuntuacionesPromedio } from "../../../components/PuntuacionesPromedio";
 
 const columns: ColumnTablas[] = [
   { id: "fechaInicio", label: "Inicio" },
   { id: "fechaFin", label: "Fin" },
   { id: "valoracion", label: "Valoración" },
   { id: "resena", label: "Reseña" },
-  { id: "usuario", label: "Usuario" },
   { id: "acciones", label: "Acciones" },
 ];
 
-
 interface Props {
   userId: number;
+  cargarPuntuaciones: () => Promise<void>;
+  cargarPuntuacionesPromedio: () => Promise<void>;
 }
 
 export const HistorialReservas = (props: Props) => {
-  const { userId } = props;
+  const { userId, cargarPuntuaciones, cargarPuntuacionesPromedio } = props;
+  const hoy = new Date();
   const { vehiculo } = useContext(VehiculoContext);
   const { historialReserva } = apiReserva();
   const { puntuacionesByUserVehiculo } = apiPuntuacion();
@@ -39,7 +39,7 @@ export const HistorialReservas = (props: Props) => {
     };
     const result = await historialReserva(data);
     setReservas(result);
-  }
+  };
 
   const cargarPuntuacion = async () => {
     const data = {
@@ -48,38 +48,65 @@ export const HistorialReservas = (props: Props) => {
     };
     const result = await puntuacionesByUserVehiculo(data);
     setPuntuacion(result);
-  }
+  };
 
   const buscarPuntuacion = (reservaId: number, dato: string) => {
-    const puntuacionEncontrada = puntuacion.find((p) => p.reserva.id === reservaId);
-    if(dato === "valor"){
+    const puntuacionEncontrada = puntuacion.find(
+      (p) => p.reserva.id === reservaId
+    );
+    if (dato === "valor") {
       return puntuacionEncontrada ? puntuacionEncontrada.valor : null;
     }
-    if(dato === "resena"){  
+    if (dato === "resena") {
       return puntuacionEncontrada ? puntuacionEncontrada.resena : null;
     }
   };
 
-
   useEffect(() => {
-    const mappedRows = reservas.map((reserva) => ({
-      fechaInicio: formatearFecha(reserva.fechaInicio),
-      fechaFin: formatearFecha(reserva.fechaFin),
-      fechaOrdenar: new Date(reserva.fechaFin).getTime(), 
-      valoracion: <Ratings name="read-only" titulo={false} valor={buscarPuntuacion(reserva.id, "valor")}/>,
-      resena: buscarPuntuacion(reserva.id, "resena"),
-      usuario: reserva.user.firstname + " " + reserva.user.lastname,
-      acciones: buscarPuntuacion(reserva.id, "valor") == null && <AccionesHistorialReserva reserva={reserva} cargarPuntuacion={cargarPuntuacion} cargarHistorial={cargarHistorial}/>
-    }));
+    const mappedRows = reservas.map((reserva) => {
+      const [anio, mes, dia] = reserva.fechaFin.split("-").map(Number);
+      const fechaFin = new Date(anio, mes - 1, dia); // Crear la fecha correctamente
+      console.log("fechaFin", fechaFin);
+      // console.log("hoy", hoy);
 
-    const sortedRows = mappedRows.sort((a, b) => b.fechaOrdenar - a.fechaOrdenar);
+      return {
+        fechaInicio: formatearFecha(reserva.fechaInicio),
+        fechaFin: formatearFecha(reserva.fechaFin),
+        fechaOrdenar: fechaFin.getTime(),
+        valoracion: buscarPuntuacion(reserva.id, "valor") != null && (
+            <Ratings
+              name="read-only"
+              titulo={false}
+              valor={buscarPuntuacion(reserva.id, "valor")}
+            />
+          ),
+        resena: buscarPuntuacion(reserva.id, "resena"),
+        acciones: buscarPuntuacion(reserva.id, "valor") == null &&
+          hoy >= fechaFin && (
+            <AccionesHistorialReserva
+              reserva={reserva}
+              cargaDatos={cargaDatos}
+            />
+          ),
+      };
+    });
+
+    const sortedRows = mappedRows.sort(
+      (a, b) => b.fechaOrdenar - a.fechaOrdenar
+    );
     setRows(sortedRows);
   }, [reservas, puntuacion]);
 
-  useEffect(() => {
+  const cargaDatos = async () => {
     cargarHistorial();
     cargarPuntuacion();
-  }, [])
+    cargarPuntuaciones();
+    cargarPuntuacionesPromedio();
+  }
+
+  useEffect(() => {
+    cargaDatos();
+  }, []);
 
   return (
     <>
@@ -88,10 +115,17 @@ export const HistorialReservas = (props: Props) => {
           Historial de reservas
         </Typography>
 
-      <div style={{ width:"85%", textAlign: "center", margin: "auto", marginTop: "20px" }}>
-        <Tablas columns={columns} rows={rows} />
-      </div>
+        <div
+          style={{
+            width: "85%",
+            textAlign: "center",
+            margin: "auto",
+            marginTop: "20px",
+          }}
+        >
+          <Tablas columns={columns} rows={rows} />
+        </div>
       </Box>
     </>
-  )
-}
+  );
+};

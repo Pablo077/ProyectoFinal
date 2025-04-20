@@ -1,49 +1,62 @@
 import { useContext, useEffect, useState } from "react";
 import { VehiculoContext } from "../../../context/VehiculoContext";
-import { apiPuntuacion, iPuntuacion } from "../../../service/Puntuacion/apiPuntuacion";
+import {
+  apiPuntuacion,
+  iPuntuacion,
+  iPuntuacionPromedio,
+} from "../../../service/Puntuacion/apiPuntuacion";
 import { Box, Typography } from "@mui/material";
 import { ColumnTablas, Tablas } from "../../../components/Tablas";
 import { Ratings } from "../../../components/Ratings";
-import { formatearFecha } from '../../../utils/utils';
+import { formatearFecha } from "../../../utils/utils";
+import { PuntuacionesPromedio } from "../../../components/PuntuacionesPromedio";
 
 const columns: ColumnTablas[] = [
   { id: "fecha", label: "Fecha" },
   { id: "usuario", label: "Usuario" },
   { id: "valoracion", label: "Valoración" },
   { id: "resena", label: "Reseña" },
-
-  
 ];
 
-export const PuntuacionesUsuarios = () => {
+interface Props {
+  puntuaciones: iPuntuacion[];
+  cargarPuntuaciones: () => Promise<void>;
+  puntuacionesPromedio: iPuntuacionPromedio[];
+  cargarPuntuacionesPromedio: () => Promise<void>;
+}
+
+export const PuntuacionesUsuarios = (props: Props) => {
+  const {
+    puntuaciones,
+    cargarPuntuaciones,
+    cargarPuntuacionesPromedio,
+    puntuacionesPromedio,
+  } = props;
   const { vehiculo } = useContext(VehiculoContext);
-  const { getPuntuacionesByVehiculo } = apiPuntuacion();
-  const [puntuaciones, setPuntuaciones] = useState<iPuntuacion[]>([]);
   const [rows, setRows] = useState<any[]>([]);
 
-  const cargarDatos = async () => {
-    const data = {
-      vehiculoId: vehiculo.id,
-    };
-    const result = await getPuntuacionesByVehiculo(data);
-    setPuntuaciones(result);
-  };
+  useEffect(() => {
+    const mappedRows = puntuaciones.map((puntuacion) => ({
+      fecha: formatearFecha(puntuacion.fechaPuntuacion.toString()),
+      fechaOrdenar: new Date(puntuacion.fechaPuntuacion).getTime(),
+      usuario:
+        puntuacion.reserva.user.lastname +
+        " " +
+        puntuacion.reserva.user.firstname,
+      valoracion: (
+        <Ratings name="read-only" titulo={false} valor={puntuacion.valor} />
+      ),
+      resena: puntuacion.resena,
+    }));
 
-    useEffect(() => {
-      const mappedRows = puntuaciones.map((puntuacion) => ({
-        fecha: formatearFecha(puntuacion.fechaPuntuacion.toString()),
-        fechaOrdenar: new Date(puntuacion.fechaPuntuacion).getTime(), 
-        usuario: puntuacion.reserva.user.lastname + " " + puntuacion.reserva.user.firstname,
-        valoracion: <Ratings name="read-only" titulo={false} valor={puntuacion.valor}/>,
-        resena: puntuacion.resena,
-      }));
-  
-      const sortedRows = mappedRows.sort((a, b) => b.fechaOrdenar - a.fechaOrdenar);
-      setRows(sortedRows);
-    }, [puntuaciones]);
+    const sortedRows = mappedRows.sort(
+      (a, b) => b.fechaOrdenar - a.fechaOrdenar
+    );
+    setRows(sortedRows);
+  }, [puntuaciones]);
 
   useEffect(() => {
-    cargarDatos();
+    cargarPuntuaciones();
   }, []);
 
   return (
@@ -52,6 +65,20 @@ export const PuntuacionesUsuarios = () => {
         <Typography variant="h4" component="h1">
           Opiniones de usuarios
         </Typography>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            width: "85%",
+            margin: "auto",
+          }}
+        >
+          <PuntuacionesPromedio
+            vehiculoId={vehiculo.id}
+            puntuacionesPromedio={puntuacionesPromedio}
+            cargarPuntuacionesPromedio={cargarPuntuacionesPromedio}
+          />
+        </div>
 
         <div
           style={{

@@ -13,12 +13,11 @@ interface Props {
   openModal: boolean;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   reserva: any;
-  cargarPuntuacion: () => Promise<void>;
-  cargarHistorial: () => Promise<void>
+  cargaDatos: () => Promise<void>
 }
 
 export const ModalResena = (props:Props) => {
-    const { openModal, setOpenModal, reserva, cargarPuntuacion, cargarHistorial } = props;
+    const { openModal, setOpenModal, reserva, cargaDatos } = props;
     const [valor,setValor] = useState<number | null>(null);
     const { guardarPuntuacion } = apiPuntuacion();
     const { setOpenSnack, setMensajeSnack, setAlertSnack } =
@@ -39,8 +38,7 @@ const onSubmit = async (values: any) => {
           setMensajeSnack("Reseña guardada");
           setAlertSnack("success");
           setOpenSnack(true);
-          cargarHistorial();
-          cargarPuntuacion();
+          cargaDatos();
           setOpenModal(false);
         } else {
           setMensajeSnack("Error al guardar reseña");

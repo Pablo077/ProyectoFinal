@@ -1,57 +1,52 @@
 import { useEffect, useState } from "react";
-import { apiPuntuacion, iPuntuacion } from "../service/Puntuacion/apiPuntuacion"
+import { iPuntuacionPromedio } from "../service/Puntuacion/apiPuntuacion";
 import { HalfRatings } from "./HalfRatings";
 
-
 interface Props {
-    vehiculoId: number;
+  vehiculoId: number;
+  puntuacionesPromedio: iPuntuacionPromedio[];
+  cargarPuntuacionesPromedio: () => Promise<void>;
 }
 
+export const PuntuacionesPromedio = (props: Props) => {
+  const { vehiculoId, puntuacionesPromedio, cargarPuntuacionesPromedio } =
+    props;
+  const [puntuacion, setPuntuacion] = useState<iPuntuacionPromedio>({
+    vehiculoId: 0,
+    promedio: 0,
+    cantidad: 0,
+  });
 
-export const PuntuacionesPromedio = (props:Props) => {
-    const { vehiculoId } = props;
-    const { getPuntuacionesPromedio } = apiPuntuacion();
-    const [puntuaciones, setPuntuaciones] = useState<iPuntuacion[]>([]);
-    const [puntuacion, setPuntuacion] = useState<iPuntuacion>({
+  const buscarPuntuacion = () => {
+    const puntuacionEncontrada = puntuacionesPromedio.find(
+      (p) => p.vehiculoId === vehiculoId
+    );
+
+    if (puntuacionEncontrada) {
+      setPuntuacion(puntuacionEncontrada);
+    } else {
+      setPuntuacion({
         vehiculoId: 0,
         promedio: 0,
         cantidad: 0,
-    });
-
-    const cargarDatos = async () => {
-        const result = await getPuntuacionesPromedio();
-        setPuntuaciones(result);
+      });
     }
+  };
 
-    const buscarPuntuacion = () => {
-        const puntuacionEncontrada = puntuaciones.find((p) => p.vehiculoId === vehiculoId);
-        
-        if (puntuacionEncontrada) {
-            setPuntuacion(puntuacionEncontrada);
-        } else {
-            setPuntuacion({
-                vehiculoId: 0,
-                promedio: 0,
-                cantidad: 0,
-            });
-        }
-    }
-    
-    useEffect(() => {
-        buscarPuntuacion();
-    }, [puntuaciones])
+  useEffect(() => {
+    buscarPuntuacion();
+  }, [puntuacionesPromedio]);
 
+  useEffect(() => {
+    cargarPuntuacionesPromedio();
+  }, []);
 
-    useEffect(() => {
-        cargarDatos();
-    }, [])
-
-    return (
-        <div>
-            <HalfRatings 
-            cantidad={puntuacion.cantidad.toString()} 
-            promedio={parseFloat(puntuacion.promedio.toFixed(1))} 
-            />
-        </div>
-    )
-}
+  return (
+    <div>
+      <HalfRatings
+        cantidad={puntuacion.cantidad.toString()}
+        promedio={parseFloat(puntuacion.promedio.toFixed(1))}
+      />
+    </div>
+  );
+};
