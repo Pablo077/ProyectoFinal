@@ -18,7 +18,7 @@ export const VehiculoPage = () => {
 
   if (!vehiculo) {
     cargarVehiculos();
-    return <div>Vehículo no encontrado</div>;
+    return <></>;
   }
 
   setVehiculo(vehiculo);
