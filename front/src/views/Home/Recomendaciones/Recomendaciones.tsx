@@ -68,7 +68,7 @@ const Filas = ({
 };
 
 export const Recomendaciones = () => {
-  const { setVehiculo, vehiculos, cargarVehiculos } =
+  const { vehiculos, cargarVehiculos } =
     useContext(VehiculoContext);
   const { setOpenSnack, setMensajeSnack, setAlertSnack } =
     useContext(VehiculoContext);
@@ -82,8 +82,9 @@ export const Recomendaciones = () => {
   const navigate = useNavigate();
 
   const handleClick = (vehiculo: Vehiculo) => {
-    setVehiculo(vehiculo);
-    navigate("/Vehiculo");
+    // setVehiculo(vehiculo);
+    const url = `/Vehiculo/${vehiculo.id}`;
+    navigate(url);
   };
 
   const cargarFavorito = async (user: any) => {

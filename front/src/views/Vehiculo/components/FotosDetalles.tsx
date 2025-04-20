@@ -22,7 +22,7 @@ export const FotosDetalles = () => {
 
   // Navegar hacia atrás
   const back = () => {
-    navigate(-1);
+    navigate("/");
   };
 
   // Cargar las imágenes al montar el componente
