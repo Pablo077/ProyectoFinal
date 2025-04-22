@@ -10,6 +10,7 @@ import { ListaUsuarios } from '../pages/ListaUsuarios';
 import { Caracteristicas } from '../pages/Caracteristicas';
 import { Categorías } from '../pages/Categorías';
 import { ListaFavoritos } from '../pages/ListaFavoritos';
+import { ReservaConfirmacion } from '../pages/ReservaConfirmacion';
 
 
 export const AppRouter = () => {
@@ -25,6 +26,7 @@ export const AppRouter = () => {
           <Route path="/ListaProductos" element={<ListaProductos />} />
           <Route path="/ListaUsuarios" element={<ListaUsuarios />} />
           <Route path="/Login" element={<Login />} />
+          <Route path="/ReservaConfirmación" element={<ReservaConfirmacion />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/Vehiculo/*" element={<VehiculoPage />} />
           <Route path="*" element={<Home />} />

@@ -7,6 +7,7 @@ export const colores = {
     HookersGreen:"#5A716A",
     Jasper:"#DB504A",
     Saffron:"#E3B505",
+    LightGreen:"#ABFAA9",
 }
 
 export const coloresDesignados = {

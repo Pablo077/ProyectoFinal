@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Map;
+
 
 @RestController
 @RequestMapping("/reserva")
@@ -39,9 +41,15 @@ public class ReservaController {
     }
 
     @PostMapping("/saveReservas")
-    public ResponseEntity<Reserva> save(@RequestBody Reserva reserva) throws ResourceNotFoundException {
+    public ResponseEntity<String> save(@RequestBody Reserva reserva) throws ResourceNotFoundException {
         return ResponseEntity.ok(iReservaService.save(reserva));
     }
+
+//        @PostMapping("/saveReservas")
+//    public ResponseEntity<?> recibirBody(@RequestBody Map<String, Object> body) {
+//        System.out.println("Body recibido: " + body);
+//        return ResponseEntity.ok().build();
+//    }
     
     @PostMapping("/disponibilidad")
     public ResponseEntity<List<Vehiculo>> verificarDisponibilidad(@RequestBody ReservaDTO reservaDTO) throws ResourceNotFoundException{

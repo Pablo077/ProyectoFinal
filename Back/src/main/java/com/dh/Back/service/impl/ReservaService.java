@@ -31,11 +31,26 @@ public class ReservaService implements IReservaService {
     }
 
     @Override
-    public Reserva save(Reserva reserva) throws ResourceNotFoundException {
-        try{
-            return reservaRepository.save(reserva);
-        }catch (Exception e){
-            throw new ResourceNotFoundException(e.getMessage());
+    public String save(Reserva reserva) {
+
+        if (reserva.getVehiculo() == null || reserva.getVehiculo().getId() == null) {
+            return "Error: El vehículo asociado a la reserva no es válido.";
+        }
+
+        LocalDate fechaInicio = reserva.getFechaInicio();
+        LocalDate fechaFin = reserva.getFechaFin();
+        Long vehiculoId = reserva.getVehiculo().getId();
+
+        // Verificar disponibilidad del vehículo para el rango de fechas
+        if (!reservaRepository.verificarDisponibilidad(vehiculoId, fechaInicio, fechaFin).isEmpty()) {
+            return String.format("El vehículo no está disponible.");
+        }
+
+        try {
+            reservaRepository.save(reserva);
+            return "Reserva guardada con éxito";
+        } catch (Exception e) {
+            return "Error al guardar la reserva: " + e.getMessage();
         }
     }
 
