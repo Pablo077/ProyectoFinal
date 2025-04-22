@@ -30,3 +30,9 @@
 [2025-04-08 03:17:27] [ WARN ] [ResourceNotFoundException:10] No se pudo eliminar el favorito con id: 3
 [2025-04-08 03:17:41] [ WARN ] [ResourceNotFoundException:10] No se pudo eliminar el favorito con id: 3
 [2025-04-14 21:16:55] [ WARN ] [ResourceNotFoundException:10] No converter found capable of converting from type [org.springframework.data.jpa.repository.query.AbstractJpaQuery$TupleConverter$TupleBackedMap] to type [com.dh.Back.dto.PuntuacionPromedioDTO]
+[2025-04-21 13:35:54] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-04-21 13:35:54] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-04-21 13:36:03] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-04-21 13:36:03] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-04-21 13:36:24] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo
+[2025-04-21 13:36:24] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: com.dh.Back.entity.Vehiculo

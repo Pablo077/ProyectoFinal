@@ -66,8 +66,7 @@ export const HistorialReservas = (props: Props) => {
     const mappedRows = reservas.map((reserva) => {
       const [anio, mes, dia] = reserva.fechaFin.split("-").map(Number);
       const fechaFin = new Date(anio, mes - 1, dia); // Crear la fecha correctamente
-      console.log("fechaFin", fechaFin);
-      // console.log("hoy", hoy);
+     
 
       return {
         fechaInicio: formatearFecha(reserva.fechaInicio),

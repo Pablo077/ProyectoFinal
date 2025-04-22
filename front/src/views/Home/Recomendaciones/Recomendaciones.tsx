@@ -82,7 +82,7 @@ export const Recomendaciones = () => {
   const navigate = useNavigate();
 
   const handleClick = (vehiculo: Vehiculo) => {
-    const url = `/Vehiculo/${vehiculo.id}`;
+    const url = `/Vehiculo/?vehiculoId=${vehiculo.id}`;
     navigate(url);
   };
 

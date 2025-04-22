@@ -1,12 +1,15 @@
 import { Typography } from "@mui/material";
 import { InputsBuscador } from "./components/InputsBuscador";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Resultados } from "./components/Resultados";
 import { colores } from "../../../styles/colors";
 import { VehiculoContext } from "../../../context/VehiculoContext";
+import dayjs, { Dayjs } from "dayjs";
 
 export const Buscador = () => {
   const {vehiculosDisponibles, setVehiculosDisponibles} = useContext(VehiculoContext);
+  const [fechaInicio, setFechaInicio] = useState<String>("");
+  const [fechaFin, setFechaFin] = useState<String>("");
 
   return (
     <div
@@ -22,10 +25,10 @@ export const Buscador = () => {
         Buscar
       </Typography>
       <div style={{ width: "70%", margin: "auto" }}>
-        <InputsBuscador setVehiculos={setVehiculosDisponibles} />
+        <InputsBuscador setVehiculos={setVehiculosDisponibles} setFechaFin={setFechaFin} setFechaInicio={setFechaInicio}/>
       </div>
       <div style={{ marginLeft: "-10px" }}>
-        <Resultados vehiculos={vehiculosDisponibles} />
+        <Resultados vehiculos={vehiculosDisponibles} fechaInicio={fechaInicio} fechaFin={fechaFin}/>
       </div>
     </div>
   );

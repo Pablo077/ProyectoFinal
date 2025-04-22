@@ -12,6 +12,9 @@ import {
   iPuntuacionPromedio,
 } from "../../service/Puntuacion/apiPuntuacion";
 import { VehiculoContext } from "../../context/VehiculoContext";
+import { ReservaLogin } from "./components/ReservaLogin";
+import { RealizarReservas } from "./components/RealizarReservas/RealizarReservas";
+import dayjs, { Dayjs } from "dayjs";
 
 export const VehiculoView = () => {
   const { vehiculo } = useContext(VehiculoContext);
@@ -22,6 +25,8 @@ export const VehiculoView = () => {
   const [puntuacionesPromedio, setPuntuacionesPromedio] = useState<
     iPuntuacionPromedio[]
   >([]);
+  const [fechaInicio, setFechaInicio] = useState<Dayjs | null>(null);
+  const [fechaFin, setFechaFin] = useState<Dayjs | null>(null);
 
   const cargarPuntuaciones = async () => {
     const result = await getPuntuacionesByVehiculo(vehiculo.id.toString());
@@ -44,7 +49,9 @@ export const VehiculoView = () => {
   return (
     <div>
       <FotosDetalles />
-      {apiData && <Reservas />}
+      {apiData && <Reservas fechaInicio={fechaInicio} setFechaInicio={setFechaInicio} fechaFin={fechaFin} setFechaFin={setFechaFin} />}
+      {apiData && <RealizarReservas fechaInicio={fechaInicio} fechaFin={fechaFin}/>}
+      {apiData === null && <ReservaLogin />}
       {apiData && (
         <HistorialReservas
           userId={apiData.id}

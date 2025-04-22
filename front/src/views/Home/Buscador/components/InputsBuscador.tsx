@@ -14,6 +14,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { apiReserva } from "../../../../service/Reserva/apiReserva";
 import dayjs from "dayjs";
 import { Buttons } from "../../../../components/Buttons";
+import { set } from "date-fns";
 
 interface FormValues {
   marca: string;
@@ -30,10 +31,12 @@ const validationSchema = Yup.object({
 
 interface Props {
   setVehiculos: React.Dispatch<React.SetStateAction<Vehiculo[]>>;
+  setFechaInicio: React.Dispatch<React.SetStateAction<String>>;
+  setFechaFin: React.Dispatch<React.SetStateAction<String>>
 }
 
 export const InputsBuscador = (props: Props) => {
-  const { setVehiculos } = props;
+  const { setVehiculos, setFechaFin, setFechaInicio } = props;
   const { getMarcas, getModelos } = apiVehiculo();
   const { disponibilidad } = apiReserva();
   const [marcas, setMarcas] = useState<{ id: string; tipo: string }[]>([]);
@@ -46,6 +49,12 @@ export const InputsBuscador = (props: Props) => {
       dateInicio: values.dateInicio ? dayjs(values.dateInicio).toDate() : null,
       dateFinal: values.dateFinal ? dayjs(values.dateFinal).toDate() : null,
     };
+    // Guardar en localStorage
+    // localStorage.setItem("dateInicio", values.dateInicio ? values.dateInicio.toString() : "");
+    // localStorage.setItem("dateFinal", values.dateFinal ? values.dateFinal.toString() : "");
+    setFechaInicio(values.dateInicio ? dayjs(values.dateInicio).format("YYYY-MM-DD").toString() : "");
+    setFechaFin(values.dateFinal ? dayjs(values.dateFinal).format("YYYY-MM-DD").toString() : "");
+
     const response = await disponibilidad(formattedValues);
     setVehiculos(response);
   };

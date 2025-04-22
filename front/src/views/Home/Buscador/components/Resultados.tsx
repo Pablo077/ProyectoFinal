@@ -14,6 +14,8 @@ import {
 
 interface Props {
   vehiculos: Vehiculo[];
+  fechaInicio: String;
+  fechaFin: String;
 }
 
 const sxCard: SxProps<Theme> = {
@@ -26,7 +28,7 @@ const sxCardMedia: SxProps<Theme> = {
 };
 
 export const Resultados = (props: Props) => {
-  const { vehiculos } = props;
+  const { vehiculos, fechaInicio, fechaFin } = props;
   const { getPuntuacionesPromedio } = apiPuntuacion();
   const [puntuacionesPromedio, setPuntuacionesPromedio] = useState<
     iPuntuacionPromedio[]
@@ -39,7 +41,9 @@ export const Resultados = (props: Props) => {
   };
 
   const handleClick = (vehiculo: Vehiculo) => {
-    const url = `/Vehiculo/${vehiculo.id}`;
+    // const url = `/Vehiculo/?fechaInicio=${fechaInicio}&fechaFin=${fechaFin}&vehiculoId=${vehiculo.id}`;
+    const url = `/Vehiculo/?vehiculoId=${vehiculo.id}`;
+
     navigate(url);
   };
 

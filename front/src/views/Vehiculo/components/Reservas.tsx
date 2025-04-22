@@ -9,6 +9,7 @@ import { styled, Typography, Box, Divider } from "@mui/material";
 import { apiReserva } from "../../../service/Reserva/apiReserva";
 import { VehiculoContext } from "../../../context/VehiculoContext";
 import { colores } from "../../../styles/colors";
+import { useLocation } from "react-router-dom";
 
 dayjs.extend(isBetween);
 dayjs.locale("es");
@@ -41,13 +42,20 @@ const CustomDateCalendar = styled(DateCalendar)({
     color: colores.AntiFlashWhite, // Cambiar el color de las letras de los días
   },
 });
+interface Props {
+  fechaInicio: dayjs.Dayjs | null;
+  setFechaInicio: React.Dispatch<React.SetStateAction<dayjs.Dayjs | null>>;
+  fechaFin: dayjs.Dayjs | null;
+  setFechaFin: React.Dispatch<React.SetStateAction<dayjs.Dayjs | null>>;
+}
 
-export const Reservas = () => {
+export const Reservas = (props:Props) => {
+  const { fechaInicio, setFechaInicio, fechaFin, setFechaFin } = props;
   const { reservaByVehiculo } = apiReserva();
   const [reservas, setReservas] = useState<{ start: Dayjs; end: Dayjs }[]>([]);
   const [error, setError] = useState(false);
-  const [fechaInicio, setFechaInicio] = useState<Dayjs | null>(null);
-  const [fechaFin, setFechaFin] = useState<Dayjs | null>(null);
+  // const [fechaInicio, setFechaInicio] = useState<Dayjs | null>(null);
+  // const [fechaFin, setFechaFin] = useState<Dayjs | null>(null);
   const { vehiculo } = useContext(VehiculoContext);
 
   const CargarDatos = async () => {
@@ -68,6 +76,26 @@ export const Reservas = () => {
       }
     }
   };
+  
+
+  const cargarFechasBusqueda = () => {
+    // const storedDateInicio = localStorage.getItem("dateInicio");
+    // const storedDateFinal = localStorage.getItem("dateFinal");
+
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+  
+    const storedDateInicio = queryParams.get("fechaInicio");
+    const storedDateFinal = queryParams.get("fechaFin");
+    
+    
+    if (storedDateInicio) {
+      setFechaInicio(dayjs(storedDateInicio));
+    }
+    if (storedDateFinal) {
+      setFechaFin(dayjs(storedDateFinal));
+    }
+  }	
 
   // Función para deshabilitar fechas reservadas
   const shouldDisableDate = (date: Dayjs) => {
@@ -81,6 +109,7 @@ export const Reservas = () => {
 
   useEffect(() => {
     CargarDatos();
+    cargarFechasBusqueda();
   }, []);
 
   return (
