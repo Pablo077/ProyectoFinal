@@ -3,6 +3,8 @@ import { Navbar } from "../views/Home/Navbar";
 import { Footer } from "../views/Home/Footer";
 import { CaracteristicasViews } from "../views/Caracteristicas/CaracteristicasViews";
 import { SnackMensaje } from "../components/SnackMensaje";
+import { WhatsAppButton } from "../views/Home/WhatsAppButton";
+
 
 export const Caracteristicas = () => {
   return (
@@ -10,7 +12,8 @@ export const Caracteristicas = () => {
       <Navbar />
       <SnackMensaje />
       <CaracteristicasViews />
+      <WhatsAppButton />
       <Footer />
     </Box>
-  )
-}
+  );
+};

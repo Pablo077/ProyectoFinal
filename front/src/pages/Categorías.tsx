@@ -4,6 +4,7 @@ import { Footer } from "../views/Home/Footer";
 
 import { SnackMensaje } from "../components/SnackMensaje";
 import { CategoriasViews } from "../views/Categorias/CategoriasViews";
+import { WhatsAppButton } from "../views/Home/WhatsAppButton";
 
 
 export const Categorías = () => {
@@ -12,7 +13,8 @@ export const Categorías = () => {
       <Navbar />
       <SnackMensaje />
       <CategoriasViews />
+      <WhatsAppButton />
       <Footer />
     </Box>
-  )
-}
+  );
+};

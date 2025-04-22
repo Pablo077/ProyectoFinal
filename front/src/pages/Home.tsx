@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import { getCookie } from "../utils/utils";
 import { MenuBotonesUser } from "../views/Home/MenuBotonesUser";
 import { Recomendaciones } from "../views/Home/Recomendaciones/Recomendaciones";
+import { WhatsAppButton } from "../views/Home/WhatsAppButton";
+
 
 export const Home = () => {
   const [apiData, setApiData] = useState<any>(null);
@@ -27,12 +29,11 @@ export const Home = () => {
       <Box display="flex" flexDirection="column" minHeight="100vh">
         <Navbar />
         <SnackMensaje />
-        {apiData && 
+        {apiData && (
           <Box textAlign="right" mt={6} marginTop={"90px"}>
             <MenuBotonesUser />
           </Box>
-        
-        }
+        )}
         <Box flex={1} mt={10} textAlign="center">
           <Typography variant="h4" component="h1" marginTop="10px">
             Flota de vehículos en alquiler
@@ -46,6 +47,7 @@ export const Home = () => {
         </Box>
         <ListaVehiculos />
       </Box>
+      <WhatsAppButton />
       <Footer />
     </>
   );

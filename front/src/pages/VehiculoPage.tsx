@@ -5,6 +5,7 @@ import { VehiculoView } from "../views/Vehiculo/VehiculoView";
 import { useLocation } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { VehiculoContext } from "../context/VehiculoContext";
+import { WhatsAppButton } from "../views/Home/WhatsAppButton";
 
 export const VehiculoPage = () => {
   const location = useLocation();
@@ -23,10 +24,10 @@ export const VehiculoPage = () => {
       }
     }
   };
-  
+
   const cargaDeVehiculos = async () => {
     await cargarVehiculos();
-  }
+  };
 
   useEffect(() => {
     if (vehiculoFind !== null) {
@@ -34,19 +35,16 @@ export const VehiculoPage = () => {
       setMostrar(true);
     }
   }, [vehiculoFind]);
-  
 
   useEffect(() => {
     cargarPagina();
   }, [vehiculos]);
-
 
   useEffect(() => {
     window.scrollTo(0, 0);
     cargaDeVehiculos();
   }, []);
 
-  
   return (
     <div>
       <Navbar />
@@ -68,6 +66,7 @@ export const VehiculoPage = () => {
         )}
       </div>
       <div style={{ marginTop: "80px" }}>
+        <WhatsAppButton />
         <Footer />
       </div>
     </div>

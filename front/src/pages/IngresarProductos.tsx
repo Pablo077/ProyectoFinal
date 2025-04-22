@@ -1,9 +1,9 @@
 import { Box } from "@mui/material";
-import { Footer } from "../views/Home/Footer"
-import { Navbar } from "../views/Home/Navbar"
-import { IngresarProductosViews } from "../views/IngresarProductos/IngresarProductosViews"
+import { Footer } from "../views/Home/Footer";
+import { Navbar } from "../views/Home/Navbar";
+import { IngresarProductosViews } from "../views/IngresarProductos/IngresarProductosViews";
 import { SnackMensaje } from "../components/SnackMensaje";
-
+import { WhatsAppButton } from "../views/Home/WhatsAppButton";
 
 export const IngresarProductos = () => {
   return (
@@ -15,8 +15,8 @@ export const IngresarProductos = () => {
           <IngresarProductosViews />
         </div>
       </Box>
+      <WhatsAppButton />
       <Footer />
-
     </>
-  )
-}
+  );
+};
