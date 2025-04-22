@@ -43,11 +43,18 @@ export const apiReserva = () => {
     return result;
   }
 
+  const historialReservasUser = async (valores: any) => {
+    const url = `${tabla}/historialReservasUser`;
+    const result = await postApiLocal({ url, valores });
+    return result;
+  }
+
   return {
     disponibilidad,
     getReservas,
     reservaByVehiculo,
     historialReserva,
     saveReservas,
+    historialReservasUser,
   };
 };

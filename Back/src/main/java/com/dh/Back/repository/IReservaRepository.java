@@ -2,6 +2,7 @@ package com.dh.Back.repository;
 
 import com.dh.Back.entity.Puntuacion;
 import com.dh.Back.entity.Reserva;
+import com.dh.Back.entity.User;
 import com.dh.Back.entity.Vehiculo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -25,4 +26,6 @@ public interface IReservaRepository extends JpaRepository<Reserva, Long> {
 
     @Query("SELECT r FROM Reserva r WHERE r.user.id = :userId AND r.vehiculo.id = :vehiculoId")
     List<Reserva> findByUserAndVehiculo(@Param("userId") Long userId, @Param("vehiculoId") Long vehiculoId);
+
+    Optional<List<Reserva>> findByUser(User user);
 }

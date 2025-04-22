@@ -8,6 +8,9 @@ export const MenuBotonesUser = () => {
     const handleClickFavoritos = () => {
         navigate("/ListaFavoritos");
     }
+    const handleClickHistorial = () => {
+        navigate("/ReservaHistorial");
+    }
 
 
     return (
@@ -17,6 +20,12 @@ export const MenuBotonesUser = () => {
                 variant="contained"
                 styles={{ marginRight: "10px" }}
                 onClick={handleClickFavoritos}
+            />
+            <Buttons
+                text="Historial de reservas"
+                variant="contained"
+                styles={{ marginRight: "10px" }}
+                onClick={handleClickHistorial}
             />
         </>
     )

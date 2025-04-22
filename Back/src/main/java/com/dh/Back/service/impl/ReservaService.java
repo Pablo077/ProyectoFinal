@@ -3,6 +3,7 @@ import com.dh.Back.authentication.RegisterRequest;
 import com.dh.Back.data.ReservaDataLoader;
 import com.dh.Back.entity.Caja;
 import com.dh.Back.entity.Reserva;
+import com.dh.Back.entity.User;
 import com.dh.Back.entity.Vehiculo;
 import com.dh.Back.exception.ResourceNotFoundException;
 import com.dh.Back.repository.IReservaRepository;
@@ -86,6 +87,15 @@ public class ReservaService implements IReservaService {
     public Optional<Reserva> findById(Long reservaId) throws ResourceNotFoundException {
         try{
             return reservaRepository.findById(reservaId);
+        }catch (Exception e){
+            throw new ResourceNotFoundException(e.getMessage());
+        }
+    }
+
+    @Override
+    public Optional<List<Reserva>> findByUser(User user) throws ResourceNotFoundException {
+        try{
+            return reservaRepository.findByUser(user);
         }catch (Exception e){
             throw new ResourceNotFoundException(e.getMessage());
         }

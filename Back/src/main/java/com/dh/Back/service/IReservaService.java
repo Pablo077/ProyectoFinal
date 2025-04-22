@@ -2,6 +2,7 @@ package com.dh.Back.service;
 
 import com.dh.Back.entity.Puntuacion;
 import com.dh.Back.entity.Reserva;
+import com.dh.Back.entity.User;
 import com.dh.Back.entity.Vehiculo;
 import com.dh.Back.exception.ResourceNotFoundException;
 
@@ -16,4 +17,5 @@ public interface IReservaService {
     Optional<List<Reserva>> findByVehiculo(Vehiculo vehiculo);
     List<Reserva> findByUserAndVehiculo (Long userId, Long vehiculoId) throws ResourceNotFoundException;
     Optional<Reserva> findById(Long reservaId) throws ResourceNotFoundException;
+    Optional<List<Reserva>> findByUser(User user) throws ResourceNotFoundException;
 }

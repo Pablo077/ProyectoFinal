@@ -3,6 +3,7 @@ import com.dh.Back.dto.ReservaDTO;
 import com.dh.Back.dto.ResquestReservaDTO;
 import com.dh.Back.entity.Caja;
 import com.dh.Back.entity.Reserva;
+import com.dh.Back.entity.User;
 import com.dh.Back.entity.Vehiculo;
 import com.dh.Back.exception.ResourceNotFoundException;
 import com.dh.Back.service.IReservaService;
@@ -45,12 +46,6 @@ public class ReservaController {
         return ResponseEntity.ok(iReservaService.save(reserva));
     }
 
-//        @PostMapping("/saveReservas")
-//    public ResponseEntity<?> recibirBody(@RequestBody Map<String, Object> body) {
-//        System.out.println("Body recibido: " + body);
-//        return ResponseEntity.ok().build();
-//    }
-    
     @PostMapping("/disponibilidad")
     public ResponseEntity<List<Vehiculo>> verificarDisponibilidad(@RequestBody ReservaDTO reservaDTO) throws ResourceNotFoundException{
 
@@ -68,5 +63,11 @@ public class ReservaController {
                 iReservaService.findByUserAndVehiculo(resquestReservaDTO.getUserId(), resquestReservaDTO.getVehiculoId())
         );
     }
+
+    @PostMapping("/historialReservasUser")
+    public ResponseEntity<Optional<List<Reserva>>> findByUser(@RequestBody User user) throws ResourceNotFoundException {
+        return ResponseEntity.ok(iReservaService.findByUser(user));
+    }
+
 
 }

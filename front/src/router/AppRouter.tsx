@@ -11,12 +11,12 @@ import { Caracteristicas } from '../pages/Caracteristicas';
 import { Categorías } from '../pages/Categorías';
 import { ListaFavoritos } from '../pages/ListaFavoritos';
 import { ReservaConfirmacion } from '../pages/ReservaConfirmacion';
+import { ReservaHistorial } from '../pages/ReservaHistorial';
 
 
 export const AppRouter = () => {
     return (
         <Routes>
-          <Route path="/" element={<Home />} />
           <Route path="/administracion" element={<Administracion />} />
           <Route path="/Caracteristicas" element={<Caracteristicas />} />
           <Route path="/Categorias/AgregarCategorias" element={<Categorías />} />
@@ -26,10 +26,12 @@ export const AppRouter = () => {
           <Route path="/ListaProductos" element={<ListaProductos />} />
           <Route path="/ListaUsuarios" element={<ListaUsuarios />} />
           <Route path="/Login" element={<Login />} />
-          <Route path="/ReservaConfirmación" element={<ReservaConfirmacion />} />
           <Route path="/Register" element={<Register />} />
+          <Route path="/ReservaConfirmación" element={<ReservaConfirmacion />} />
+          <Route path="/ReservaHistorial" element={<ReservaHistorial />} />
           <Route path="/Vehiculo/*" element={<VehiculoPage />} />
           <Route path="*" element={<Home />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       );
 }
