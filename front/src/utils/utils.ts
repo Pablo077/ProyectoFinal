@@ -67,6 +67,7 @@ export const userData = () =>{
       firstname: parsedUser.firstname,
       lastname: parsedUser.lastname,
       role: parsedUser.rol,
+      email: parsedUser.email,
     };
     return userData;
   }

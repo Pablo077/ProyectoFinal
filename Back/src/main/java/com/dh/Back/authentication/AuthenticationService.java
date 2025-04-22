@@ -85,6 +85,7 @@ public class AuthenticationService {
                 .lastname(user.getLastname())
                 .token(jwt)
                 .rol(user.getRole().toString())
+                .email(user.getEmail())
                 .build();
     }
 
