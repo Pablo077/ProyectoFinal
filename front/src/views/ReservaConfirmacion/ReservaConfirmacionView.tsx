@@ -2,11 +2,15 @@ import { Typography } from "@mui/material";
 import { Buttons } from "../../components/Buttons";
 import { useNavigate } from "react-router-dom";
 import { colores } from "../../styles/colors";
+import { useContext } from "react";
+import { VehiculoContext } from "../../context/VehiculoContext";
 
 export const ReservaConfirmacionView = () => {
   const navigate = useNavigate();
+  const {setVehiculosDisponibles} = useContext(VehiculoContext);
 
   const handleClick = () => {
+    setVehiculosDisponibles([]);
     navigate("/");
   };
 

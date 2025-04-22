@@ -51,8 +51,8 @@ export const InputsBuscador = (props: Props) => {
   const onSubmit = async (values: FormValues) => {
     const formattedValues = {
       ...values,
-      dateInicio: values.dateInicio ? values.dateInicio.toDate() : null,
-      dateFinal: values.dateFinal ? values.dateFinal.toDate() : null,
+      fechaInicio: values.dateInicio ? values.dateInicio.format("YYYY-MM-DD").toString() : null,
+      fechaFinal: values.dateFinal ? values.dateFinal.format("YYYY-MM-DD").toString() : null,
     };
 
     setFechaInicio(

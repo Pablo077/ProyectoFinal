@@ -57,8 +57,9 @@ public class ReservaController {
         List<Vehiculo> vehiculos = iVehiculoService.buscarVehiculosDisponibles(
                 reservaDTO.getMarca(), reservaDTO.getModelo(), reservaDTO.getPasajeros());
 
-        return ResponseEntity.ok(iReservaService.verificarDisponibilidad(vehiculos,
-                reservaDTO.getFechaInicio(), reservaDTO.getFechaFin()));
+        List<Vehiculo> disponibles = iReservaService.verificarDisponibilidad(vehiculos,
+                reservaDTO.getFechaInicio(), reservaDTO.getFechaFin());
+        return ResponseEntity.ok(disponibles);
     }
 
     @PostMapping("/historialReserva")

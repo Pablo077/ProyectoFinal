@@ -16,7 +16,8 @@ public interface IReservaRepository extends JpaRepository<Reserva, Long> {
     @Query("SELECT r FROM Reserva r WHERE r.vehiculo.id = :vehiculoId " +
             "AND ((:fechaInicio BETWEEN r.fechaInicio AND r.fechaFin) " +
             "OR (:fechaFin BETWEEN r.fechaInicio AND r.fechaFin) " +
-            "OR (r.fechaInicio BETWEEN :fechaInicio AND :fechaFin))")
+            "OR (r.fechaInicio BETWEEN :fechaInicio AND :fechaFin) " +
+            "OR (r.fechaFin BETWEEN :fechaInicio AND :fechaFin))")
     List<Reserva> verificarDisponibilidad(@Param("vehiculoId") Long vehiculoId,
                                           @Param("fechaInicio") LocalDate fechaInicio,
                                           @Param("fechaFin") LocalDate fechaFin);
