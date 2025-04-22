@@ -4,12 +4,12 @@ import { useContext, useState } from "react";
 import { Resultados } from "./components/Resultados";
 import { colores } from "../../../styles/colors";
 import { VehiculoContext } from "../../../context/VehiculoContext";
-import dayjs, { Dayjs } from "dayjs";
 
 export const Buscador = () => {
-  const {vehiculosDisponibles, setVehiculosDisponibles} = useContext(VehiculoContext);
-  const [fechaInicio, setFechaInicio] = useState<String>("");
-  const [fechaFin, setFechaFin] = useState<String>("");
+  const { vehiculosDisponibles, setVehiculosDisponibles } =
+    useContext(VehiculoContext);
+  const [fechaInicio, setFechaInicio] = useState<string>("");
+  const [fechaFin, setFechaFin] = useState<string>("");
 
   return (
     <div
@@ -25,10 +25,20 @@ export const Buscador = () => {
         Buscar
       </Typography>
       <div style={{ width: "70%", margin: "auto" }}>
-        <InputsBuscador setVehiculos={setVehiculosDisponibles} setFechaFin={setFechaFin} setFechaInicio={setFechaInicio}/>
+        <InputsBuscador
+          setVehiculos={setVehiculosDisponibles}
+          setFechaFin={setFechaFin}
+          setFechaInicio={setFechaInicio}
+          fechaInicio={fechaInicio}
+          fechaFin={fechaFin}
+        />
       </div>
       <div style={{ marginLeft: "-10px" }}>
-        <Resultados vehiculos={vehiculosDisponibles} fechaInicio={fechaInicio} fechaFin={fechaFin}/>
+        <Resultados
+          vehiculos={vehiculosDisponibles}
+          fechaInicio={fechaInicio}
+          fechaFin={fechaFin}
+        />
       </div>
     </div>
   );

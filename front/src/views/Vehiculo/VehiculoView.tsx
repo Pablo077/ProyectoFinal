@@ -14,7 +14,7 @@ import {
 import { VehiculoContext } from "../../context/VehiculoContext";
 import { ReservaLogin } from "./components/ReservaLogin";
 import { RealizarReservas } from "./components/RealizarReservas/RealizarReservas";
-import dayjs, { Dayjs } from "dayjs";
+import { Dayjs } from "dayjs";
 
 export const VehiculoView = () => {
   const { vehiculo } = useContext(VehiculoContext);

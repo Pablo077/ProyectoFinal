@@ -3,8 +3,7 @@ import { Cards } from "../../../../components/Cards";
 import { Vehiculo } from "../../../../service/Vehiculo/apiVehiculo";
 import { colores } from "../../../../styles/colors";
 import { linkFotosArchivos } from "../../../../utils/utils";
-import { useContext, useState } from "react";
-import { VehiculoContext } from "../../../../context/VehiculoContext";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PuntuacionesPromedio } from "../../../../components/PuntuacionesPromedio";
 import {
@@ -41,9 +40,7 @@ export const Resultados = (props: Props) => {
   };
 
   const handleClick = (vehiculo: Vehiculo) => {
-    // const url = `/Vehiculo/?fechaInicio=${fechaInicio}&fechaFin=${fechaFin}&vehiculoId=${vehiculo.id}`;
-    const url = `/Vehiculo/?vehiculoId=${vehiculo.id}`;
-
+    const url = `/Vehiculo/?fechaInicio=${fechaInicio}&fechaFin=${fechaFin}&vehiculoId=${vehiculo.id}`;
     navigate(url);
   };
 

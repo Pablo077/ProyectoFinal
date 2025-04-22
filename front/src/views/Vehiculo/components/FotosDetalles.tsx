@@ -3,7 +3,7 @@ import { Card, CardMedia, Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import Icon from "@mdi/react";
 import { mdiArrowLeftCircle } from "@mdi/js";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { VehiculoContext } from "../../../context/VehiculoContext";
 import { linkFotosArchivos } from "../../../utils/utils";
 import { coloresDesignados } from "../../../styles/colors";
@@ -14,6 +14,8 @@ export const FotosDetalles = () => {
   const [imagenSeleccionada, setImagenSeleccionada] = useState<string>("");
   const { vehiculo } = useContext(VehiculoContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
 
   // Cargar la URL de la imagen
   const cargarImagen = (archivo: string) => {
@@ -22,7 +24,10 @@ export const FotosDetalles = () => {
 
   // Navegar hacia atrás
   const back = () => {
-    navigate("/");
+    const storedDateInicio = queryParams.get("fechaInicio");
+    const storedDateFinal = queryParams.get("fechaFin");
+    const url = `/?fechaInicio=${storedDateInicio}&fechaFin=${storedDateFinal}`;
+    navigate(url);
   };
 
   // Cargar las imágenes al montar el componente

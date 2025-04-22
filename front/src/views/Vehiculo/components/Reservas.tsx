@@ -54,15 +54,14 @@ export const Reservas = (props:Props) => {
   const { reservaByVehiculo } = apiReserva();
   const [reservas, setReservas] = useState<{ start: Dayjs; end: Dayjs }[]>([]);
   const [error, setError] = useState(false);
-  // const [fechaInicio, setFechaInicio] = useState<Dayjs | null>(null);
-  // const [fechaFin, setFechaFin] = useState<Dayjs | null>(null);
   const { vehiculo } = useContext(VehiculoContext);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
 
   const CargarDatos = async () => {
     if (vehiculo) {
       try {
-        const response = await reservaByVehiculo(vehiculo); // Reemplaza con tu API real
-        // Suponiendo que la respuesta tiene un formato { start: "fechaInicio", end: "fechaFin" }
+        const response = await reservaByVehiculo(vehiculo); 
         const reservasApi = response.map(
           (reserva: { fechaInicio: string; fechaFin: string }) => ({
             start: dayjs(reserva.fechaInicio),
@@ -82,9 +81,6 @@ export const Reservas = (props:Props) => {
     // const storedDateInicio = localStorage.getItem("dateInicio");
     // const storedDateFinal = localStorage.getItem("dateFinal");
 
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-  
     const storedDateInicio = queryParams.get("fechaInicio");
     const storedDateFinal = queryParams.get("fechaFin");
     

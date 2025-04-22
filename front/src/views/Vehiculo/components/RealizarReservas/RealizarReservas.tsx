@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material"
 import { DynamicForm } from "../../../../components/Formik/DynamicForm"
 import { DataInputs } from "./components/DataInputs";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 
 interface Props {
     fechaInicio: dayjs.Dayjs | null;

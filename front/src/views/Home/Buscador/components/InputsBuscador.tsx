@@ -12,16 +12,16 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { apiReserva } from "../../../../service/Reserva/apiReserva";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { Buttons } from "../../../../components/Buttons";
-import { set } from "date-fns";
+import { useLocation } from "react-router-dom";
 
 interface FormValues {
   marca: string;
   modelo: string;
   pasajeros: string;
-  dateInicio: Date | null;
-  dateFinal: Date | null;
+  dateInicio: Dayjs | null;
+  dateFinal: Dayjs | null;
 }
 
 const validationSchema = Yup.object({
@@ -31,29 +31,36 @@ const validationSchema = Yup.object({
 
 interface Props {
   setVehiculos: React.Dispatch<React.SetStateAction<Vehiculo[]>>;
-  setFechaInicio: React.Dispatch<React.SetStateAction<String>>;
-  setFechaFin: React.Dispatch<React.SetStateAction<String>>
+  setFechaInicio: React.Dispatch<React.SetStateAction<string>>;
+  setFechaFin: React.Dispatch<React.SetStateAction<string>>;
+  fechaInicio: string;
+  fechaFin: string;
 }
 
 export const InputsBuscador = (props: Props) => {
-  const { setVehiculos, setFechaFin, setFechaInicio } = props;
+  const { setVehiculos, setFechaFin, setFechaInicio, fechaFin, fechaInicio } =
+    props;
   const { getMarcas, getModelos } = apiVehiculo();
   const { disponibilidad } = apiReserva();
   const [marcas, setMarcas] = useState<{ id: string; tipo: string }[]>([]);
   const [modelos, setModelos] = useState<{ id: string; tipo: string }[]>([]);
   const [marcaSeleccionada, setMarcaSeleccionada] = useState<string>("");
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
 
   const onSubmit = async (values: FormValues) => {
     const formattedValues = {
       ...values,
-      dateInicio: values.dateInicio ? dayjs(values.dateInicio).toDate() : null,
-      dateFinal: values.dateFinal ? dayjs(values.dateFinal).toDate() : null,
+      dateInicio: values.dateInicio ? values.dateInicio.toDate() : null,
+      dateFinal: values.dateFinal ? values.dateFinal.toDate() : null,
     };
-    // Guardar en localStorage
-    // localStorage.setItem("dateInicio", values.dateInicio ? values.dateInicio.toString() : "");
-    // localStorage.setItem("dateFinal", values.dateFinal ? values.dateFinal.toString() : "");
-    setFechaInicio(values.dateInicio ? dayjs(values.dateInicio).format("YYYY-MM-DD").toString() : "");
-    setFechaFin(values.dateFinal ? dayjs(values.dateFinal).format("YYYY-MM-DD").toString() : "");
+
+    setFechaInicio(
+      values.dateInicio ? values.dateInicio.format("YYYY-MM-DD").toString() : ""
+    );
+    setFechaFin(
+      values.dateFinal ? values.dateFinal.format("YYYY-MM-DD").toString() : ""
+    );
 
     const response = await disponibilidad(formattedValues);
     setVehiculos(response);
@@ -87,6 +94,15 @@ export const InputsBuscador = (props: Props) => {
       tipo: marca,
     }));
     setMarcas(marcasObjetos);
+    const storedDateInicio = queryParams.get("fechaInicio");
+    const storedDateFinal = queryParams.get("fechaFin");
+
+    if (storedDateInicio) {
+      setFechaInicio(storedDateInicio);
+    }
+    if (storedDateFinal) {
+      setFechaFin(storedDateFinal);
+    }
   };
 
   useEffect(() => {
@@ -107,8 +123,12 @@ export const InputsBuscador = (props: Props) => {
             marca: "",
             modelo: "",
             pasajeros: "",
-            dateInicio: null,
-            dateFinal: null,
+            dateInicio:
+              fechaInicio && dayjs(fechaInicio).isValid()
+                ? dayjs(fechaInicio)
+                : null,
+            dateFinal:
+              fechaFin && dayjs(fechaFin).isValid() ? dayjs(fechaFin) : null,
           }}
           validationSchema={validationSchema}
           onSubmit={onSubmit}
@@ -223,8 +243,8 @@ export const InputsBuscador = (props: Props) => {
                     variant="contained"
                     tipo="button"
                     onClick={() => {
-                      resetForm()
-                      setVehiculos([])
+                      resetForm();
+                      setVehiculos([]);
                     }}
                     styles={{ marginLeft: "10px", width: "150px" }}
                   />

@@ -9,49 +9,63 @@ import { VehiculoContext } from "../context/VehiculoContext";
 export const VehiculoPage = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const { setVehiculo, vehiculos, cargarVehiculos, vehiculo } = useContext(VehiculoContext);
-  const [vehiculoFind, setVehiculoFind] = useState<any>(null); // Cambia el tipo según tu modelo de datos
+  const { setVehiculo, vehiculos, cargarVehiculos } =
+    useContext(VehiculoContext);
+  const [vehiculoFind, setVehiculoFind] = useState<any>(null);
+  const [mostrar, setMostrar] = useState(false);
 
-
-  const cargarPagina = () =>{
-    // Convertir vehiculoId a número
-    // const vehiculoId = Number(location.pathname.split("/").pop());
+  const cargarPagina = async () => {
     const vehiculoId = Number(queryParams.get("vehiculoId"));
-    // Buscar el vehículo por ID
-    const vehiculo = vehiculos.find((vehiculo) => vehiculo.id === vehiculoId);
-    setVehiculoFind(vehiculos.find((vehiculo) => vehiculo.id === vehiculoId));
+    if (vehiculos.length > 0) {
+      const vehiculo = vehiculos.find((v) => v.id === vehiculoId);
+      if (vehiculo) {
+        setVehiculoFind(vehiculo);
+      }
+    }
+  };
+  
+  const cargaDeVehiculos = async () => {
+    await cargarVehiculos();
   }
 
+  useEffect(() => {
+    if (vehiculoFind !== null) {
+      setVehiculo(vehiculoFind);
+      setMostrar(true);
+    }
+  }, [vehiculoFind]);
+  
+
+  useEffect(() => {
+    cargarPagina();
+  }, [vehiculos]);
 
 
   useEffect(() => {
-    // Asegurarse de que la página esté bien arriba
     window.scrollTo(0, 0);
-    cargarPagina();
+    cargaDeVehiculos();
   }, []);
 
-  useEffect(() => {
-    // Asegurarse de que la página esté bien arriba
-    window.scrollTo(0, 0);
-
-    // if (!vehiculo) {
-    //   cargarVehiculos();
-    //   return <>no esta</>;
-    // }
   
-    setVehiculo(vehiculoFind);
-  }, [vehiculoFind]);
-
-console.log(vehiculo)
   return (
     <div>
       <Navbar />
       <SnackMensaje />
       <div style={{ marginTop: "60px" }}>
-        {
-          vehiculo &&
-        <VehiculoView />
-        }
+        {mostrar ? (
+          <VehiculoView />
+        ) : (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100vh",
+            }}
+          >
+            <h1 style={{ fontSize: "30px", color: "#000" }}>Cargando...</h1>
+          </div>
+        )}
       </div>
       <div style={{ marginTop: "80px" }}>
         <Footer />
