@@ -1,4 +1,4 @@
-package com.dh.Back.authentication;
+package com.dh.Back.service;
 
 import com.dh.Back.dto.CorreoRequestDTO;
 

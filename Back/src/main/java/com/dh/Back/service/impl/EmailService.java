@@ -1,7 +1,7 @@
-package com.dh.Back.authentication;
+package com.dh.Back.service.impl;
 
 import com.dh.Back.dto.CorreoRequestDTO;
-import jakarta.mail.MessagingException;
+import com.dh.Back.service.IEmailService;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -10,11 +10,11 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 @Service
-public class EmailServiceImpl implements IEmailService{
+public class EmailService implements IEmailService {
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
 
-    public EmailServiceImpl(JavaMailSender javaMailSender, TemplateEngine templateEngine) {
+    public EmailService(JavaMailSender javaMailSender, TemplateEngine templateEngine) {
         this.javaMailSender = javaMailSender;
         this.templateEngine = templateEngine;
     }
