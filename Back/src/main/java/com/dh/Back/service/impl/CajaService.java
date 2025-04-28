@@ -4,7 +4,6 @@ import com.dh.Back.entity.Caja;
 import com.dh.Back.exception.ResourceNotFoundException;
 import com.dh.Back.repository.ICajaRepository;
 import com.dh.Back.service.ICajaService;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,12 +38,4 @@ public class CajaService implements ICajaService {
         return cajaRepository.findById(id);
     }
 
-//    @PostConstruct
-//    public void initData() {
-//        if (cajaRepository.count() == 0) {
-//            cajaRepository.save(new Caja("Automático"));
-//            cajaRepository.save(new Caja("Manual"));
-//            cajaRepository.save(new Caja("Semiautomático"));
-//        }
-//    }
 }

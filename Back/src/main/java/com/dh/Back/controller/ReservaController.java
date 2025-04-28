@@ -1,7 +1,5 @@
 package com.dh.Back.controller;
 import com.dh.Back.dto.ReservaDTO;
-import com.dh.Back.dto.ResquestReservaDTO;
-import com.dh.Back.entity.Caja;
 import com.dh.Back.entity.Reserva;
 import com.dh.Back.entity.User;
 import com.dh.Back.entity.Vehiculo;
@@ -12,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.Map;
 
 
 @RestController
@@ -57,10 +53,10 @@ public class ReservaController {
         return ResponseEntity.ok(disponibles);
     }
 
-    @PostMapping("/historialReserva")
-    public ResponseEntity<List<Reserva>> findByUserAndVehiculo(@RequestBody ResquestReservaDTO resquestReservaDTO) throws ResourceNotFoundException{
+    @GetMapping("/historialReserva/{userId}/{vehiculoId}")
+    public ResponseEntity<List<Reserva>> findByUserAndVehiculo(@PathVariable Long userId, @PathVariable Long vehiculoId) throws ResourceNotFoundException{
         return ResponseEntity.ok(
-                iReservaService.findByUserAndVehiculo(resquestReservaDTO.getUserId(), resquestReservaDTO.getVehiculoId())
+                iReservaService.findByUserAndVehiculo(userId, vehiculoId)
         );
     }
 
@@ -68,6 +64,5 @@ public class ReservaController {
     public ResponseEntity<Optional<List<Reserva>>> findByUser(@RequestBody User user) throws ResourceNotFoundException {
         return ResponseEntity.ok(iReservaService.findByUser(user));
     }
-
 
 }

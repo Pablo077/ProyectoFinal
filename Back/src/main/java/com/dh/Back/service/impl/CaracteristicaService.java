@@ -4,7 +4,6 @@ import com.dh.Back.entity.*;
 import com.dh.Back.exception.ResourceNotFoundException;
 import com.dh.Back.repository.ICaracteristicaRepository;
 import com.dh.Back.service.ICaracteristicaService;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

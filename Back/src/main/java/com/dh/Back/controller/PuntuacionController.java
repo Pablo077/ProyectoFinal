@@ -3,11 +3,8 @@ package com.dh.Back.controller;
 
 import com.dh.Back.dto.BodySavePuntuacionDTO;
 import com.dh.Back.dto.PuntuacionPromedioDTO;
-import com.dh.Back.dto.ResquestPuntuacionDTO;
 import com.dh.Back.entity.Puntuacion;
 import com.dh.Back.entity.Reserva;
-import com.dh.Back.entity.Vehiculo;
-import com.dh.Back.entity.User;
 import com.dh.Back.exception.ResourceNotFoundException;
 import com.dh.Back.service.IPuntuacionService;
 import com.dh.Back.service.IReservaService;
@@ -16,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -51,15 +47,9 @@ public class PuntuacionController {
         }
     }
 
-//    @PostMapping
-//    public ResponseEntity<?> recibirBody(@RequestBody Map<String, Object> body) {
-//        System.out.println("Body recibido: " + body);
-//        return ResponseEntity.ok().build();
-//    }
-
-    @PostMapping("/PuntuacionesByUserVehiculo")
-    public ResponseEntity<List<Puntuacion>> findByUserAndVehiculo(@RequestBody ResquestPuntuacionDTO resquestPuntuacionDTO) throws ResourceNotFoundException{
-        return ResponseEntity.ok(iPuntuacionService.findByUserAndVehiculo(resquestPuntuacionDTO.getUserId(), resquestPuntuacionDTO.getVehiculoId()));
+    @GetMapping("/PuntuacionesByUserVehiculo/{userId}/{vehiculoId}")
+    public ResponseEntity<List<Puntuacion>> findByUserAndVehiculo(@PathVariable Long userId, @PathVariable Long vehiculoId) throws ResourceNotFoundException{
+        return ResponseEntity.ok(iPuntuacionService.findByUserAndVehiculo(userId, vehiculoId));
     }
 
     @GetMapping("/PuntuacionesByVehiculo/{vehiculoId}")
@@ -71,10 +61,5 @@ public class PuntuacionController {
     public ResponseEntity<List<PuntuacionPromedioDTO>> puntuacionPromedioByVehiculo() throws ResourceNotFoundException{
         return ResponseEntity.ok(iPuntuacionService.puntuacionPromedioByVehiculo());
     }
-
-//    @GetMapping("/PuntuacionesPromedio")
-//    public ResponseEntity<String> puntuacionPromedioByVehiculo() throws ResourceNotFoundException{
-//        return ResponseEntity.ok("LLega");
-//    }
 
 }

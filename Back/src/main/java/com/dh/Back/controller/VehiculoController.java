@@ -26,9 +26,7 @@ import org.springframework.http.MediaType;
 @RestController
 @RequestMapping("/vehiculo")
 public class VehiculoController {
-    /*
-     private static final String BASE_UPLOAD_DIR = System.getProperty("user.dir") + "/src/main/resources/static/fotos/";
-     */
+
     private static final String BASE_UPLOAD_DIR = System.getProperty("user.dir") + "/fotos/";
 
     private IVehiculoService vehiculoService;

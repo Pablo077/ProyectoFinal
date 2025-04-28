@@ -20,9 +20,9 @@ export interface iPuntuacionPromedio {
 export const apiPuntuacion = () => {
   const tabla = "puntuacion";
 
-  const puntuacionesByUserVehiculo = async (valores: any) => {
-    const url = `${tabla}/PuntuacionesByUserVehiculo`;
-    const result = await postApiLocal({ url, valores });
+  const puntuacionesByUserVehiculo = async (userId:string, vehiculoId: string ) => {
+    const url = `${tabla}/PuntuacionesByUserVehiculo/${userId}/${vehiculoId}`;
+    const result = await getApiLocal({ url });
     return result;
   };
 

@@ -33,20 +33,12 @@ export const HistorialReservas = (props: Props) => {
   const [rows, setRows] = useState<any[]>([]);
 
   const cargarHistorial = async () => {
-    const data = {
-      vehiculoId: vehiculo.id,
-      userId: userId,
-    };
-    const result = await historialReserva(data);
+    const result = await historialReserva(userId.toString(), vehiculo.id.toString());
     setReservas(result);
   };
 
   const cargarPuntuacion = async () => {
-    const data = {
-      vehiculoId: vehiculo.id,
-      userId: userId,
-    };
-    const result = await puntuacionesByUserVehiculo(data);
+    const result = await puntuacionesByUserVehiculo(userId.toString(), vehiculo.id.toString());
     setPuntuacion(result);
   };
 

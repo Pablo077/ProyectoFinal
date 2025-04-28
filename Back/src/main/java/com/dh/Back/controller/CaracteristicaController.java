@@ -1,6 +1,5 @@
 package com.dh.Back.controller;
 
-import com.dh.Back.entity.Caja;
 import com.dh.Back.entity.Caracteristica;
 import com.dh.Back.entity.Vehiculo;
 import com.dh.Back.exception.ResourceNotFoundException;
@@ -10,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/caracteristica")

@@ -4,7 +4,6 @@ import com.dh.Back.entity.Direccion;
 import com.dh.Back.exception.ResourceNotFoundException;
 import com.dh.Back.repository.IDireccionRepository;
 import com.dh.Back.service.IDireccionService;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,12 +37,4 @@ public class DireccionService implements IDireccionService {
         return direccionRepository.findById(id);
     }
 
-//    @PostConstruct
-//    public void initData(){
-//        if(direccionRepository.count()==0){
-//            direccionRepository.save(new Direccion("Asistido"));
-//            direccionRepository.save(new Direccion("Hibrido"));
-//            direccionRepository.save(new Direccion("Manual"));
-//        }
-//    }
 }

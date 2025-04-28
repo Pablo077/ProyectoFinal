@@ -2,8 +2,6 @@ package com.dh.Back.service.impl;
 
 import com.dh.Back.dto.PuntuacionPromedioDTO;
 import com.dh.Back.entity.Puntuacion;
-import com.dh.Back.entity.Vehiculo;
-import com.dh.Back.entity.User;
 import com.dh.Back.exception.ResourceNotFoundException;
 import com.dh.Back.repository.IPuntuacionRepository;
 import com.dh.Back.service.IPuntuacionService;

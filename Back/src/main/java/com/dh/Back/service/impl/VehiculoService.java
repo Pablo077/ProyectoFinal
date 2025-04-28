@@ -1,52 +1,25 @@
 package com.dh.Back.service.impl;
-import com.dh.Back.data.ReservaDataLoader;
-import com.dh.Back.data.VehiculoDataLoader;
-import com.dh.Back.entity.Caja;
-import com.dh.Back.entity.Categoria;
-import com.dh.Back.entity.Direccion;
 import com.dh.Back.entity.Vehiculo;
-import com.dh.Back.entity.Reserva;
 import com.dh.Back.exception.ResourceNotFoundException;
-import com.dh.Back.repository.IReservaRepository;
 import com.dh.Back.repository.IVehiculoRepository;
 import com.dh.Back.service.IVehiculoService;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import com.dh.Back.service.ICajaService;
-import com.dh.Back.service.IDireccionService;
 
 import java.io.File;
-import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class VehiculoService implements IVehiculoService {
-    /*
-    private static final String BASE_UPLOAD_DIR = System.getProperty("user.dir") + "/src/main/resources/static/fotos/";
-    */
+
     private static final String BASE_UPLOAD_DIR = System.getProperty("user.dir") + "/fotos/";
     private IVehiculoRepository vehiculoRepository;
-    private IReservaRepository reservaRepository;
-    private VehiculoDataLoader vehiculoDataLoader;
-    private ReservaDataLoader reservaDataLoader;
-
-    private ICajaService cajaService;
-    private IDireccionService direccionService;
 
     @Autowired
-    public VehiculoService(IVehiculoRepository vehiculoRepository,
-                           IReservaRepository reservaRepository,
-                           VehiculoDataLoader vehiculoDataLoader,
-                           ReservaDataLoader reservaDataLoader){
+    public VehiculoService(IVehiculoRepository vehiculoRepository){
         this.vehiculoRepository = vehiculoRepository;
-        this.reservaRepository = reservaRepository;
-        this.vehiculoDataLoader = vehiculoDataLoader;
-        this.reservaDataLoader = reservaDataLoader;
     }
 
     @Override
@@ -133,16 +106,5 @@ public class VehiculoService implements IVehiculoService {
         }
         return false;
     }
-
-
-//    @PostConstruct
-//    public void initData() {
-//        if (vehiculoRepository.count() > 0) {
-//            return;
-//        }
-//        for (Vehiculo vehiculo : vehiculoDataLoader.getVehiculos()) {
-//            vehiculoRepository.save(vehiculo);
-//        }
-//    }
 
 }

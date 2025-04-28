@@ -1,25 +1,16 @@
 package com.dh.Back.authentication;
 
 import com.dh.Back.configuration.JwtService;
-import com.dh.Back.data.UserDataLoader;
 import com.dh.Back.entity.Role;
 import com.dh.Back.entity.User;
-import com.dh.Back.exception.GlobalException;
 import com.dh.Back.exception.ResourceNotFoundException;
 import com.dh.Back.repository.IUserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.thymeleaf.TemplateEngine;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,7 +24,6 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-    private final UserDataLoader userDataLoader;
 
     public AuthenticationResponse register(RegisterRequest request) throws ResourceNotFoundException {
         Role rol = Role.ADMIN;
@@ -154,21 +144,20 @@ public class AuthenticationService {
 */
     @PostConstruct
     public void initData() {
-        UserDataLoader users = new UserDataLoader();
 
         var admin = User.builder()
-                .firstname(users.getUser().get(0).getFirstname())
-                .lastname(users.getUser().get(0).getLastname())
-                .email(users.getUser().get(0).getEmail())
-                .password(passwordEncoder.encode(users.getUser().get(0).getPassword()))
+                .firstname("Juan")
+                .lastname("Perez")
+                .email("admin@gmail.com")
+                .password(passwordEncoder.encode("1234"))
                 .role(Role.ADMIN)
                 .build();
 
         var user = User.builder()
-                .firstname(users.getUser().get(1).getFirstname())
-                .lastname(users.getUser().get(1).getLastname())
-                .email(users.getUser().get(1).getEmail())
-                .password(passwordEncoder.encode(users.getUser().get(1).getPassword()))
+                .firstname("Pedro")
+                .lastname("Diaz")
+                .email("user@gmail.com")
+                .password(passwordEncoder.encode("1234"))
                 .role(Role.USER)
                 .build();
 

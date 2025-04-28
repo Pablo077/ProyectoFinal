@@ -31,9 +31,9 @@ export const apiReserva = () => {
     return result;
   };
 
-  const historialReserva = async (valores: any) => {
-    const url = `${tabla}/historialReserva`;
-    const result = await postApiLocal({ url, valores });
+  const historialReserva = async (userId:string, vehiculoId: string) => {
+    const url = `${tabla}/historialReserva/${userId}/${vehiculoId}`;
+    const result = await getApiLocal({ url});
     return result;
   };
 
