@@ -50,12 +50,21 @@ public class CaracteristicaService implements ICaracteristicaService {
     }
 
     @Override
-    public Caracteristica update(Caracteristica caracteristica) {
-        return caracteristicaRepository.save(caracteristica);
+    public Caracteristica update(Caracteristica caracteristica) throws ResourceNotFoundException{
+        Optional<Caracteristica> existingCaracteristica = caracteristicaRepository.findById(caracteristica.getId());
+        if(existingCaracteristica.isPresent()) {
+            return caracteristicaRepository.save(caracteristica);
+        }
+        else {
+            throw new ResourceNotFoundException("No se pudo actualizar");
+        }
     }
 
     @Override
     public void delete(Long id) throws ResourceNotFoundException {
+        if (id == null) {
+            throw new IllegalArgumentException("El ID no puede ser nulo");
+        }
         Optional<Caracteristica> caracteristicaFindById = findById(id);
 
         if(caracteristicaFindById.isPresent()){

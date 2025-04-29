@@ -12,6 +12,6 @@ public interface ICaracteristicaService {
     List<Caracteristica> findAll();
     Optional<Caracteristica> findById(Long id);
     List<Caracteristica> findByVehiculo(Vehiculo vehiculo) throws ResourceNotFoundException;
-    Caracteristica update(Caracteristica caracteristica);
+    Caracteristica update(Caracteristica caracteristica) throws ResourceNotFoundException;
     void delete(Long id) throws ResourceNotFoundException;
 }

@@ -36,7 +36,7 @@ public class CaracteristicaController {
     }
 
     @PutMapping
-    public ResponseEntity<Caracteristica> update(@RequestBody Caracteristica caracteristica) {
+    public ResponseEntity<Caracteristica> update(@RequestBody Caracteristica caracteristica) throws ResourceNotFoundException{
         return ResponseEntity.ok(iCaracteristicaService.update(caracteristica));
     }
 
