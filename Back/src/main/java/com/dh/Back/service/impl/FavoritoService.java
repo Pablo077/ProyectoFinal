@@ -46,6 +46,9 @@ public class FavoritoService implements IFavoritoService {
 
     @Override
     public void delete(Long id) throws ResourceNotFoundException {
+        if (id == null) {
+            throw new IllegalArgumentException("El ID no puede ser nulo");
+        }
         Optional<Favorito> favoritoFindById = findById(id);
 
         if(favoritoFindById.isPresent()){

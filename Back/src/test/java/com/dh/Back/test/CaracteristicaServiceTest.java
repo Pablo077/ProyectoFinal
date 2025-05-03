@@ -25,44 +25,44 @@ class CaracteristicaServiceTest {
     @InjectMocks
     private CaracteristicaService caracteristicaService;
 
+    private User user;
+    private Vehiculo vehiculo1;
+    private Caja automatico;
+    private Direccion asistido;
+    private Categoria hatchbackCompacto;
+    private Caracteristica caracteristica1;
+    private Caracteristica caracteristica2;
+
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this); // Inicializa los mocks
+        MockitoAnnotations.openMocks(this);
+        automatico = new Caja("Automático");
+        asistido = new Direccion("Asistido");
+        hatchbackCompacto = new Categoria("Hatchback compacto", "", "");
+        user = new User(2L, "Pedro", "Diaz", "user@gmail.com", "1234", Role.USER);
+        vehiculo1 = new Vehiculo("Citroen", "C3", 1.5f,5, 1, 2, automatico, asistido, hatchbackCompacto, "Foto1.png", "{\"images\":[\"Foto1.png\",\"Foto2.png\",\"Foto3.png\",\"Foto4.png\",\"Foto5.png\"]}");
+        caracteristica1 = new Caracteristica("Wifi", 1, vehiculo1);
+        caracteristica1.setId(1L);
+        caracteristica2 = new Caracteristica("Aire acondicionado", 2, vehiculo1);
+        caracteristica2.setId(2L);
     }
 
     @Test
     void save() throws ResourceNotFoundException {
-
-        Caja automatico = new Caja("Automático");
-        Direccion asistido = new Direccion("Asistido");
-        Categoria hatchbackCompacto = new Categoria("Hatchback compacto", "", "");
-        Vehiculo vehiculo = new Vehiculo("Citroen", "C3", 1.5f,5, 1, 2, automatico, asistido, hatchbackCompacto, "Foto1.png", "{\"images\":[\"Foto1.png\",\"Foto2.png\",\"Foto3.png\",\"Foto4.png\",\"Foto5.png\"]}");
-        Caracteristica caracteristica = new Caracteristica("Wif", 1, vehiculo);
-
-        when(caracteristicaRepository.save(caracteristica)).thenReturn(caracteristica);
+        when(caracteristicaRepository.save(caracteristica1)).thenReturn(caracteristica1);
 
         //Act
-        Caracteristica result = caracteristicaService.save(caracteristica);
+        Caracteristica result = caracteristicaService.save(caracteristica1);
 
         //Assert
         assertNotNull(result);
         assertEquals("Automático", result.getVehiculo().getCaja().getTipo());
-        verify(caracteristicaRepository, times(1)).save(caracteristica);
+        verify(caracteristicaRepository, times(1)).save(caracteristica1);
 
     }
 
     @Test
     void findAll() {
-        Caja automatico = new Caja("Automático");
-        Direccion asistido = new Direccion("Asistido");
-        Categoria hatchbackCompacto = new Categoria("Hatchback compacto", "", "");
-        Vehiculo vehiculo = new Vehiculo("Citroen", "C3", 1.5f,5, 1, 2, automatico, asistido, hatchbackCompacto, "Foto1.png", "{\"images\":[\"Foto1.png\",\"Foto2.png\",\"Foto3.png\",\"Foto4.png\",\"Foto5.png\"]}");
-        Caracteristica caracteristica1 = new Caracteristica("Wifi", 1, vehiculo);
-
-        Categoria suv = new Categoria("SUV","","");
-        Vehiculo vehiculo2 = new Vehiculo("Citroen", "C3 Aircross", 1.2f,5, 2, 4, automatico, asistido, suv, "Foto1.png", "{\"images\":[\"Foto1.png\",\"Foto2.png\",\"Foto3.png\",\"Foto4.png\",\"Foto5.png\"]}");
-        Caracteristica caracteristica2 = new Caracteristica("Aire acondicionado", 2, vehiculo2);
-
         when(caracteristicaRepository.findAll()).thenReturn(Arrays.asList(caracteristica1, caracteristica2));
 
         //Act
@@ -76,13 +76,7 @@ class CaracteristicaServiceTest {
 
     @Test
     void findById() {
-        Caja automatico = new Caja("Automático");
-        Direccion asistido = new Direccion("Asistido");
-        Categoria hatchbackCompacto = new Categoria("Hatchback compacto", "", "");
-        Vehiculo vehiculo = new Vehiculo("Citroen", "C3", 1.5f,5, 1, 2, automatico, asistido, hatchbackCompacto, "Foto1.png", "{\"images\":[\"Foto1.png\",\"Foto2.png\",\"Foto3.png\",\"Foto4.png\",\"Foto5.png\"]}");
-        Caracteristica caracteristica = new Caracteristica("Wif", 1, vehiculo);
-
-        when(caracteristicaRepository.findById(1L)).thenReturn(Optional.of(caracteristica));
+        when(caracteristicaRepository.findById(1L)).thenReturn(Optional.of(caracteristica1));
 
         //Act
         Optional<Caracteristica> result = caracteristicaService.findById(1L);
@@ -95,35 +89,22 @@ class CaracteristicaServiceTest {
 
     @Test
     void findByVehiculo() throws ResourceNotFoundException{
-        // Arrange
-        Caja automatico = new Caja("Automático");
-        Direccion asistido = new Direccion("Asistido");
-        Categoria hatchbackCompacto = new Categoria("Hatchback compacto", "", "");
-        Vehiculo vehiculo = new Vehiculo("Citroen", "C3", 1.5f, 5, 1, 2, automatico, asistido, hatchbackCompacto, "Foto1.png", "{\"images\":[\"Foto1.png\",\"Foto2.png\"]}");
-        Caracteristica caracteristica1 = new Caracteristica("Wifi", 1, vehiculo);
-        Caracteristica caracteristica2 = new Caracteristica("Aire acondicionado", 2, vehiculo);
-
-        when(caracteristicaRepository.findByVehiculo(vehiculo)).thenReturn(Arrays.asList(caracteristica1, caracteristica2));
+        when(caracteristicaRepository.findByVehiculo(vehiculo1)).thenReturn(Arrays.asList(caracteristica1, caracteristica2));
 
         // Act
-        List<Caracteristica> result = caracteristicaService.findByVehiculo(vehiculo);
+        List<Caracteristica> result = caracteristicaService.findByVehiculo(vehiculo1);
 
         // Assert
         assertNotNull(result);
         assertEquals(2, result.size());
         assertEquals("Wifi", result.get(0).getNombre());
         assertEquals("Aire acondicionado", result.get(1).getNombre());
-        verify(caracteristicaRepository, times(1)).findByVehiculo(vehiculo);
+        verify(caracteristicaRepository, times(1)).findByVehiculo(vehiculo1);
     }
 
     @Test
     void update() throws ResourceNotFoundException{
-        // Arrange
-        Caja automatico = new Caja("Automático");
-        Direccion asistido = new Direccion("Asistido");
-        Categoria hatchbackCompacto = new Categoria("Hatchback compacto", "", "");
-        Vehiculo vehiculo = new Vehiculo("Citroen", "C3", 1.5f, 5, 1, 2, automatico, asistido, hatchbackCompacto, "Foto1.png", "{\"images\":[\"Foto1.png\",\"Foto2.png\"]}");
-        Caracteristica existingCaracteristica = new Caracteristica("Wifi", 1, vehiculo);
+        Caracteristica existingCaracteristica = new Caracteristica("Wifi", 1, vehiculo1);
         Long caracteristicaId = 1L;
         existingCaracteristica.setId(caracteristicaId); // Set the ID on the existing entity
 
@@ -135,7 +116,7 @@ class CaracteristicaServiceTest {
         });
 
         // Act
-        Caracteristica updatedCaracteristica = new Caracteristica("Bluetooth", 1, vehiculo);
+        Caracteristica updatedCaracteristica = new Caracteristica("Bluetooth", 1, vehiculo1);
         updatedCaracteristica.setId(caracteristicaId); // Ensure the ID is set on the updated object
         Caracteristica result = caracteristicaService.update(updatedCaracteristica);
 
@@ -149,15 +130,7 @@ class CaracteristicaServiceTest {
 
     @Test
     void delete() throws ResourceNotFoundException{
-        // Arrange
-        Caja automatico = new Caja("Automático");
-        Direccion asistido = new Direccion("Asistido");
-        Categoria hatchbackCompacto = new Categoria("Hatchback compacto", "", "");
-        Vehiculo vehiculo = new Vehiculo("Citroen", "C3", 1.5f, 5, 1, 2, automatico, asistido, hatchbackCompacto, "Foto1.png", "{\"images\":[\"Foto1.png\",\"Foto2.png\"]}");
-        Caracteristica caracteristica = new Caracteristica("Wifi", 1, vehiculo);
-        caracteristica.setId(1L); // Asegúrate de que el ID esté configurado
-
-        when(caracteristicaRepository.findById(1L)).thenReturn(Optional.of(caracteristica));
+        when(caracteristicaRepository.findById(1L)).thenReturn(Optional.of(caracteristica1));
         doNothing().when(caracteristicaRepository).deleteById(1L);
 
         // Act

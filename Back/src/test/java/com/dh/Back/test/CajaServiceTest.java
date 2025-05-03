@@ -26,41 +26,33 @@ class CajaServiceTest {
 
     @InjectMocks
     private CajaService cajaService;
+    private Caja caja1;
+    private Caja caja2;
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this); // Inicializa los mocks
+        MockitoAnnotations.openMocks(this);
+        caja1 = new Caja("Automático");
+        caja1.setId(1L);
+        caja2 = new Caja("Manual");
+        caja2.setId(2L);
     }
 
     @Test
     void save() throws ResourceNotFoundException {
-        // Arrange
-        Caja caja = new Caja();
-        caja.setId(1L);
-        caja.setTipo("Automático");
-
-        when(cajaRepository.save(caja)).thenReturn(caja);
+        when(cajaRepository.save(caja1)).thenReturn(caja1);
 
         // Act
-        Caja result = cajaService.save(caja);
+        Caja result = cajaService.save(caja1);
 
         // Assert
         assertNotNull(result);
         assertEquals("Automático", result.getTipo());
-        verify(cajaRepository, times(1)).save(caja);
+        verify(cajaRepository, times(1)).save(caja1);
     }
 
     @Test
     void findAll() {
-        // Arrange
-        Caja caja1 = new Caja();
-        caja1.setId(1L);
-        caja1.setTipo("Automático");
-
-        Caja caja2 = new Caja();
-        caja2.setId(2L);
-        caja2.setTipo("Manual");
-
         when(cajaRepository.findAll()).thenReturn(Arrays.asList(caja1, caja2));
 
         // Act
@@ -74,12 +66,7 @@ class CajaServiceTest {
 
     @Test
     void findById() {
-        // Arrange
-        Caja caja = new Caja();
-        caja.setId(1L);
-        caja.setTipo("Automático");
-
-        when(cajaRepository.findById(1L)).thenReturn(Optional.of(caja));
+        when(cajaRepository.findById(1L)).thenReturn(Optional.of(caja1));
 
         // Act
         Optional<Caja> result = cajaService.findById(1L);
@@ -92,15 +79,10 @@ class CajaServiceTest {
 
     @Test
     void testSaveThrowsException() {
-        // Arrange
-        Caja caja = new Caja();
-        caja.setId(1L);
-        caja.setTipo("Automático");
-
-        when(cajaRepository.save(caja)).thenThrow(new RuntimeException("Error al guardar"));
+        when(cajaRepository.save(caja1)).thenThrow(new RuntimeException("Error al guardar"));
 
         // Act & Assert
-        assertThrows(ResourceNotFoundException.class, () -> cajaService.save(caja));
-        verify(cajaRepository, times(1)).save(caja);
+        assertThrows(ResourceNotFoundException.class, () -> cajaService.save(caja1));
+        verify(cajaRepository, times(1)).save(caja1);
     }
 }

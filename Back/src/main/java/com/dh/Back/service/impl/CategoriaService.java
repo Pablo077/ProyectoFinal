@@ -15,7 +15,11 @@ import java.util.Optional;
 public class CategoriaService implements ICategoriaService {
 
     private ICategoriaRepository categoriaRepository;
-    private static final String BASE_UPLOAD_DIR = System.getProperty("user.dir") + "/categorias/";
+
+    //Usar en el test
+    private static final String BASE_UPLOAD_DIR = "test-uploads/";
+
+    //private static final String BASE_UPLOAD_DIR = System.getProperty("user.dir") + "/categorias/";
 
     @Autowired
     public CategoriaService(ICategoriaRepository categoriaRepository){
