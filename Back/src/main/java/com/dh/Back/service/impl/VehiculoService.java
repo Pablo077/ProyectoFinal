@@ -14,10 +14,10 @@ import java.util.stream.Collectors;
 @Service
 public class VehiculoService implements IVehiculoService {
 
-    //private static final String BASE_UPLOAD_DIR = System.getProperty("user.dir") + "/fotos/";
+    private static final String BASE_UPLOAD_DIR = System.getProperty("user.dir") + "/fotos/";
 
     //Usar en el test
-    private static final String BASE_UPLOAD_DIR = "test-uploads/";
+    //private static final String BASE_UPLOAD_DIR = "test-uploads/";
 
     private IVehiculoRepository vehiculoRepository;
 

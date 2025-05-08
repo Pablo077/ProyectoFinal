@@ -24,7 +24,6 @@ public class FavoritoController {
 
     @PostMapping
     public ResponseEntity<Favorito> save(@RequestBody Favorito favorito) throws ResourceNotFoundException{
-        System.out.println(favorito);
         return ResponseEntity.ok(iFavoritoService.save(favorito));
     }
 

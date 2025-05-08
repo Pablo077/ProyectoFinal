@@ -107,6 +107,18 @@ public class DataInitializer implements CommandLineRunner {
         Vehiculo vehiculo10 = new Vehiculo("Volkswagen", "Taos", 1.4f,5, 1, 2, automatico, asistido, suv, "Foto1.png", "{\"images\":[\"Foto1.png\",\"Foto2.png\",\"Foto3.png\",\"Foto4.png\",\"Foto5.png\"]}");
         entityManager.persist(vehiculo10);
 
+        //Favorito
+        Favorito favorito1 = new Favorito(user,vehiculo1);
+        entityManager.persist(favorito1);
+
+
+        //Caracteristica
+        Caracteristica caracteristica1 = new Caracteristica("Wifi", 9, vehiculo1);
+        entityManager.persist(caracteristica1);
+
+        Caracteristica caracteristica2 = new Caracteristica("ABS", 1, vehiculo1);
+        entityManager.persist(caracteristica2);
+
         //Reserva
         LocalDate fechaInicio1 = LocalDate.of(2025, 3, 20);
         LocalDate fechaFinal1 = LocalDate.of(2025, 3, 24);

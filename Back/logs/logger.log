@@ -1,2 +1,19 @@
 [2025-05-02 20:14:18] [ WARN ] [ResourceNotFoundException:10] Error al guardar
 [2025-05-02 23:25:07] [ WARN ] [ResourceNotFoundException:10] Error al guardar
+[2025-05-05 19:11:25] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.dh.Back.entity.Vehiculo' (save the transient instance before flushing)
+[2025-05-05 20:52:48] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.dh.Back.entity.Vehiculo' (save the transient instance before flushing)
+[2025-05-07 21:05:46] [ WARN ] [ResourceNotFoundException:10] The given id must not be null
+[2025-05-07 21:25:17] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.dh.Back.entity.Reserva' (save the transient instance before flushing)
+[2025-05-07 21:28:10] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.dh.Back.entity.Reserva' (save the transient instance before flushing)
+[2025-05-07 21:31:06] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.dh.Back.entity.Reserva' (save the transient instance before flushing)
+[2025-05-07 21:32:46] [ WARN ] [ResourceNotFoundException:10] The given id must not be null
+[2025-05-07 21:32:46] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.dh.Back.entity.Reserva' (save the transient instance before flushing)
+[2025-05-07 21:33:21] [ WARN ] [ResourceNotFoundException:10] The given id must not be null
+[2025-05-07 21:35:00] [ WARN ] [ResourceNotFoundException:10] The given id must not be null
+[2025-05-07 21:35:01] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.dh.Back.entity.Reserva' (save the transient instance before flushing)
+[2025-05-07 21:36:17] [ WARN ] [ResourceNotFoundException:10] org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.dh.Back.entity.Reserva' (save the transient instance before flushing)
+[2025-05-07 21:39:09] [ WARN ] [ResourceNotFoundException:10] The given id must not be null
+[2025-05-07 21:40:13] [ WARN ] [ResourceNotFoundException:10] The given id must not be null
+[2025-05-07 21:44:40] [ WARN ] [ResourceNotFoundException:10] The given id must not be null
+[2025-05-07 21:46:09] [ WARN ] [ResourceNotFoundException:10] The given id must not be null
+[2025-05-07 21:54:21] [ WARN ] [ResourceNotFoundException:10] The given id must not be null
