@@ -8,10 +8,7 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-// import Button from "@mui/material/Button";
-// import Tooltip from '@mui/material/Tooltip';
 import MenuItem from "@mui/material/MenuItem";
-// import AdbIcon from "@mui/icons-material/Adb";
 import { colores, coloresDesignados } from "../styles/colors";
 
 import logo11 from "../assets/logo11.jpeg";
@@ -19,12 +16,6 @@ import { Buttons } from "./Buttons";
 import { useEffect, useState } from "react";
 import { deleteCookie, getCookie } from "../utils/utils";
 
-const pages = [
-  "Crear cuenta",
-  "Iniciar sesión",
-  "Agregar producto",
-  "Cerrar sesión",
-];
 
 const items = [
   {
@@ -50,22 +41,14 @@ function ResponsiveAppBar() {
     null
   );
   const [apiData, setApiData] = useState<any>(null);
-  // const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-  // const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-  //   setAnchorElUser(event.currentTarget);
-  // };
-
+ 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
-  // const handleCloseUserMenu = () => {
-  //   setAnchorElUser(null);
-  // };
 
   const cerrarSesion = () => {
     deleteCookie("user");
@@ -74,12 +57,12 @@ function ResponsiveAppBar() {
   const letrasNombres = (nombre: string) => {
     if (!nombre) return "";
 
-    const palabras = nombre.trim().split(/\s+/); // Divide el nombre en palabras
+    const palabras = nombre.trim().split(/\s+/); 
 
     if (palabras.length === 1) {
-      return palabras[0].charAt(0).toUpperCase(); // Retorna la primera letra
+      return palabras[0].charAt(0).toUpperCase(); 
     } else {
-      return (palabras[0].charAt(0) + palabras[1].charAt(0)).toUpperCase(); // Retorna las iniciales de las dos primeras palabras
+      return (palabras[0].charAt(0) + palabras[1].charAt(0)).toUpperCase(); 
     }
   };
 
@@ -117,7 +100,7 @@ function ResponsiveAppBar() {
               marginLeft: "5px",
               marginTop: "32px",
               fontStyle: "italic",
-              fontWeight:"bold",
+              fontWeight: "bold",
             }}
           >
             Conduce tu libertad, nosotros ponemos las ruedas
@@ -150,11 +133,57 @@ function ResponsiveAppBar() {
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: "block", md: "none" } }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {apiData?.rol === "ADMIN" && (
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography
+                    textAlign="center"
+                    href={items[2].href}
+                    component="a"
+                    color={colores.AntiFlashWhite}
+                    sx={{ textDecoration: 'none' }}
+                  >
+                    {items[2].pages}
+                  </Typography>
                 </MenuItem>
-              ))}
+              )}
+              {apiData ? (
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography
+                    textAlign="center"
+                    href={items[3].href}
+                    component="a"
+                    color={colores.AntiFlashWhite}
+                    sx={{ textDecoration: 'none' }}
+                  >
+                    {items[3].pages}
+                  </Typography>
+                </MenuItem>
+              ) : (
+                <>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography
+                      textAlign="center"
+                      href={items[0].href}
+                      component="a"
+                      color={colores.AntiFlashWhite}
+                      sx={{ textDecoration: 'none' }}
+                    >
+                      {items[0].pages}
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography
+                      textAlign="center"
+                      href={items[1].href}
+                      component="a"
+                      color={colores.AntiFlashWhite}
+                      sx={{ textDecoration: 'none' }}
+                    >
+                      {items[1].pages}
+                    </Typography>
+                  </MenuItem>
+                </>
+              )}
             </Menu>
           </Box>
 
@@ -176,44 +205,8 @@ function ResponsiveAppBar() {
           </Typography>
 
           <Box sx={{ flexGrow: 1 }}>
-            {/* <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu> */}
           </Box>
           <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
-            {/* {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "#060D66", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))} */}
             {apiData?.rol === "ADMIN" ? (
               <div style={{ display: "flex", alignItems: "center" }}>
                 <Buttons
@@ -244,7 +237,7 @@ function ResponsiveAppBar() {
                     display: "flex",
                     alignItems: "center",
                     marginBottom: "-5px",
-                    marginTop:"-5px"
+                    marginTop: "-5px",
                   }}
                 >
                   <div style={{ marginRight: "10px" }}>
@@ -272,9 +265,9 @@ function ResponsiveAppBar() {
                     styles={{
                       backgroundColor: colores.PennBlue,
                       color: colores.CornflowerBlue,
-                      fontSize:"10px",
-                      padding:"2px 10px 2px 10px",
-                      marginBottom:"2px"
+                      fontSize: "10px",
+                      padding: "2px 10px 2px 10px",
+                      marginBottom: "2px",
                     }}
                   />
                 </div>

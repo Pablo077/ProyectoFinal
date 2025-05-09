@@ -1,7 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { Navbar } from "../views/Home/Navbar";
 import { Buscador } from "../views/Home/Buscador/Buscador";
-import { Categorias } from "../views/Home/Categorias";
 import { Footer } from "../views/Home/Footer";
 import { Galeria } from "../views/Home/Galeria";
 import { SnackMensaje } from "../components/SnackMensaje";
@@ -40,7 +39,6 @@ export const Home = () => {
           </Typography>
         </Box>
         {apiData && <Buscador />}
-        <Categorias />
         <Recomendaciones />
         <Box mt={3} mb={3}>
           <Galeria />

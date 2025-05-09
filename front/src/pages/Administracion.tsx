@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import { Navbar } from "../views/Home/Navbar";
 import { Buscador } from "../views/Home/Buscador/Buscador";
-import { Categorias } from "../views/Home/Categorias";
 import { Footer } from "../views/Home/Footer";
 import { Galeria } from "../views/Home/Galeria";
 import { MenuBotones } from "../views/Administracion/components/MenuBotones";
@@ -68,7 +67,6 @@ export const Administracion = () => {
         </Typography>
       </Box>
       <Buscador />
-      <Categorias />
       <Recomendaciones />
       <Box mt={3} mb={3}>
         <Galeria />

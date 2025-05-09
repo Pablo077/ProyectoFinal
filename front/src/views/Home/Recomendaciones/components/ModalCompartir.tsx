@@ -6,9 +6,10 @@ import { linkFotosArchivos } from "../../../../utils/utils";
 import IconButton from "@mui/material/IconButton";
 import Icon from '@mdi/react';
 import { mdiFacebook, mdiTwitter, mdiInstagram } from '@mdi/js';
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { DynamicForm } from "../../../../components/Formik/DynamicForm";
 import { formJson } from "./DataInputs";
+import { VehiculoContext } from "../../../../context/VehiculoContext";
 
 
 interface Props {
@@ -31,6 +32,8 @@ const sxCardMedia: SxProps<Theme> = {
 export const ModalCompartir = (props: Props) => {
     const { openModal, setOpenModal, vehiculo } = props;
     const [redSelect, setRedSelect] = useState<string>("");
+    const { setOpenSnack, setMensajeSnack, setAlertSnack } =
+            useContext(VehiculoContext);
 
     const handleRedSelect = (red: string) => {
         setRedSelect(red);
@@ -38,7 +41,11 @@ export const ModalCompartir = (props: Props) => {
 
     const onSubmit = async (values: any) => {
 
-        console.log(values)
+        setMensajeSnack("Su mensaje se compartira en redes sociales");
+        setAlertSnack("info");
+        setOpenSnack(true);
+        setOpenModal(false);
+        
     };
 
     const Redes = () => {
@@ -87,10 +94,10 @@ export const ModalCompartir = (props: Props) => {
                         {vehiculo?.modelo} con capacidad para {vehiculo?.pasajeros} pasajeros
                     </Typography>
                     <Typography variant="body1">
-                        http://localhost:5173/
+                        http://localhost:5173/Vehiculo/?vehiculoId={vehiculo?.id}
                     </Typography>
                 </Cards>
-                <div>
+                <div style={{width:"90%", margin:"0 auto"}}>
                     <DynamicForm
                         column={1}
                         formJson={formJson}

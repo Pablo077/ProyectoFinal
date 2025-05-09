@@ -3,7 +3,7 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 export const WhatsAppButton = () => {
   const phoneNumber = "+5493548405343";
-  const message = "¡Hola! Necesito ayuda.";
+  const message = "¡Hola! Tengo una consulta sobre el alquiler de autos. ¿Podrían ayudarme? ¡Gracias!";
 
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
     message

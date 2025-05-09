@@ -26,6 +26,7 @@ import java.util.List;
 import static org.mockito.Mockito.*;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.hamcrest.Matchers;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -53,7 +54,7 @@ class VehiculoControllerTest {
     private Direccion asistido;
     private Categoria hatchbackCompacto;
 
-    private static final String BASE_UPLOAD_DIR = "test-uploads/";
+    private static final String BASE_UPLOAD_DIR = System.getProperty("user.dir") + "/fotos/";
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -106,37 +107,65 @@ class VehiculoControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[*].modelo").value(Matchers.hasItem("Etios 5P")));
     }
 
-    @Test
-    void getFile() throws Exception{
 
-        // Datos de prueba
+    @Test
+    void getFile() throws Exception {
         String folder = "Citroen_C3";
         String filename = "Foto1.png";
-
-        // Crear la ruta completa donde el archivo debería estar
         Path filePath = Paths.get(BASE_UPLOAD_DIR).resolve(folder).resolve(filename);
 
-        // Crear el directorio si no existe
-        Files.createDirectories(filePath.getParent());
+        // Configura el comportamiento esperado si usas mocks
+        // Mockito.when(...).thenReturn(...);
 
-        // Crear archivo de prueba solo si no existe
-        if (!Files.exists(filePath)) {
-            Files.createFile(filePath);
-        }
-
-        // Verificar si el archivo fue creado correctamente
-        assertTrue(Files.exists(filePath), "El archivo debería existir: " + filePath.toString());
-
-        // Realizamos la petición HTTP GET
-        mockMvc.perform(MockMvcRequestBuilders.get("/fotos/{folder}/{filename}", folder, filename))
+        mockMvc.perform(get("/vehiculo/fotos/{folder}/{filename}", folder, filename)
+                        .contentType(MediaType.IMAGE_JPEG))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.IMAGE_PNG)); // Ajusta según el tipo real de tu imagen
-
-
+                .andExpect(content().contentType(MediaType.IMAGE_JPEG));
     }
 
+
     @Test
-    void delete() {
+    void delete() throws Exception{
+        dataLoad();
+
+        MockMultipartFile file1 = new MockMultipartFile("images", "foto1.jpg", "image/jpeg", "contenido".getBytes());
+        MockMultipartFile file2 = new MockMultipartFile("images", "foto2.jpg", "image/jpeg", "contenido".getBytes());
+
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/vehiculo")
+                        .file(file1)
+                        .file(file2)
+                        .param("marca", "TestMarca")
+                        .param("modelo", "TestModelo")
+                        .param("motor", "1.6")
+                        .param("pasajeros", "4")
+                        .param("valijasGrandes", "2")
+                        .param("valijasChicas", "1")
+                        .param("caja_id", automatico.getId().toString())
+                        .param("direccion_id", asistido.getId().toString())
+                        .param("categoria_id", hatchbackCompacto.getId().toString())
+                        .param("mainImage", "foto1.jpg")
+                        .param("filesName", "{\"images\":[\"foto1.jpg\",\"foto2.jpg\"]}")
+                )
+                .andExpect(status().isOk())
+                .andExpect(content().string("Vehículo guardado correctamente"));
+
+
+        Long vehiculoId = vehiculoService.findAll().stream()
+                .filter(v -> v.getMarca().equals("TestMarca") && v.getModelo().equals("TestModelo"))
+                .findFirst()
+                .map(Vehiculo::getId)
+                .orElseThrow(() -> new ResourceNotFoundException("Vehículo no encontrado"));
+
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/vehiculo/{id}", vehiculoId))
+                .andExpect(status().isOk())  // Verificar que la respuesta sea 200 OK
+                .andExpect(content().string("Borrado exitoso"));  // Verificar que el mensaje de éxito sea el esperado
+
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/vehiculo/getVehiculos"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$[*].id").value(Matchers.not(Matchers.hasItem(vehiculoId))));  // Verificar que el ID del vehículo eliminado no esté en la respuesta
     }
 
     @Test

@@ -144,7 +144,7 @@ export const InputsBuscador = (props: Props) => {
             <Form noValidate>
               <div>
                 <Grid2 container spacing={2}>
-                  <Grid2 size={{ xs: 2, md: 2 }}>
+                  <Grid2 size={{ xs: 12, md: 2 }}>
                     <InputSelect
                       datos={marcas}
                       datosMostrar={"tipo"}
@@ -162,7 +162,7 @@ export const InputsBuscador = (props: Props) => {
                       sxSelect={{ textAlign: "left" }}
                     />
                   </Grid2>
-                  <Grid2 size={{ xs: 2, md: 2 }}>
+                  <Grid2 size={{ xs: 12, md: 2 }}>
                     <InputSelect
                       datos={modelos}
                       datosMostrar={"tipo"}
@@ -177,7 +177,7 @@ export const InputsBuscador = (props: Props) => {
                       sxSelect={{ textAlign: "left" }}
                     />
                   </Grid2>
-                  <Grid2 size={{ xs: 2, md: 2 }}>
+                  <Grid2 size={{ xs: 12, md: 2 }}>
                     <InputComun
                       type={"number"}
                       key={"pasajeros"}
@@ -193,7 +193,7 @@ export const InputsBuscador = (props: Props) => {
                       style={{ width: "100%" }}
                     />
                   </Grid2>
-                  <Grid2 size={{ xs: 3, md: 3 }}>
+                  <Grid2 size={{ xs: 12, md: 3 }}>
                     <DatePicker
                       label="Desde"
                       value={values.dateInicio}
@@ -212,7 +212,7 @@ export const InputsBuscador = (props: Props) => {
                       }}
                     />
                   </Grid2>
-                  <Grid2 size={{ xs: 3, md: 3 }}>
+                  <Grid2 size={{ xs: 12, md: 3 }}>
                     <DatePicker
                       label="Hasta"
                       value={values.dateFinal}
