@@ -24,13 +24,13 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> register (
             @RequestBody RegisterRequest request) throws ResourceNotFoundException {
 
-        CorreoRequestDTO correoRequestDTO = new CorreoRequestDTO();
-        correoRequestDTO.setDestinatario(request.getEmail());
-        correoRequestDTO.setAsunto("registrado");
-        correoRequestDTO.setMensaje("Un lujo");
-
-
-            iEmailService.enviarCorreo(correoRequestDTO);
+//        CorreoRequestDTO correoRequestDTO = new CorreoRequestDTO();
+//        correoRequestDTO.setDestinatario(request.getEmail());
+//        correoRequestDTO.setAsunto("registrado");
+//        correoRequestDTO.setMensaje("Un lujo");
+//
+//
+//            iEmailService.enviarCorreo(correoRequestDTO);
             return ResponseEntity.ok(authenticationService.register(request));
     }
 
