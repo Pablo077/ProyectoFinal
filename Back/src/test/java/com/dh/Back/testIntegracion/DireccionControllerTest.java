@@ -1,6 +1,5 @@
 package com.dh.Back.testIntegracion;
 
-import com.dh.Back.entity.Caracteristica;
 import com.dh.Back.entity.Direccion;
 import com.dh.Back.exception.ResourceNotFoundException;
 import com.dh.Back.service.IDireccionService;

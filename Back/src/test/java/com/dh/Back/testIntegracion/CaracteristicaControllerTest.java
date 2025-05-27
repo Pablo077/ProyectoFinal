@@ -4,7 +4,6 @@ import com.dh.Back.entity.*;
 import com.dh.Back.exception.ResourceNotFoundException;
 import com.dh.Back.service.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.transaction.annotation.Transactional;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

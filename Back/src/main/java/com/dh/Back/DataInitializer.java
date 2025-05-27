@@ -19,18 +19,6 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-        // Crea tus entidades
-//        MiEntidad entidad1 = new MiEntidad();
-//        entidad1.setNombre("Dato Inicial 1");
-//        entidad1.setDescripcion("Descripción del dato 1");
-//        entityManager.persist(entidad1);
-//
-//        MiEntidad entidad2 = new MiEntidad();
-//        entidad2.setNombre("Segundo Dato");
-//        entidad2.setDescripcion("Otra descripción");
-//        entityManager.persist(entidad2);
-
-        // Puedes agregar más entidades aquí
 
         //Usuarios
         User admin = new User(1L,"Juan", "Perez", "admin@gmail.com", "1234", Role.ADMIN);
