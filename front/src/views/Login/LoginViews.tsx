@@ -22,7 +22,7 @@ export const LoginViews = () => {
         if (response.rol == "ADMIN") {
           navigate("/administracion");
         } else {
-          navigate(-1);
+          navigate("/");
         }
       }
     } catch (error) {
