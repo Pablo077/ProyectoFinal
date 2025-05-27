@@ -27,7 +27,7 @@ const CustomDateCalendar = styled(DateCalendar)({
       backgroundColor: colores.CornflowerBlue,
     },
     "&.Mui-disabled": {
-      color: colores.CornflowerBlue,
+      color: colores.PaleDogwood,
     },
     "&.MuiPickersDay-today": {
       borderColor: colores.AntiFlashWhite, // Cambiar el color del borde del círculo que marca la fecha de hoy
@@ -78,9 +78,6 @@ export const Reservas = (props:Props) => {
   
 
   const cargarFechasBusqueda = () => {
-    // const storedDateInicio = localStorage.getItem("dateInicio");
-    // const storedDateFinal = localStorage.getItem("dateFinal");
-
     const storedDateInicio = queryParams.get("fechaInicio");
     const storedDateFinal = queryParams.get("fechaFin");
     
@@ -93,15 +90,19 @@ export const Reservas = (props:Props) => {
     }
   }	
 
-  // Función para deshabilitar fechas reservadas
-  const shouldDisableDate = (date: Dayjs) => {
-    return reservas.some(
+  // Función para deshabilitar fechas reservadas y anteriores al día de hoy
+const shouldDisableDate = (date: Dayjs) => {
+  const today = dayjs().startOf("day"); // Obtener el inicio del día actual
+  return (
+    date.isBefore(today, "day") || // Deshabilitar fechas anteriores al día de hoy
+    reservas.some(
       (reserva) =>
         date.isBetween(reserva.start, reserva.end, "day", "[]") || // Deshabilitar fechas entre la fecha de inicio y fin
         date.isSame(reserva.start, "day") || // Deshabilitar la fecha de inicio
         date.isSame(reserva.end, "day") // Deshabilitar la fecha de fin
-    );
-  };
+    )
+  );
+};
 
   useEffect(() => {
     CargarDatos();
