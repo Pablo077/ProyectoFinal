@@ -119,6 +119,30 @@ public class DataInitializer implements CommandLineRunner {
         Caracteristica caracteristica2 = new Caracteristica("ABS", 1, vehiculo1);
         entityManager.persist(caracteristica2);
 
+        Caracteristica caracteristica3 = new Caracteristica("Wifi", 9, vehiculo2);
+        entityManager.persist(caracteristica3);
+
+        Caracteristica caracteristica4 = new Caracteristica("ABS", 1, vehiculo2);
+        entityManager.persist(caracteristica4);
+
+        Caracteristica caracteristica5 = new Caracteristica("Wifi", 9, vehiculo3);
+        entityManager.persist(caracteristica5);
+
+        Caracteristica caracteristica6 = new Caracteristica("ABS", 1, vehiculo3);
+        entityManager.persist(caracteristica6);
+
+        Caracteristica caracteristica7 = new Caracteristica("Wifi", 9, vehiculo4);
+        entityManager.persist(caracteristica7);
+
+        Caracteristica caracteristica8 = new Caracteristica("ABS", 1, vehiculo4);
+        entityManager.persist(caracteristica8);
+
+        Caracteristica caracteristica9 = new Caracteristica("Wifi", 9, vehiculo5);
+        entityManager.persist(caracteristica9);
+
+        Caracteristica caracteristica10 = new Caracteristica("ABS", 1, vehiculo5);
+        entityManager.persist(caracteristica10);
+
         //Reserva
         LocalDate fechaInicio1 = LocalDate.of(2025, 3, 20);
         LocalDate fechaFinal1 = LocalDate.of(2025, 3, 24);
