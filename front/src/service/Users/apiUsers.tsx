@@ -40,10 +40,17 @@ export const apiUsers = () => {
     return result.data
   }
 
+  const envioCorreo = async (valores: Register) =>{
+    const url = "auth/user/envioCorreo";
+    const result = await postApiLocal({ valores, url });
+    return result;
+  }
+
   return {
     login,
     register,
     getUsers,
     updateUser,
+    envioCorreo,
   };
 };

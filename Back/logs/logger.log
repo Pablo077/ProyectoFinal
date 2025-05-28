@@ -17,3 +17,8 @@
 [2025-05-07 21:44:40] [ WARN ] [ResourceNotFoundException:10] The given id must not be null
 [2025-05-07 21:46:09] [ WARN ] [ResourceNotFoundException:10] The given id must not be null
 [2025-05-07 21:54:21] [ WARN ] [ResourceNotFoundException:10] The given id must not be null
+[2025-05-27 18:31:05] [ WARN ] [ResourceNotFoundException:10] El usuario con el correo pfb1983@outlook.com ya existe
+[2025-05-28 13:49:09] [ WARN ] [ResourceNotFoundException:10] El usuario con el correo pfb1983@outlook.com ya existe
+[2025-05-28 13:49:46] [ WARN ] [ResourceNotFoundException:10] El usuario con el correo pfb1983@outlook.com ya existe
+[2025-05-28 13:49:49] [ WARN ] [ResourceNotFoundException:10] El usuario con el correo pfb1983@outlook.com ya existe
+[2025-05-28 13:57:03] [ WARN ] [ResourceNotFoundException:10] El usuario con el correo pfb1983@outlook.com ya existe

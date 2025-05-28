@@ -50,7 +50,6 @@ public class AuthenticationService {
 
         userRepository.save(user);
 
-        /*sendRegistrationEmail(request.getEmail(), request.getLastname());*/
 
         var jwt = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
@@ -83,7 +82,6 @@ public class AuthenticationService {
                 .email(user.getEmail())
                 .build();
     }
-
 
     public List<AuthenticationResponse> listAllUsers() {
         return userRepository.findAll().stream()
@@ -127,21 +125,7 @@ public class AuthenticationService {
         return new AuthenticationUpdate(user.getId(), user.getFirstname(), user.getLastname(), user.getEmail(), "",user.getRole().toString());
 
     }
-/*
 
-    private JavaMailSender mailSender;
-
-    public void sendRegistrationEmail(String toEmail, String userName) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(toEmail);
-        message.setSubject("Bienvenido a nuestra aplicación");
-        message.setText("Hola " + userName + "\n\n Tu correo " + toEmail + " fue registrado con éxito."
-                + "\n\n Ya puedes ingresar a nuestra página " + "http://localhost:5173/"
-                + ",\n\nGracias por registrarte en nuestra aplicación.");
-
-        mailSender.send(message);
-    }
-*/
     @PostConstruct
     public void initData() {
 

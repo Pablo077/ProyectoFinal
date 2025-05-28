@@ -24,14 +24,30 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> register (
             @RequestBody RegisterRequest request) throws ResourceNotFoundException {
 
-        CorreoRequestDTO correoRequestDTO = new CorreoRequestDTO();
-        correoRequestDTO.setDestinatario(request.getEmail());
-        correoRequestDTO.setAsunto("registrado");
-        correoRequestDTO.setMensaje("Un lujo");
+        AuthenticationResponse response = authenticationService.register(request);
 
-
+        if(!response.equals("El usuario con el correo " + request.getEmail() + " ya existe")){
+            CorreoRequestDTO correoRequestDTO = new CorreoRequestDTO();
+            correoRequestDTO.setDestinatario(request.getEmail());
+            correoRequestDTO.setAsunto("Bienvenido " + request.getFirstname() + "a driver punilla");
+            correoRequestDTO.setMensaje("El usuario " + request.getEmail() + " se ha registrado con exíto");
             iEmailService.enviarCorreo(correoRequestDTO);
-            return ResponseEntity.ok(authenticationService.register(request));
+        }
+
+            return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/user/envioCorreo")
+    public ResponseEntity<String> envioCorreo (
+            @RequestBody RegisterRequest request) throws ResourceNotFoundException {
+        CorreoRequestDTO correoRequestDTO = new CorreoRequestDTO();
+
+        correoRequestDTO.setDestinatario(request.getEmail());
+        correoRequestDTO.setAsunto("Bienvenido " + request.getFirstname() + "a driver punilla");
+        correoRequestDTO.setMensaje("El usuario " + request.getEmail() + " se ha registrado con exíto");
+        iEmailService.enviarCorreo(correoRequestDTO);
+
+        return ResponseEntity.ok("Se envía correo nuevamente");
     }
 
     @PostMapping("/user/login")
