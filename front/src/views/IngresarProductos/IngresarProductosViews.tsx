@@ -74,7 +74,7 @@ export const IngresarProductosViews = () => {
       setOpenSnack(true);
       if (response === "Vehículo guardado correctamente") {
         setTimeout(() => {
-          window.location.href = "/"; // Redirige a la página principal
+          window.location.href = "/administracion"; // Redirige a la página principal
         }, 3000);
       }
     } catch (error) {
