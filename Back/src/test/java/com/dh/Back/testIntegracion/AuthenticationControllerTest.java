@@ -65,6 +65,21 @@ class AuthenticationControllerTest {
 
     @Test
     @Order(2)
+    void envioCorreo() throws Exception{
+        dataLoad();
+        // Convert the request object to JSON
+        String requestJson = objectMapper.writeValueAsString(registerRequest);
+
+        // Act
+        MvcResult result = mockMvc.perform(post("/auth/user/envioCorreo")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestJson))
+                .andExpect(status().isOk())
+                .andReturn();
+    }
+
+    @Test
+    @Order(3)
     void login() throws Exception{
         dataLoad();
         // Convert the request object to JSON
@@ -85,7 +100,7 @@ class AuthenticationControllerTest {
     }
 
     @Test
-    @Order(3)
+    @Order(4)
     void listAllUser() throws Exception{
         mockMvc.perform(MockMvcRequestBuilders.get("/auth/listUsers"))
                 .andExpect(status().isOk())
@@ -96,7 +111,7 @@ class AuthenticationControllerTest {
     }
 
     @Test
-    @Order(4)
+    @Order(5)
     void updateUser() throws Exception{
         // Crear un objeto AuthenticationUpdate con los datos a modificar
         AuthenticationUpdate updateRequest = new AuthenticationUpdate();

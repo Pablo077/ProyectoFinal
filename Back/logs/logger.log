@@ -22,3 +22,4 @@
 [2025-05-28 13:49:46] [ WARN ] [ResourceNotFoundException:10] El usuario con el correo pfb1983@outlook.com ya existe
 [2025-05-28 13:49:49] [ WARN ] [ResourceNotFoundException:10] El usuario con el correo pfb1983@outlook.com ya existe
 [2025-05-28 13:57:03] [ WARN ] [ResourceNotFoundException:10] El usuario con el correo pfb1983@outlook.com ya existe
+[2025-05-28 16:57:21] [ WARN ] [ResourceNotFoundException:10] El usuario con el correo integration.test@example.com ya existe
