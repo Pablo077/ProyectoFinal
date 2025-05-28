@@ -30,8 +30,16 @@ public class EmailService implements IEmailService {
 
             // Procesar la plantilla Thymeleaf
             Context context = new Context();
-            context.setVariable("mensaje", correoRequestDTO.getMensaje()); // Puedes añadir más variables
-            String contenidoHtml = templateEngine.process("email", context);
+            context.setVariable("mensaje", correoRequestDTO.getMensaje());
+
+            String contenidoHtml = "";
+
+            if (correoRequestDTO.getTipo().equals("Registro")) {
+                contenidoHtml = templateEngine.process("registro", context);
+            }
+            else{
+                contenidoHtml = templateEngine.process("reserva", context);
+            }
 
             helper.setText(contenidoHtml, true);
 

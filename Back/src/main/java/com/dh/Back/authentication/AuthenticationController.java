@@ -29,8 +29,9 @@ public class AuthenticationController {
         if(!response.equals("El usuario con el correo " + request.getEmail() + " ya existe")){
             CorreoRequestDTO correoRequestDTO = new CorreoRequestDTO();
             correoRequestDTO.setDestinatario(request.getEmail());
-            correoRequestDTO.setAsunto("Bienvenido " + request.getFirstname() + "a driver punilla");
+            correoRequestDTO.setAsunto("Bienvenido " + request.getFirstname() + " a driver punilla");
             correoRequestDTO.setMensaje("El usuario " + request.getEmail() + " se ha registrado con exíto");
+            correoRequestDTO.setTipo("Registro");
             iEmailService.enviarCorreo(correoRequestDTO);
         }
 

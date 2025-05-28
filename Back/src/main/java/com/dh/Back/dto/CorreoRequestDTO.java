@@ -4,9 +4,11 @@ public class CorreoRequestDTO {
     private String destinatario;
     private String asunto;
     private String mensaje;
+    private String tipo;
 
     public CorreoRequestDTO() {
     }
+
 
     public String getDestinatario() {
         return destinatario;
@@ -30,5 +32,13 @@ public class CorreoRequestDTO {
 
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

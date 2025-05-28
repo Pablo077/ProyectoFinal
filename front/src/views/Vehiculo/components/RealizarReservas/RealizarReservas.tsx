@@ -11,6 +11,7 @@ import { colores } from "../../../../styles/colors";
 import { apiReserva } from "../../../../service/Reserva/apiReserva";
 import { useNavigate } from "react-router-dom";
 import { ModalError } from "./components/ModalError";
+import { ModalEspera } from "./components/ModalEspera";
 
 interface Props {
   fechaInicio: dayjs.Dayjs | null;
@@ -26,9 +27,11 @@ export const RealizarReservas = (props: Props) => {
   const colorDato = colores.Saffron;
   const [expanded, setExpanded] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [openModalEspera, setOpenModalEspera] = useState(false);
   const navigate = useNavigate();
 
   const onSubmit = async () => {
+    setOpenModalEspera(true);
     if (user) {
       const reserva = {
         fechaInicio: fechaInicio
@@ -41,12 +44,15 @@ export const RealizarReservas = (props: Props) => {
       const response = await saveReservas(reserva);
 
       if (response === "Reserva guardada con éxito") {
+        setOpenModalEspera(false);
         navigate("/ReservaConfirmación");
       } else {
+        setOpenModalEspera(false);
         setOpenModal(true);
       }
       
     } else {
+      setOpenModalEspera(false);
       console.error("No hay usuario autenticado");
     }
   };
@@ -65,6 +71,7 @@ export const RealizarReservas = (props: Props) => {
   return (
     <div>
       <ModalError openModal={openModal} setOpenModal={setOpenModal} />
+      <ModalEspera openModal={openModalEspera} setOpenModal={setOpenModalEspera}/>
       <Typography variant="h4" component="h1" textAlign={"center"}>
         Formulario de reserva
       </Typography>
